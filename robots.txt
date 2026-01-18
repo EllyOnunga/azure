@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://azurebay.co.ke/sitemap.xml

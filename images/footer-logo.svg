@@ -1,0 +1,50 @@
+<svg width="240" height="80" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="oceanBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3A8FA6"/>
+      <stop offset="100%" stop-color="#2C6B7E"/>
+    </linearGradient>
+    <linearGradient id="greenText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7FD8A0"/>
+      <stop offset="100%" stop-color="#5FB87E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Small circle with fish -->
+  <circle cx="30" cy="40" r="22" 
+          fill="none"
+          stroke="url(#greenText)" 
+          stroke-width="2"/>
+
+  <!-- Realistic fish silhouette -->
+  <g transform="translate(30, 40)">
+    <!-- Fish body -->
+    <ellipse cx="0" cy="0" rx="11" ry="5" 
+             fill="url(#greenText)"/>
+    
+    <!-- Fish head detail -->
+    <circle cx="6" cy="-1" r="1" fill="url(#greenText)"/>
+    
+    <!-- Tail fin -->
+    <path d="M-11 0 L-16 -4 L-16 4 Z" 
+          fill="url(#greenText)"/>
+    
+    <!-- Top fin -->
+    <path d="M-2 -5 L-3 -8 L2 -5 Z" 
+          fill="url(#greenText)"/>
+    
+    <!-- Bottom fin -->
+    <path d="M0 5 L-2 8 L3 5 Z" 
+          fill="url(#greenText)"/>
+  </g>
+
+  <!-- Restaurant name -->
+  <text x="60" y="48"
+        font-family="'Playfair Display', 'Georgia', serif"
+        font-size="28"
+        font-weight="600"
+        fill="url(#greenText)"
+        letter-spacing="0.5">
+    Azure
+  </text>
+</svg>
