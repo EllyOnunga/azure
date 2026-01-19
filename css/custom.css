@@ -349,6 +349,27 @@ body {
   background: var(--white-color);
 }
 
+.btn-default.btn-outline {
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--white-color);
+}
+
+.btn-default.btn-outline:hover {
+  background: var(--accent-color);
+  color: var(--white-color);
+}
+
+.btn-default.btn-outline::before {
+  background-image: url("../images/arrow-white.svg");
+  background-color: var(--accent-color);
+}
+
+.btn-default.btn-outline:hover::before {
+  background-color: var(--white-color);
+  background-image: url("../images/arrow-accent.svg");
+}
+
 .readmore-btn {
   position: relative;
   display: inline-block;
@@ -910,16 +931,15 @@ header.main-header .header-sticky.active {
   gap: 30px;
 }
 
-.hero-content-body .trusted-clients-box {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 0;
-}
-
 .hero-content-body .trusted-clients-box .trusted-clients-content {
   max-width: 180px;
   margin: 0;
+}
+
+.hero-cta-group {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
 }
 
 .hero-image-circle {
@@ -5446,28 +5466,53 @@ header.main-header .header-sticky.active {
   }
 
   .hero {
-    padding: 100px 0 40px;
+    padding: 140px 0 60px;
+    text-align: center;
   }
 
-  .hero-content-body {
-    gap: 10px;
+  .section-title {
+    margin-bottom: 30px;
   }
 
-  .hero-title-image {
-    margin-right: -30px;
+  .hero-cta-group {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
   }
 
-  .hero-title-image img,
-  .contact-us-circle a img {
-    max-width: 100px;
+  .btn-default {
+    width: 100%;
+    padding: 15px 45px 15px 20px;
   }
 
-  .trusted-clients-content {
-    margin-top: 10px;
+  .hero-image-circle {
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .hero-image {
+    margin-top: 40px;
+  }
+
+  .hero-content {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-items-box {
+    padding: 25px;
+  }
+
+  .hero-item {
+    padding-bottom: 25px;
+    margin-bottom: 25px;
   }
 
   .hero-item-content h3 {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .our-scrolling-ticker {
