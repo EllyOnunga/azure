@@ -43,25 +43,43 @@
     const button = document.getElementById('whatsapp-button');
 
     // 3. Logic
+    let soundPlayed = false;
+
+    const playNotificationSound = () => {
+        if (soundPlayed) return;
+
+        sound.currentTime = 0;
+        const playPromise = sound.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                soundPlayed = true;
+                console.log("Notification sound played successfully");
+            }).catch(error => {
+                console.log("Audio play deferred until user interaction.");
+            });
+        }
+    };
+
     const showNotification = () => {
         // Only show if user hasn't interacted yet in this session
         if (!sessionStorage.getItem('whatsapp_notified')) {
             setTimeout(() => {
                 popup.classList.add('active');
                 badge.classList.add('active');
-
-                // Play sound (may require user interaction with the page first due to browser policies)
-                const playPromise = sound.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.log("Audio play prevented by browser. Will play on next click.");
-                    });
-                }
-
+                playNotificationSound();
                 sessionStorage.setItem('whatsapp_notified', 'true');
             }, 5000); // 5 seconds delay
         }
     };
+
+    // Browser policy workaround: Play sound on first user click anywhere if it hasn't played yet
+    document.addEventListener('click', () => {
+        if (!soundPlayed && sessionStorage.getItem('whatsapp_notified')) {
+            // If notification is already visible but sound was blocked, try one more time on click
+            playNotificationSound();
+        }
+    }, { once: true });
 
     // Close popup
     closeBtn.addEventListener('click', (e) => {
