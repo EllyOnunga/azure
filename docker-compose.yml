@@ -1,12 +1,24 @@
 services:
   azure-bay:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: azure_bay_app
     ports:
       - "8080:80"
     restart: always
     networks:
       - azure_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   azure_network:
