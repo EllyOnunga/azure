@@ -4467,9 +4467,22 @@ header.main-header .header-sticky.active {
     margin-top: 20px;
   }
 
-  .hero-title-image img,
+  .hero-title-image {
+    margin-right: -30px;
+  }
+
+  .hero-title-image img {
+    max-width: 100px;
+    border: 3px solid var(--accent-color);
+  }
+
+  .contact-us-circle a {
+    border-width: 3px;
+    border-color: var(--accent-color);
+  }
+
   .contact-us-circle a img {
-    max-width: 120px;
+    max-width: 90px;
   }
 
   .hero-content {
@@ -5487,8 +5500,32 @@ header.main-header .header-sticky.active {
   }
 
   .hero-image-circle {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    margin-top: 40px;
+    margin: 40px auto;
+    position: relative;
+    max-width: 300px;
+  }
+
+  .hero-title-image {
+    margin: 0;
+  }
+
+  .hero-title-image img {
+    max-width: 120px;
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .contact-us-circle {
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+  }
+
+  .contact-us-circle a img {
+    max-width: 90px !important;
   }
 
   .hero-image {
@@ -5511,8 +5548,56 @@ header.main-header .header-sticky.active {
     margin-bottom: 25px;
   }
 
-  .hero-item-content h3 {
-    font-size: 16px;
+  .trusted-clients-box {
+    margin: 30px auto;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 100px;
+    border: 1px solid var(--dark-divider-color);
+    gap: 15px;
+    width: auto;
+  }
+
+  .trusted-clients-images {
+    margin-bottom: 0;
+  }
+
+  .trusted-clients-image figure {
+    width: 30px;
+    height: 30px;
+    border-width: 1.5px;
+    border-color: var(--accent-color);
+  }
+
+  .trusted-clients-image.add-more {
+    width: 30px;
+    height: 30px;
+    background: var(--accent-color);
+  }
+
+  .trusted-clients-image.add-more i {
+    font-size: 12px;
+    color: var(--white-color);
+  }
+
+  .trusted-clients-content {
+    margin-top: 0;
+  }
+
+  .trusted-clients-content p {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+    white-space: nowrap;
   }
 
   .our-scrolling-ticker {
