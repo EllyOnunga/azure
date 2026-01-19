@@ -18,6 +18,133 @@
     animation: pulse-whatsapp 2s infinite;
 }
 
+/* Notification Badge */
+.whatsapp-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff3b30;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.whatsapp-badge.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* WhatsApp Popup Bubble */
+.whatsapp-popup {
+    position: fixed;
+    bottom: 105px;
+    left: 30px;
+    width: 280px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 9998;
+    overflow: hidden;
+    transform: translateY(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.whatsapp-popup.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.whatsapp-popup-header {
+    background: #075e54;
+    color: white;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.whatsapp-popup-header img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.whatsapp-popup-header-info h4 {
+    font-size: 14px;
+    margin: 0;
+    color: white;
+}
+
+.whatsapp-popup-header-info p {
+    font-size: 11px;
+    margin: 0;
+    opacity: 0.8;
+}
+
+.whatsapp-popup-body {
+    padding: 15px;
+    background: #e5ddd5;
+    position: relative;
+}
+
+.whatsapp-msg {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 0 15px 15px 15px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #333;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.whatsapp-msg::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 0;
+    border-style: solid;
+    border-width: 0 10px 10px 0;
+    border-color: transparent white transparent transparent;
+}
+
+.whatsapp-msg .time {
+    font-size: 10px;
+    color: #999;
+    display: block;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.whatsapp-popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.whatsapp-popup-close:hover {
+    color: white;
+}
+
 .floating-whatsapp:hover {
     background-color: #128c7e;
     transform: scale(1.15);
