@@ -1,11 +1,56 @@
+# Git
 .git
+.gitignore
 .github
+
+# Environment files
 .env
-.htaccess
+.env.local
+.env.*.local
+
+# Build tools
 Dockerfile
 docker-compose.yml
+docker-compose.*.yml
+k8s-deployment.yaml
+Makefile
+setup.sh
+
+# Documentation
 README.md
-node_modules
+LICENSE
+docs/
+
+# Development files
+.vscode/
+.idea/
+*.sublime-*
+
+# Node.js
+node_modules/
 npm-debug.log
+package.json
+package-lock.json
+.prettierrc
+.htmlhintrc
 .hintrc
 
+# Logs
+*.log
+logs/
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.bak
+*.tmp
+*.temp
+
+# Azure/Kubernetes
+*.pem
+*.key

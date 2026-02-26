@@ -1,0 +1,37 @@
+# Azure Bay Restaurant Website
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-*
+
+# Logs
+*.log
+logs/
+
+# Backup files
+*.bak
+*.tmp
+*.temp
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+
+# Node modules (if any)
+node_modules/
+
+# Automated files
+.automate/

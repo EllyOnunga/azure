@@ -1,50 +1,80 @@
 <svg width="240" height="80" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
   <defs>
+    <!-- Ocean blue gradient -->
     <linearGradient id="oceanBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3A8FA6"/>
-      <stop offset="100%" stop-color="#2C6B7E"/>
+      <stop offset="0%" stop-color="#0891B2"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
     </linearGradient>
-    <linearGradient id="greenText" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#7FD8A0"/>
-      <stop offset="100%" stop-color="#5FB87E"/>
+    <!-- Golden sand gradient -->
+    <linearGradient id="golden" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+    <!-- Teal for text -->
+    <linearGradient id="tealText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0D9488"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
     </linearGradient>
   </defs>
 
-  <!-- Small circle with fish -->
-  <circle cx="30" cy="40" r="22" 
-          fill="none"
-          stroke="url(#greenText)" 
-          stroke-width="2"/>
+  <!-- Wave decoration at bottom -->
+  <path d="M0 65 Q30 55 60 65 Q90 75 120 65 Q150 55 180 65 Q210 75 240 65 L240 80 L0 80 Z" 
+        fill="url(#oceanBlue)" opacity="0.3"/>
+  <path d="M0 72 Q30 62 60 72 Q90 82 120 72 Q150 62 180 72 Q210 82 240 72 L240 80 L0 80 Z" 
+        fill="url(#oceanBlue)" opacity="0.5"/>
 
-  <!-- Realistic fish silhouette -->
-  <g transform="translate(30, 40)">
-    <!-- Fish body -->
-    <ellipse cx="0" cy="0" rx="11" ry="5" 
-             fill="url(#greenText)"/>
+  <!-- Outer circle - represents a plate or sunset -->
+  <circle cx="35" cy="38" r="26" 
+          fill="none"
+          stroke="url(#oceanBlue)" 
+          stroke-width="2.5"/>
+
+  <!-- Inner circle - represents the horizon -->
+  <circle cx="35" cy="38" r="20" 
+          fill="none"
+          stroke="url(#oceanBlue)" 
+          stroke-width="1"
+          opacity="0.5"/>
+
+  <!-- Simplified fish icon -->
+  <g transform="translate(35, 38)">
+    <!-- Fish body - flowing shape -->
+    <ellipse cx="0" cy="0" rx="10" ry="6" 
+             fill="url(#golden)"/>
     
-    <!-- Fish head detail -->
-    <circle cx="6" cy="-1" r="1" fill="url(#greenText)"/>
+    <!-- Tail -->
+    <path d="M-10 0 L-16 -5 L-16 5 Z" 
+          fill="url(#golden)"/>
     
-    <!-- Tail fin -->
-    <path d="M-11 0 L-16 -4 L-16 4 Z" 
-          fill="url(#greenText)"/>
-    
-    <!-- Top fin -->
-    <path d="M-2 -5 L-3 -8 L2 -5 Z" 
-          fill="url(#greenText)"/>
-    
-    <!-- Bottom fin -->
-    <path d="M0 5 L-2 8 L3 5 Z" 
-          fill="url(#greenText)"/>
+    <!-- Eye -->
+    <circle cx="5" cy="-1" r="1.5" fill="#fff"/>
+    <circle cx="5.5" cy="-1" r="0.5" fill="#0D4"/>
   </g>
 
-  <!-- Restaurant name -->
-  <text x="60" y="48"
-        font-family="'Playfair Display', 'Georgia', serif"
-        font-size="28"
-        font-weight="600"
-        fill="url(#greenText)"
-        letter-spacing="0.5">
-    Azure
+  <!-- Wave accent -->
+  <path d="M20 52 Q27 48 35 52 Q43 56 50 52" 
+        fill="none"
+        stroke="url(#oceanBlue)"
+        stroke-width="1.5"
+        stroke-linecap="round"/>
+
+  <!-- Restaurant name - more modern font -->
+  <text x="68" y="46"
+        font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-size="32"
+        font-weight="700"
+        fill="url(#tealText)"
+        letter-spacing="1">
+    Azure Bay
+  </text>
+
+  <!-- Tagline -->
+  <text x="68" y="62"
+        font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-size="11"
+        font-weight="400"
+        fill="#64748B"
+        letter-spacing="2">
+    SEAFOOD RESTAURANT
   </text>
 </svg>

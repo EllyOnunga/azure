@@ -1,0 +1,23 @@
+# Security Policy for Azure Bay Restaurant
+# https://azurebay.co.ke/security.txt
+
+# Preferred languages
+Preferred-Languages: en
+
+# Encryption
+Encryption: https://keybase.io/azurebay
+
+# Security contact
+Contact: mailto:security@azurebay.co.ke
+
+# Policy
+Policy: https://azurebay.co.ke/privacy.html
+
+# Acknowledgments
+Acknowledgments: https://azurebay.co.ke/security/acknowledgments
+
+# Hiring
+Hiring: https://azurebay.co.ke/careers
+
+# Scope
+Scope: https://azurebay.co.ke/*

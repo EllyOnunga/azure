@@ -21,7 +21,7 @@
                 <div class="whatsapp-popup-body">
                     <div class="whatsapp-msg">
                         Hello! 👋 Welcome to Azure Bay. How can we help you today with your reservation or inquiry?
-                        <span class="time">${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}</span>
+                        <span class="time">${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, "0")}</span>
                     </div>
                 </div>
             </div>
@@ -33,14 +33,14 @@
             </a>
         </div>
     `;
-    document.body.insertAdjacentHTML('beforeend', whatsappHTML);
+    document.body.insertAdjacentHTML("beforeend", whatsappHTML);
 
     // 2. Elements
-    const popup = document.getElementById('whatsapp-popup');
-    const badge = document.getElementById('whatsapp-badge');
-    const closeBtn = document.getElementById('close-whatsapp-popup');
-    const sound = document.getElementById('whatsapp-notification-sound');
-    const button = document.getElementById('whatsapp-button');
+    const popup = document.getElementById("whatsapp-popup");
+    const badge = document.getElementById("whatsapp-badge");
+    const closeBtn = document.getElementById("close-whatsapp-popup");
+    const sound = document.getElementById("whatsapp-notification-sound");
+    const button = document.getElementById("whatsapp-button");
 
     // 3. Logic
     let soundPlayed = false;
@@ -52,48 +52,54 @@
         const playPromise = sound.play();
 
         if (playPromise !== undefined) {
-            playPromise.then(() => {
-                soundPlayed = true;
-                console.log("Notification sound played successfully");
-            }).catch(error => {
-                console.log("Audio play deferred until user interaction.");
-            });
+            playPromise
+                .then(() => {
+                    soundPlayed = true;
+                    console.log("Notification sound played successfully");
+                })
+                .catch((error) => {
+                    console.log("Audio play deferred until user interaction.");
+                });
         }
     };
 
     const showNotification = () => {
         // Only show if user hasn't interacted yet in this session
-        if (!sessionStorage.getItem('whatsapp_notified')) {
+        if (!sessionStorage.getItem("whatsapp_notified")) {
             setTimeout(() => {
-                popup.classList.add('active');
-                badge.classList.add('active');
+                popup.classList.add("active");
+                badge.classList.add("active");
                 playNotificationSound();
-                sessionStorage.setItem('whatsapp_notified', 'true');
+                sessionStorage.setItem("whatsapp_notified", "true");
             }, 5000); // 5 seconds delay
         }
     };
 
     // Browser policy workaround: Play sound on first user click anywhere if it hasn't played yet
-    document.addEventListener('click', () => {
-        if (!soundPlayed && sessionStorage.getItem('whatsapp_notified')) {
-            // If notification is already visible but sound was blocked, try one more time on click
-            playNotificationSound();
-        }
-    }, { once: true });
+    document.addEventListener(
+        "click",
+        () => {
+            if (!soundPlayed && sessionStorage.getItem("whatsapp_notified")) {
+                // If notification is already visible but sound was blocked, try one more time on click
+                playNotificationSound();
+            }
+        },
+        { once: true },
+    );
 
     // Close popup
-    closeBtn.addEventListener('click', (e) => {
+    closeBtn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        popup.classList.remove('active');
+        popup.classList.remove("active");
     });
 
     // Hide badge on click
-    button.addEventListener('click', () => {
-        badge.classList.remove('active');
-        popup.classList.remove('active');
+    button.addEventListener("click", () => {
+        badge.classList.remove("active");
+        popup.classList.remove("active");
     });
 
     // Trigger on load
-    window.addEventListener('load', showNotification);
+    window.addEventListener("load", showNotification);
 })();

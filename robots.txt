@@ -1,4 +1,17 @@
+# Azure Bay Restaurant - Robots.txt
+# https://azurebay.co.ke
+
 User-agent: *
 Allow: /
 
+# Disallow admin/private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_nuxt/
+Disallow: /assets/
+
+# Sitemap
 Sitemap: https://azurebay.co.ke/sitemap.xml
+
+# Crawl-delay (optional, for polite crawling)
+Crawl-delay: 1

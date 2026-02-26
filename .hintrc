@@ -16,6 +16,19 @@
         ]
       }
     ],
-    "highest-available-document-mode": "off"
-  }
+    "highest-available-document-mode": "off",
+    "axe/structure": [
+      "default",
+      {
+        "html": {
+          "lang": true
+        }
+      }
+    ]
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "not dead"
+  ]
 }
