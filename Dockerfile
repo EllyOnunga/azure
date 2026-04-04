@@ -6,10 +6,7 @@ LABEL maintainer="Azure Bay Team"
 LABEL description="Static production build for Azure Bay website"
 
 # Install additional tools for health checking
-RUN apk add --no-cache \
-    curl \
-    bash \
-    > /dev/null 2>&1
+RUN apk add --no-cache curl
 
 # Copy static files to the Nginx serving directory
 COPY . /usr/share/nginx/html

@@ -93,6 +93,110 @@
             .skip-link:focus {
                 top: 0;
             }
+            /* Hero Section Improvements */
+            .hero .hero-content {
+                padding-right: 20px;
+            }
+            .hero .section-title {
+                margin-bottom: 30px;
+            }
+            .hero .section-title h3 {
+                color: var(--accent-color);
+                font-size: 18px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin-bottom: 10px;
+            }
+            .hero .section-title h1 {
+                font-size: clamp(2rem, 4vw, 3.5rem);
+                line-height: 1.2;
+                margin-bottom: 20px;
+                color: var(--white-color);
+            }
+            .hero-cta-group {
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+                margin-bottom: 40px;
+            }
+            .hero-items-box {
+                display: flex;
+                gap: 30px;
+                margin-bottom: 40px;
+                flex-wrap: wrap;
+            }
+            .hero-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .hero-item .icon-box {
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .hero-item .icon-box img {
+                width: 40px;
+                height: 40px;
+            }
+            .hero-item-content h3 {
+                font-size: 16px;
+                font-weight: 600;
+                color: var(--white-color);
+                margin: 0;
+            }
+            .trusted-clients-box {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+            .trusted-clients-images {
+                display: flex;
+            }
+            .trusted-clients-image {
+                margin-left: -12px;
+            }
+            .trusted-clients-image:first-child {
+                margin-left: 0;
+            }
+            .trusted-clients-content {
+                color: var(--light-color);
+                font-size: 14px;
+            }
+            .hero-image {
+                position: relative;
+            }
+            .hero-image img {
+                width: 100%;
+                border-radius: 20px;
+                object-fit: cover;
+            }
+            @media (max-width: 991px) {
+                .hero .hero-content {
+                    padding-right: 0;
+                    margin-bottom: 40px;
+                }
+                .hero-items-box {
+                    justify-content: flex-start;
+                }
+            }
+            @media (max-width: 576px) {
+                .hero-items-box {
+                    flex-direction: column;
+                    gap: 20px;
+                }
+                .hero-cta-group {
+                    flex-direction: column;
+                }
+                .hero-cta-group .btn {
+                    width: 100%;
+                    text-align: center;
+                }
+            }
         </style>
         <link href="css/whatsapp.css" rel="stylesheet" />
 
@@ -133,8 +237,6 @@
 
     <body>
         <!-- Skip to Main Content Link for Accessibility -->
-        <a href="#main-content" class="skip-link">Skip to main content</a>
-        <!-- Skip Link for Accessibility -->
         <a href="#main-content" class="skip-link">Skip to main content</a>
 
         <div class="scroll-progress"></div>
@@ -215,47 +317,49 @@
         <!-- Hero Section Start -->
         <div id="main-content" class="hero dark-section">
             <div class="container">
-                <div class="row section-row align-items-center">
-                    <div class="col-lg-8">
-                        <!-- Section Title Start -->
-                        <div class="section-title">
-                            <h3 class="wow fadeInUp" data-wow-delay="0.1s">Welcome to Azure Bay</h3>
-                            <h1 class="text-anime-style-3" data-cursor="-opaque">
-                                Fresh Seafood, Stunning Views, Unforgettable Memories
-                            </h1>
-                            <div class="hero-cta-group wow fadeInUp" data-wow-delay="0.6s">
-                                <a href="reserve-table.html" class="btn-default">Book Your Table</a>
-                                <a href="menu.html" class="btn-default btn-outline">View Our Menu</a>
-                            </div>
-                        </div>
-                        <!-- Section Title End -->
-                    </div>
-
-                    <div class="col-lg-4">
-                        <!-- Hero Image Circle Start -->
-                        <div class="hero-image-circle">
-                            <!-- Hero Title Image Start -->
-                            <div class="hero-title-image">
-                                <figure class="image-anime">
-                                    <img src="images/hero-title-image.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- Hero Title Image End -->
-
-                            <!-- Contact Us Circle Start -->
-                            <div class="contact-us-circle">
-                                <a href="contact.html"><img src="images/contact-us-circle.svg" alt="Contact Us" /></a>
-                            </div>
-                            <!-- Contact Us Circle End -->
-                        </div>
-                        <!-- Hero Image Circle End -->
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-3">
-                        <!-- Hero Content Start -->
+                <div class="row align-items-center">
+                    <!-- Left Column - Content -->
+                    <div class="col-lg-7">
                         <div class="hero-content">
+                            <!-- Section Title Start -->
+                            <div class="section-title">
+                                <h3 class="wow fadeInUp" data-wow-delay="0.1s">Welcome to Azure Bay</h3>
+                                <h1 class="text-anime-style-3" data-cursor="-opaque">
+                                    Fresh Seafood, Stunning Views, Unforgettable Memories
+                                </h1>
+                                <div class="hero-cta-group wow fadeInUp" data-wow-delay="0.6s">
+                                    <a href="reserve-table.html" class="btn-default">Book Your Table</a>
+                                    <a href="menu.html" class="btn-default btn-outline">View Our Menu</a>
+                                </div>
+                            </div>
+                            <!-- Section Title End -->
+
+                            <!-- Hero Items Box Start -->
+                            <div class="hero-items-box wow fadeInUp" data-wow-delay="0.4s">
+                                <!-- Hero Item Start -->
+                                <div class="hero-item">
+                                    <div class="icon-box">
+                                        <img src="images/icon-hero-item-1.svg" alt="" />
+                                    </div>
+                                    <div class="hero-item-content">
+                                        <h3>Fresh Catch Daily</h3>
+                                    </div>
+                                </div>
+                                <!-- Hero Item End -->
+
+                                <!-- Hero Item Start -->
+                                <div class="hero-item">
+                                    <div class="icon-box">
+                                        <img src="images/icon-hero-item-2.svg" alt="" />
+                                    </div>
+                                    <div class="hero-item-content">
+                                        <h3>Handcrafted Dishes</h3>
+                                    </div>
+                                </div>
+                                <!-- Hero Item End -->
+                            </div>
+                            <!-- Hero Items Box End -->
+
                             <!-- Trusted Clients Box Start -->
                             <div class="trusted-clients-box wow fadeInUp" data-wow-delay="0.2s">
                                 <!-- Trusted Clients Images Start -->
@@ -293,41 +397,19 @@
                                 <!-- Satisfy Client Content End -->
                             </div>
                             <!-- Trusted Clients Box End -->
-
-                            <!-- Hero Items Box Start -->
-                            <div class="hero-items-box wow fadeInUp" data-wow-delay="0.4s">
-                                <!-- Hero Item Start -->
-                                <div class="hero-item">
-                                    <div class="icon-box">
-                                        <img src="images/icon-hero-item-1.svg" alt="" />
-                                    </div>
-                                    <div class="hero-item-content">
-                                        <h3>Fresh Catch Daily</h3>
-                                    </div>
-                                </div>
-                                <!-- Hero Item End -->
-
-                                <!-- Hero Item Start -->
-                                <div class="hero-item">
-                                    <div class="icon-box">
-                                        <img src="images/icon-hero-item-2.svg" alt="" />
-                                    </div>
-                                    <div class="hero-item-content">
-                                        <h3>Handcrafted Dishes</h3>
-                                    </div>
-                                </div>
-                                <!-- Hero Item End -->
-                            </div>
-                            <!-- Hero Items Box End -->
                         </div>
-                        <!-- Hero Content End -->
                     </div>
 
-                    <div class="col-lg-9">
+                    <!-- Right Column - Hero Image -->
+                    <div class="col-lg-5">
                         <!-- Hero Image Start -->
                         <div class="hero-image">
                             <figure class="image-anime reveal">
-                                <img src="images/hero-image-new.webp" alt="" class="floating" />
+                                <img
+                                    src="images/hero-image-new.webp"
+                                    alt="Azure Bay Seafood Restaurant"
+                                    class="floating"
+                                />
                             </figure>
                         </div>
                         <!-- Hero Image End -->
