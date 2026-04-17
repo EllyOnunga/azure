@@ -102,6 +102,29 @@ img {
     transition: var(--transition-smooth);
 }
 
+.floating-cta {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 1023px) {
+    .floating-cta {
+        bottom: 90px; /* Lift above the 70px bottom nav */
+        right: 20px;
+        width: 54px;
+        height: 54px;
+    }
+}
+
 .btn-solid { background: var(--accent-gold); color: var(--deep-navy); }
 .btn-outline { background: transparent; color: var(--soft-white); border: 2px solid var(--glass-border); }
 
