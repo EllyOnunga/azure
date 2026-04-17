@@ -106,7 +106,7 @@ img {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    z-index: 2500; /* Ensure it floats above the bottom-nav (2000) */
+    z-index: 3000; /* Ensure it stays on top of all other elements */
     border-radius: 50%;
     width: 60px;
     height: 60px;
