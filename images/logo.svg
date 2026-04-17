@@ -1,80 +1,17 @@
-<svg width="240" height="80" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <!-- Ocean blue gradient -->
-    <linearGradient id="oceanBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0891B2"/>
-      <stop offset="100%" stop-color="#06B6D4"/>
-    </linearGradient>
-    <!-- Golden sand gradient -->
-    <linearGradient id="golden" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#F59E0B"/>
-      <stop offset="100%" stop-color="#FBBF24"/>
-    </linearGradient>
-    <!-- Teal for text -->
-    <linearGradient id="tealText" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#0D9488"/>
-      <stop offset="100%" stop-color="#14B8A6"/>
-    </linearGradient>
-  </defs>
+<svg width="180" height="56" viewBox="0 0 180 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Wave icon -->
+  <path d="M8 24 Q13 18 18 24 Q23 30 28 24 Q33 18 38 24" stroke="#C0A06D" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M11 31 Q16 25 21 31 Q26 37 31 31 Q36 25 41 31" stroke="#C0A06D" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
 
-  <!-- Wave decoration at bottom -->
-  <path d="M0 65 Q30 55 60 65 Q90 75 120 65 Q150 55 180 65 Q210 75 240 65 L240 80 L0 80 Z" 
-        fill="url(#oceanBlue)" opacity="0.3"/>
-  <path d="M0 72 Q30 62 60 72 Q90 82 120 72 Q150 62 180 72 Q210 82 240 72 L240 80 L0 80 Z" 
-        fill="url(#oceanBlue)" opacity="0.5"/>
+  <!-- AZURE -->
+  <text x="52" y="30" fill="#F8F9FA" font-family="'Bricolage Grotesque', Georgia, serif" font-weight="800" font-size="22" letter-spacing="2">AZURE</text>
+  <!-- BAY -->
+  <text x="52" y="47" fill="#C0A06D" font-family="'Manrope', sans-serif" font-weight="400" font-size="12" letter-spacing="8">BAY</text>
 
-  <!-- Outer circle - represents a plate or sunset -->
-  <circle cx="35" cy="38" r="26" 
-          fill="none"
-          stroke="url(#oceanBlue)" 
-          stroke-width="2.5"/>
+  <!-- Divider -->
+  <line x1="148" y1="20" x2="148" y2="46" stroke="#C0A06D" stroke-width="0.5" opacity="0.4"/>
 
-  <!-- Inner circle - represents the horizon -->
-  <circle cx="35" cy="38" r="20" 
-          fill="none"
-          stroke="url(#oceanBlue)" 
-          stroke-width="1"
-          opacity="0.5"/>
-
-  <!-- Simplified fish icon -->
-  <g transform="translate(35, 38)">
-    <!-- Fish body - flowing shape -->
-    <ellipse cx="0" cy="0" rx="10" ry="6" 
-             fill="url(#golden)"/>
-    
-    <!-- Tail -->
-    <path d="M-10 0 L-16 -5 L-16 5 Z" 
-          fill="url(#golden)"/>
-    
-    <!-- Eye -->
-    <circle cx="5" cy="-1" r="1.5" fill="#fff"/>
-    <circle cx="5.5" cy="-1" r="0.5" fill="#0D4"/>
-  </g>
-
-  <!-- Wave accent -->
-  <path d="M20 52 Q27 48 35 52 Q43 56 50 52" 
-        fill="none"
-        stroke="url(#oceanBlue)"
-        stroke-width="1.5"
-        stroke-linecap="round"/>
-
-  <!-- Restaurant name - more modern font -->
-  <text x="68" y="46"
-        font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
-        font-size="32"
-        font-weight="700"
-        fill="url(#tealText)"
-        letter-spacing="1">
-    Azure Bay
-  </text>
-
-  <!-- Tagline -->
-  <text x="68" y="62"
-        font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
-        font-size="11"
-        font-weight="400"
-        fill="#64748B"
-        letter-spacing="2">
-    SEAFOOD RESTAURANT
-  </text>
+  <!-- EST + year -->
+  <text x="155" y="29" fill="#636E72" font-family="'Manrope', sans-serif" font-weight="700" font-size="7" letter-spacing="1">EST.</text>
+  <text x="155" y="40" fill="#636E72" font-family="'Manrope', sans-serif" font-weight="700" font-size="7" letter-spacing="1">1987</text>
 </svg>

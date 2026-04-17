@@ -1,2176 +1,358 @@
-<!doctype html>
-<html lang="en-KE">
-    <head>
-        <meta charset="utf-8" />
-        <!-- Meta -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Azure Bay | Coastal Italian Dining Since 1987</title>
+    <meta name="description" content="Nairobi's premier waterfront dining experience. Fresh seafood and authentic coastal Italian flavors.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/modern-custom.css">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Azure Bay",
+      "image": "images/hero-image-new.webp",
+      "priceRange": "$$$",
+      "servesCuisine": "Kenyan Coastal, Seafood",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nairobi",
+        "addressCountry": "KE"
+      },
+      "telephone": "+254102880577"
+    }
+    </script>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+</head>
+<body>
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-            name="description"
-            content="Discover the best seafood in town at Azure Bay. Fresh catches daily, delicious dishes, and stunning waterfront views. Join us for an unforgettable dining experience!"
-        />
-        <meta
-            name="keywords"
-            content="seafood restaurant, fresh fish, waterfront dining, fine dining, Azure Bay, lobster, sustainable seafood"
-        />
-        <meta name="author" content="Azure Bay" />
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://azurebay.co.ke/" />
-        <meta property="og:title" content="Azure Bay - Fresh Seafood & Stunning Waterfront Views" />
-        <meta
-            property="og:description"
-            content="Come taste the ocean's finest catches at Azure Bay. Fresh, delicious, and waiting for you!"
-        />
-        <meta property="og:image" content="images/hero-image-new.webp" />
+    <div id="announcement-bar">
+        Closed for a Private Event on Dec 5th. Looking for a venue? <a href="reserve-table.html#events" style="color: inherit; text-decoration: underline;">Inquire Here</a>
+    </div>
 
-        <!-- Twitter -->
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://azurebay.co.ke/" />
-        <meta property="twitter:title" content="Azure Bay - Fresh Seafood & Stunning Waterfront Views" />
-        <meta
-            property="twitter:description"
-            content="Come taste the ocean's finest catches at Azure Bay. Fresh, delicious, and waiting for you!"
-        />
-        <meta property="twitter:image" content="images/hero-image-new.webp" />
-        <!-- Canonical URL -->
-        <link rel="canonical" href="https://azurebay.co.ke/" />
-        <!-- Page Title -->
-        <title>Azure Bay - Fresh Seafood Restaurant | Waterfront Dining</title>
-        <!-- Favicon Icon -->
-        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
-        <!-- Google Fonts Css-->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Manrope:wght@200..800&display=swap"
-            rel="stylesheet"
-        />
-        <!-- Font Awesome Icons -->
-        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> -->
-        <!-- Bootstrap Css -->
-        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
-        <!-- SlickNav Css -->
-        <link href="css/slicknav.min.css" rel="stylesheet" />
-        <!-- Swiper Css -->
-        <link rel="stylesheet" href="css/swiper-bundle.min.css" />
-        <!-- Font Awesome Icon Css-->
-        <link href="css/all.min.css" rel="stylesheet" media="screen" />
-        <!-- Animated Css -->
-        <link href="css/animate.css" rel="stylesheet" />
-        <!-- Magnific Popup Core Css File -->
-        <link rel="stylesheet" href="css/magnific-popup.css" />
-        <!-- Mouse Cursor Css File -->
-        <!-- Main Custom Css -->
-        <link href="css/custom.min.css" rel="stylesheet" media="screen" />
+    <!-- Navigation Drawer -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div id="mobile-drawer">
+        <div class="logo" style="margin-bottom: 40px;">
+            <img src="images/logo.svg" alt="Azure Bay" height="40">
+        </div>
+        <ul class="drawer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="reserve-table.html">Reservations</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="image-gallery.html">Gallery</a></li>
+            <li><a href="blog.html">The Blog</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div style="margin-top: auto;">
+            <p style="font-size: 0.8rem; color: var(--text-light);">Nairobi Waterfront, Karen<br>+254 102 880 577</p>
+        </div>
+    </div>
+
+    <!-- Section: Sticky Header -->
+    <header id="main-header">
+        <div class="container header-container">
+            <div class="hamburger" id="hamburger-trigger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.svg" alt="Azure Bay Logo" height="40">
+                </a>
+            </div>
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="image-gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-cta">
+                <a href="reserve-table.html" class="btn-premium btn-solid" style="padding: 10px 20px; font-size: 0.7rem;">Reserve</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Section: Hero -->
+        <section id="hero" style="min-height: 80vh; position: relative; display: flex; align-items: center; overflow: hidden; padding: 0;">
+            <div class="hero-media" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+                <img src="images/hero-image-new.webp" alt="Azure Bay Ambiance" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4);">
+            </div>
+            
+            <div class="container hero-content" style="text-align: center;">
+                <div class="kenya-badge">Nairobi's Finest</div>
+                <h1 style="margin-bottom: 20px;">Karibu Azure Bay</h1>
+                <p style="font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 40px; font-weight: 700;">Kenyan Coastal Excellence Since 1987</p>
+                <div class="hero-btns responsive-grid cols-2" style="max-width: 500px; margin: 0 auto;">
+                    <a href="reserve-table.html" class="btn-premium btn-solid">Book Table</a>
+                    <a href="menu.html" class="btn-premium btn-outline">View Menu</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Speed Bump Info Bar -->
+        <div id="speed-bump" class="container" style="margin-top: -40px; position: relative; z-index: 10;">
+            <div class="glass-panel responsive-grid cols-3" style="padding: 20px; border-radius: 30px; text-align: center;">
+                <div class="info-item" style="padding: 10px;">
+                    <span style="display: block; font-size: 0.7rem; text-transform: uppercase; color: var(--accent-gold); letter-spacing: 1px;">Daily Hours</span>
+                    <span style="font-weight: 700; font-size: 0.9rem;">5PM - 10PM</span>
+                </div>
+                <div class="info-item" style="padding: 10px; border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
+                    <span style="display: block; font-size: 0.7rem; text-transform: uppercase; color: var(--accent-gold); letter-spacing: 1px;">Location</span>
+                    <a href="https://maps.google.com" target="_blank" style="font-weight: 700; font-size: 0.85rem;">Waterfront, Nairobi</a>
+                </div>
+                <div class="info-item" style="padding: 10px;">
+                    <span style="display: block; font-size: 0.7rem; text-transform: uppercase; color: var(--accent-gold); letter-spacing: 1px;">Call Us</span>
+                    <a href="tel:+254102880577" style="font-weight: 700; font-size: 0.85rem;">+254 102 880</a>
+                </div>
+            </div>
+        </div>
+        
         <style>
-            a,
-            button,
-            .btn,
-            .nav-link,
-            .navbar-brand,
-            .team-image a,
-            .post-featured-image a,
-            .gallery-item-box a,
-            .video-play-circle a,
-            .popup-video {
-                cursor: pointer;
-            }
-            /* Skip Link for Accessibility */
-            .skip-link {
-                position: absolute;
-                top: -40px;
-                left: 0;
-                background: #000;
-                color: #fff;
-                padding: 8px 16px;
-                z-index: 10000;
-                transition: top 0.3s;
-                text-decoration: none;
-                font-weight: 600;
-            }
-            .skip-link:focus {
-                top: 0;
-            }
-            /* Hero Section Improvements */
-            .hero .hero-content {
-                padding-right: 20px;
-            }
-            .hero .section-title {
-                margin-bottom: 30px;
-            }
-            .hero .section-title h3 {
-                color: var(--accent-color);
-                font-size: 18px;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                margin-bottom: 10px;
-            }
-            .hero .section-title h1 {
-                font-size: clamp(2rem, 4vw, 3.5rem);
-                line-height: 1.2;
-                margin-bottom: 20px;
-                color: var(--white-color);
-            }
-            .hero-cta-group {
-                display: flex;
-                gap: 15px;
-                flex-wrap: wrap;
-                margin-bottom: 40px;
-            }
-            .hero-items-box {
-                display: flex;
-                gap: 30px;
-                margin-bottom: 40px;
-                flex-wrap: wrap;
-            }
-            .hero-item {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-            }
-            .hero-item .icon-box {
-                width: 50px;
-                height: 50px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .hero-item .icon-box img {
-                width: 40px;
-                height: 40px;
-            }
-            .hero-item-content h3 {
-                font-size: 16px;
-                font-weight: 600;
-                color: var(--white-color);
-                margin: 0;
-            }
-            .trusted-clients-box {
-                display: flex;
-                align-items: center;
-                gap: 15px;
-                flex-wrap: wrap;
-            }
-            .trusted-clients-images {
-                display: flex;
-            }
-            .trusted-clients-image {
-                margin-left: -12px;
-            }
-            .trusted-clients-image:first-child {
-                margin-left: 0;
-            }
-            .trusted-clients-content {
-                color: var(--light-color);
-                font-size: 14px;
-            }
-            .hero-image {
-                position: relative;
-            }
-            .hero-image img {
-                width: 100%;
-                border-radius: 20px;
-                object-fit: cover;
-            }
-            @media (max-width: 991px) {
-                .hero .hero-content {
-                    padding-right: 0;
-                    margin-bottom: 40px;
-                }
-                .hero-items-box {
-                    justify-content: flex-start;
-                }
-            }
-            @media (max-width: 576px) {
-                .hero-items-box {
-                    flex-direction: column;
-                    gap: 20px;
-                }
-                .hero-cta-group {
-                    flex-direction: column;
-                }
-                .hero-cta-group .btn {
-                    width: 100%;
-                    text-align: center;
-                }
+            @media (min-width: 768px) {
+                #speed-bump .info-item:nth-child(2) { border: none; border-left: 1px solid var(--glass-border); border-right: 1px solid var(--glass-border); }
             }
         </style>
-        <link href="css/whatsapp.css" rel="stylesheet" />
-
-        <!-- JSON-LD Structured Data for Restaurant SEO -->
-        <script type="application/ld+json">
-            {
-                "@context": "https://schema.org",
-                "@type": "Restaurant",
-                "name": "Azure Bay",
-                "description": "Discover the best seafood in town at Azure Bay. Fresh catches daily, delicious dishes, and stunning waterfront views.",
-                "url": "https://azurebay.co.ke/",
-                "telephone": "+254700000000",
-                "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Kenya",
-                    "addressCountry": "KE"
-                },
-                "geo": {
-                    "@type": "GeoCoordinates",
-                    "latitude": "-1.3186",
-                    "longitude": "36.8219"
-                },
-                "openingHoursSpecification": [
-                    {
-                        "@type": "OpeningHoursSpecification",
-                        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-                        "opens": "11:00",
-                        "closes": "22:00"
-                    }
-                ],
-                "servesCuisine": "Seafood",
-                "priceRange": "$",
-                "image": "https://azurebay.co.ke/images/hero-image-new.webp",
-                "sameAs": []
+        <!-- Section: About / Story Block -->
+        <section id="about">
+            <div class="container responsive-grid cols-2" style="align-items: center;">
+                <div class="about-text">
+                    <h2 style="margin-bottom: 20px;">Mastering the Art of Coastal Dining</h2>
+                    <p style="margin-bottom: 30px; color: var(--text-light);">We believe in purity and patience. Our chefs source fresh catches daily from the coast, pairing them with heritage Italian recipes passed down since 1987. Every plate is a tribute to the sea.</p>
+                    <a href="about.html" class="btn-premium btn-outline">Meet the Chef</a>
+                </div>
+                <div class="about-image" style="order: -1;">
+                    <img src="images/about-us-image-new.png" alt="Dining Room Ambiance" style="width: 100%; border-radius: var(--card-radius); box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+                </div>
+            </div>
+        </section>
+        
+        <style>
+            @media (min-width: 1024px) {
+                #about .about-image { order: 1; }
             }
-        </script>
-    </head>
+        </style>
 
-    <body>
-        <!-- Skip to Main Content Link for Accessibility -->
-        <a href="#main-content" class="skip-link">Skip to main content</a>
-
-        <div class="scroll-progress"></div>
-
-        <!-- Preloader Start -->
-        <div class="preloader">
-            <div class="loading-container">
-                <div class="loading"></div>
-                <div id="loading-icon"><img src="images/loader.svg" alt="" /></div>
-            </div>
-        </div>
-        <!-- Preloader End -->
-
-        <!-- Header Start -->
-        <header class="main-header" role="banner">
-            <div class="header-sticky">
-                <nav class="navbar navbar-expand-lg" role="navigation" aria-label="Main navigation">
-                    <div class="container">
-                        <!-- Logo Start -->
-                        <a class="navbar-brand" href="index.html">
-                            <img src="images/logo.svg" alt="Logo" />
-                        </a>
-                        <!-- Logo End -->
-
-                        <!-- Main Menu Start -->
-                        <div class="collapse navbar-collapse main-menu">
-                            <div class="nav-menu-wrapper">
-                                <ul class="navbar-nav mr-auto" id="menu">
-                                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                                    <li class="nav-item submenu">
-                                        <a class="nav-link" href="#">More</a>
-                                        <ul>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="blog-single.html">Blog Post</a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link" href="team.html">Our Team</a></li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="team-single.html">Team Member</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="testimonials.html">Reviews</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="image-gallery.html">Gallery</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="video-gallery.html">Videos</a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link" href="faqs.html">FAQ</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="404.html">Oops!</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                                    <li class="nav-item highlighted-menu">
-                                        <a class="nav-link" href="reserve-table.html">Book a Table</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!-- Header Btn Start -->
-                            <div class="header-btn">
-                                <a href="reserve-table.html" class="btn-default btn-highlighted">Book a Table</a>
-                            </div>
-                            <!-- Header Btn End -->
-                        </div>
-                        <!-- Main Menu End -->
-                        <div class="navbar-toggle"></div>
-                    </div>
-                </nav>
-                <div class="responsive-menu"></div>
-            </div>
-        </header>
-        <!-- Header End -->
-
-        <!-- Hero Section Start -->
-        <div id="main-content" class="hero dark-section">
+        <!-- Section: Menu Highlights -->
+        <section id="menu-highlights" class="dark-section" style="background: rgba(4, 18, 35, 0.5);">
             <div class="container">
-                <div class="row align-items-center">
-                    <!-- Left Column - Content -->
-                    <div class="col-lg-7">
-                        <div class="hero-content">
-                            <!-- Section Title Start -->
-                            <div class="section-title">
-                                <h3 class="wow fadeInUp" data-wow-delay="0.1s">Welcome to Azure Bay</h3>
-                                <h1 class="text-anime-style-3" data-cursor="-opaque">
-                                    Fresh Seafood, Stunning Views, Unforgettable Memories
-                                </h1>
-                                <div class="hero-cta-group wow fadeInUp" data-wow-delay="0.6s">
-                                    <a href="reserve-table.html" class="btn-default">Book Your Table</a>
-                                    <a href="menu.html" class="btn-default btn-outline">View Our Menu</a>
-                                </div>
-                            </div>
-                            <!-- Section Title End -->
-
-                            <!-- Hero Items Box Start -->
-                            <div class="hero-items-box wow fadeInUp" data-wow-delay="0.4s">
-                                <!-- Hero Item Start -->
-                                <div class="hero-item">
-                                    <div class="icon-box">
-                                        <img src="images/icon-hero-item-1.svg" alt="" />
-                                    </div>
-                                    <div class="hero-item-content">
-                                        <h3>Fresh Catch Daily</h3>
-                                    </div>
-                                </div>
-                                <!-- Hero Item End -->
-
-                                <!-- Hero Item Start -->
-                                <div class="hero-item">
-                                    <div class="icon-box">
-                                        <img src="images/icon-hero-item-2.svg" alt="" />
-                                    </div>
-                                    <div class="hero-item-content">
-                                        <h3>Handcrafted Dishes</h3>
-                                    </div>
-                                </div>
-                                <!-- Hero Item End -->
-                            </div>
-                            <!-- Hero Items Box End -->
-
-                            <!-- Trusted Clients Box Start -->
-                            <div class="trusted-clients-box wow fadeInUp" data-wow-delay="0.2s">
-                                <!-- Trusted Clients Images Start -->
-                                <div class="trusted-clients-images">
-                                    <div class="trusted-clients-image">
-                                        <figure class="image-anime">
-                                            <img src="images/author-1.jpg" alt="" />
-                                        </figure>
-                                    </div>
-                                    <div class="trusted-clients-image">
-                                        <figure class="image-anime">
-                                            <img src="images/author-2.jpg" alt="" />
-                                        </figure>
-                                    </div>
-                                    <div class="trusted-clients-image">
-                                        <figure class="image-anime">
-                                            <img src="images/author-3.jpg" alt="" />
-                                        </figure>
-                                    </div>
-                                    <div class="trusted-clients-image">
-                                        <figure class="image-anime">
-                                            <img src="images/author-4.jpg" alt="" />
-                                        </figure>
-                                    </div>
-                                    <div class="trusted-clients-image add-more">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </div>
-                                </div>
-                                <!-- Trusted Clients Images End -->
-
-                                <!-- Satisfy Client Content Start -->
-                                <div class="trusted-clients-content">
-                                    <p>Thousands of happy customers can't be wrong!</p>
-                                </div>
-                                <!-- Satisfy Client Content End -->
-                            </div>
-                            <!-- Trusted Clients Box End -->
-                        </div>
+                <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                    <h2>Featured Dishes</h2>
+                    <p style="color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">Voted Best in Nairobi</p>
+                </div>
+                <div class="menu-grid responsive-grid cols-3">
+                    <!-- Dish Card 1 -->
+                    <div class="dish-card glass-panel" style="padding: 30px; text-align: center;">
+                        <img src="images/best-product-1.png" alt="Lemon Lobster" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 4px solid var(--accent-gold);">
+                        <h3>Lemon Lobster</h3>
+                        <p style="color: var(--accent-gold); font-weight: 800; font-size: 1.2rem;">KSH 3,250</p>
                     </div>
+                    <!-- Dish Card 2 -->
+                    <div class="dish-card glass-panel" style="padding: 30px; text-align: center;">
+                        <img src="images/best-product-2.png" alt="Garlic Prawns" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 4px solid var(--accent-gold);">
+                        <h3>Garlic Prawns</h3>
+                        <p style="color: var(--accent-gold); font-weight: 800; font-size: 1.2rem;">KSH 7,150</p>
+                    </div>
+                    <!-- Dish Card 3 -->
+                    <div class="dish-card glass-panel" style="padding: 30px; text-align: center;">
+                        <img src="images/best-product-3.png" alt="Spicy Scallops" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 4px solid var(--accent-gold);">
+                        <h3>Spicy Scallops</h3>
+                        <p style="color: var(--accent-gold); font-weight: 800; font-size: 1.2rem;">KSH 5,200</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 50px;">
+                    <a href="menu.html" class="btn-premium btn-solid">Full Menu</a>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Right Column - Hero Image -->
-                    <div class="col-lg-5">
-                        <!-- Hero Image Start -->
-                        <div class="hero-image">
-                            <figure class="image-anime reveal">
-                                <img
-                                    src="images/hero-image-new.webp"
-                                    alt="Azure Bay Seafood Restaurant"
-                                    class="floating"
-                                />
-                            </figure>
+        <!-- Section: Reservation Widget -->
+        <section id="reservations" style="position: relative; padding: 80px 0; background: url('images/hero-image-new.webp') center/cover fixed;">
+            <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 18, 35, 0.75);"></div>
+            <div class="container" style="position: relative; z-index: 2;">
+                <div class="glass-panel" style="padding: 40px; text-align: center; max-width: 600px; margin: 0 auto;">
+                    <h2>Book Your Table</h2>
+                    <p style="margin-bottom: 30px; color: var(--accent-gold);">Nairobi's Best Waterfront Experience</p>
+                    <form class="reservation-inline responsive-grid" style="gap: 15px;">
+                        <input type="date" required style="width: 100%; padding: 16px; border-radius: 12px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: white;">
+                        <div class="responsive-grid" style="gap: 15px;">
+                            <select style="width: 100%; padding: 16px; border-radius: 12px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: white;">
+                                <option>7:00 PM</option>
+                                <option>8:00 PM</option>
+                            </select>
+                            <select style="width: 100%; padding: 16px; border-radius: 12px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: white;">
+                                <option>2 People</option>
+                                <option>4 People</option>
+                            </select>
                         </div>
-                        <!-- Hero Image End -->
+                        <button type="submit" class="btn-premium btn-solid" style="width: 100%;">Find a Table</button>
+                    </form>
+                    
+                    <style>
+                        @media (min-width: 768px) {
+                            .reservation-inline .responsive-grid { grid-template-columns: repeat(2, 1fr); }
+                        }
+                    </style>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Private Events -->
+        <section id="events" style="padding: 60px 0;">
+            <div class="container responsive-grid cols-2" style="align-items: center;">
+                <div class="events-image">
+                    <img src="images/service-2.jpg" alt="Private Dining" style="width: 100%; border-radius: var(--card-radius);">
+                    <div class="glass-panel" style="padding: 20px; margin-top: -30px; position: relative; max-width: 250px; margin-left: auto;">
+                        <h3 style="color: var(--accent-gold); font-size: 1.2rem;">50+ Guests</h3>
+                        <p style="font-size: 0.8rem;">We handle everything from decor to custom coastal menus.</p>
+                    </div>
+                </div>
+                <div class="events-content">
+                    <h2 style="margin-bottom: 20px;">Host Your Party</h2>
+                    <p style="margin-bottom: 30px; color: var(--text-light);">Intimate dinners or grand celebrations, our waterfront venue is the perfect backdrop.</p>
+                    <a href="reserve-table.html#events" class="btn-premium btn-outline" style="width: 100%;">Inquire Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Testimonials -->
+        <section id="testimonials" class="dark-section" style="padding: 100px 0; background: var(--deep-navy);">
+            <div class="container" style="text-align: center;">
+                <h2 style="font-size: 3rem; margin-bottom: 60px;">What Our Guests Say</h2>
+                <div class="testimonial-slider" style="display: flex; gap: 30px; overflow-x: auto; padding-bottom: 40px; scroll-snap-type: x mandatory;">
+                    <!-- Testimonial 1 -->
+                    <div class="glass-panel" style="min-width: 400px; padding: 40px; scroll-snap-align: center;">
+                        <p style="font-size: 1.2rem; font-style: italic; margin-bottom: 30px;">"The best seafood I've had in Nairobi. The waterfront view at sunset is absolutely breathtaking. Highly recommend the Lemon Lobster!"</p>
+                        <h4 style="color: var(--accent-gold);">Wade Warren</h4>
+                        <span style="font-size: 0.8rem; color: var(--text-light);">Google Reviews</span>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="glass-panel" style="min-width: 400px; padding: 40px; scroll-snap-align: center;">
+                        <p style="font-size: 1.2rem; font-style: italic; margin-bottom: 30px;">"Exceptional service and an incredible wine list. The private events space is perfect for corporate dinners."</p>
+                        <h4 style="color: var(--accent-gold);">Olivia Clarke</h4>
+                        <span style="font-size: 0.8rem; color: var(--text-light);">Michelin Guide Mention</span>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Hero Section End -->
+        </section>
 
-        <!-- Scrolling Ticker Section Start -->
-        <div class="our-scrolling-ticker">
-            <!-- Scrolling Ticker Start -->
-            <div class="scrolling-ticker-box">
-                <div class="scrolling-content">
-                    <span><img src="images/icon-sparkle.svg" alt="" />Fresh Daily</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />From Ocean to Plate</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Grilled to Perfection</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Healthy & Delicious</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Best Fish & Chips</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Happy Hour 4-6 PM</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Beautiful Views</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Early Bird Deals</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Daily Specials</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Fresh Lobster</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Book Now</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Sustainably Sourced</span>
-                </div>
-
-                <div class="scrolling-content">
-                    <span><img src="images/icon-sparkle.svg" alt="" />Fresh Daily</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />From Ocean to Plate</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Grilled to Perfection</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Healthy & Delicious</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Best Fish & Chips</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Happy Hour 4-6 PM</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Beautiful Views</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Early Bird Deals</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Daily Specials</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Fresh Lobster</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Book Now</span>
-                    <span><img src="images/icon-sparkle.svg" alt="" />Sustainably Sourced</span>
-                </div>
-            </div>
-            <!-- Scrolling Ticker End -->
-        </div>
-        <!-- Scrolling Ticker Section End -->
-
-        <!-- About Us Section Start -->
-        <div class="about-us">
+        <!-- Section: Instagram Feed -->
+        <section id="instagram" style="padding: 60px 0;">
             <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <!-- About Us Content Start -->
-                        <div class="about-us-content">
-                            <!-- Section Title Start -->
-                            <div class="section-title">
-                                <h3 class="wow fadeInUp">Our Story</h3>
-                                <h2 class="text-anime-style-3" data-cursor="-opaque">
-                                    Bringing the Ocean's Best to Your Table
-                                </h2>
-                                <p class="wow fadeInUp" data-wow-delay="0.2s">
-                                    At Azure Bay, we believe great food brings people together. That's why we source the
-                                    freshest seafood from local fishermen and prepare each dish with love and care.
-                                </p>
-                                <p class="wow fadeInUp" data-wow-delay="0.4s">
-                                    Every meal we serve is our way of sharing the ocean's bounty with our community.
-                                    Come taste the difference fresh makes!
-                                </p>
-                            </div>
-                            <!-- Section Title End -->
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h2>Follow the Flavor</h2>
+                    <p style="color: var(--accent-gold); font-weight: 700;">@AzureBayRestaurant</p>
+                </div>
+                <div class="insta-grid responsive-grid cols-4" style="gap: 10px;">
+                    <img src="https://picsum.photos/400/400?random=1" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px;" alt="Instagram">
+                    <img src="https://picsum.photos/400/400?random=2" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px;" alt="Instagram">
+                    <img src="https://picsum.photos/400/400?random=3" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px;" alt="Instagram" class="desktop-only">
+                    <img src="https://picsum.photos/400/400?random=4" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px;" alt="Instagram" class="desktop-only">
+                </div>
+            </div>
+        </section>
+        
+        <style>
+            @media (max-width: 1023px) { .desktop-only { display: none; } .insta-grid { grid-template-columns: repeat(2, 1fr); } }
+        </style>
 
-                            <!-- About Us List Start -->
-                            <div class="about-us-list wow fadeInUp" data-wow-delay="0.6s">
-                                <ul>
-                                    <li>Fresh from the ocean to your plate</li>
-                                    <li>Handcrafted by passionate chefs</li>
-                                </ul>
-                            </div>
-                            <!-- About Us list End -->
-
-                            <!-- About Us Button Start -->
-                            <div class="about-us-btn wow fadeInUp" data-wow-delay="0.8s">
-                                <a href="about.html" class="btn-default">Learn Our Story</a>
-                            </div>
-                            <!-- About Us Button End -->
-                        </div>
-                        <!-- About Us Content End -->
-                    </div>
-
-                    <div class="col-lg-6">
-                        <!-- About Us Images Start -->
-                        <div class="about-us-images">
-                            <!-- About Image Start -->
-                            <div class="about-image">
-                                <figure class="image-anime reveal">
-                                    <img src="images/about-us-image-new.png" alt="" loading="lazy" />
-                                </figure>
-                            </div>
-                            <!-- About Image End -->
-
-                            <!-- About Image Start -->
-                            <div class="about-image">
-                                <figure class="image-anime reveal">
-                                    <img src="images/about-us-image-2.jpg" alt="" loading="lazy" class="floating" />
-                                </figure>
-                            </div>
-                            <!-- About Image End -->
-
-                            <!-- Contact Us Circle Start -->
-                            <div class="contact-us-circle">
-                                <a href="contact.html"><img src="images/contact-us-circle.svg" alt="Contact Us" /></a>
-                            </div>
-                            <!-- Contact Us Circle End -->
-                        </div>
-                        <!-- About Us Images End -->
-                    </div>
-
-                    <div class="col-lg-12">
-                        <!-- About Us Item List Start -->
-                        <div class="about-us-item-list">
-                            <!-- About Us Item Start -->
-                            <div class="about-us-item wow fadeInUp">
-                                <div class="icon-box">
-                                    <img src="images/icon-about-us-item-1.svg" alt="" />
-                                </div>
-                                <div class="about-us-item-content">
-                                    <h3>Flavorful Fish Dishes</h3>
-                                    <p>Caught fresh, cooked to perfection</p>
-                                </div>
-                            </div>
-                            <!-- About Us Item End -->
-
-                            <!-- About Us Item Start -->
-                            <div class="about-us-item wow fadeInUp" data-wow-delay="0.2s">
-                                <div class="icon-box">
-                                    <img src="images/icon-about-us-item-2.svg" alt="" />
-                                </div>
-                                <div class="about-us-item-content">
-                                    <h3>Expertly Prepared</h3>
-                                    <p>Chef's special recipes you'll love</p>
-                                </div>
-                            </div>
-                            <!-- About Us Item End -->
-
-                            <!-- About Us Item Start -->
-                            <div class="about-us-item wow fadeInUp" data-wow-delay="0.4s">
-                                <div class="icon-box">
-                                    <img src="images/icon-about-us-item-3.svg" alt="" />
-                                </div>
-                                <div class="about-us-item-content">
-                                    <h3>Simply Delicious</h3>
-                                    <p>Taste the ocean's best offerings</p>
-                                </div>
-                            </div>
-                            <!-- About Us Item End -->
-                        </div>
-                        <!-- About Us Item List End -->
+    <!-- Section: Footer -->
+    <footer id="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Location</h4>
+                    <p>Waterfront Mall, Karen<br>Nairobi, Kenya</p>
+                    <a href="https://maps.google.com" target="_blank" style="color: var(--accent-gold); font-size: 0.85rem; text-decoration: underline; margin-top: 5px; display: inline-block;">View on Google Maps</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Hours</h4>
+                    <p>Mon - Sun<br>11:00 AM - 10:00 PM</p>
+                    
+                    <h4 style="margin-top: 30px; font-size: 0.9rem;">Follow Us</h4>
+                    <div class="social-links" style="display: flex; gap: 15px; margin-top: 10px;">
+                        <a href="https://facebook.com" aria-label="Facebook" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.2)';" onmouseout="this.style.transform='scale(1)';"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                        <a href="https://instagram.com" aria-label="Instagram" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.2)';" onmouseout="this.style.transform='scale(1)';"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="https://x.com" aria-label="X" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.2)';" onmouseout="this.style.transform='scale(1)';"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4l16 16M4 20L20 4"></path></svg></a>
                     </div>
                 </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;"><a href="tel:+254102880577">+254 102 880 577</a></li>
+                        <li style="margin-bottom: 8px;"><a href="mailto:hello@azurebay.co.ke">hello@azurebay.co.ke</a></li>
+                        <li style="margin-bottom: 8px;"><a href="about.html">About Us</a></li>
+                        <li style="margin-bottom: 8px;"><a href="team.html">Meet the Team</a></li>
+                        <li style="margin-bottom: 8px;"><a href="blog.html">Our Blog</a></li>
+                        <li style="margin-bottom: 8px;"><a href="testimonials.html">Testimonials</a></li>
+                        <li style="margin-bottom: 8px;"><a href="video-gallery.html">Video Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p style="font-size: 0.85rem; margin-bottom: 15px; color: var(--text-light);">Subscribe to receive exclusive offers and event invites.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Email Address" required style="padding: 12px; width: 100%; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: white;">
+                        <button type="submit" class="btn-premium btn-solid" style="width: 100%; padding: 12px;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" style="text-align: center; border-top: 1px solid var(--glass-border); padding-top: 30px; font-size: 0.8rem; color: var(--text-light); display: flex; flex-direction: column; gap: 20px;">
+                <div style="padding: 15px 20px; border: 1px dashed var(--accent-gold); max-width: 250px; margin: 0 auto; border-radius: 8px; background: rgba(192,160,109,0.05);">
+                    <p style="color: #4CAF50; font-weight: 800; font-size: 0.85rem; margin-bottom: 5px; text-transform: uppercase;">Lipa Na M-Pesa</p>
+                    <p style="color: var(--soft-white); font-weight: 600; font-size: 0.9rem;">Buy Goods Till: <span style="font-size: 1.1rem; color: var(--accent-gold);">78910</span></p>
+                </div>
+                
+                <div class="footer-legal-links" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                    <a href="privacy.html" style="text-decoration: underline; color: var(--text-light);">Privacy Policy</a>
+                    <a href="terms.html" style="text-decoration: underline; color: var(--text-light);">Terms of Service</a>
+                    <a href="faqs.html" style="text-decoration: underline; color: var(--text-light);">FAQs</a>
+                </div>
+                
+                <p>&copy; 2026 Azure Bay Restaurant. Karibu Sana. All Rights Reserved.</p>
             </div>
         </div>
-        <!-- About Us Section End -->
-
-        <!-- Our Services Section Start -->
-        <div class="our-services dark-section">
-            <div class="container">
-                <div class="row section-row">
-                    <div class="col-lg-12">
-                        <!-- Section Title Start -->
-                        <div class="section-title section-title-center">
-                            <h3 class="wow fadeInUp">What We Offer</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">Fresh Seafood You'll Love</h2>
-                        </div>
-                        <!-- Section Title End -->
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <!-- Our Services Box Start -->
-                        <div class="our-services-box">
-                            <!-- Services Item Start -->
-                            <div class="services-item wow fadeInUp">
-                                <div class="services-item-content">
-                                    <h3>Bold Coastal Flavors</h3>
-                                    <p>
-                                        From grilled fish to seafood platters, every dish is bursting with fresh,
-                                        authentic flavors you'll crave.
-                                    </p>
-                                </div>
-                                <div class="icon-box">
-                                    <img src="images/icon-service-1.svg" alt="" />
-                                </div>
-                            </div>
-                            <!-- Services Item End -->
-
-                            <!-- Our Services Image Start -->
-                            <div class="services-image">
-                                <figure class="image-anime reveal">
-                                    <img src="images/service-grilled-fish.png" alt="" loading="lazy" />
-                                </figure>
-                            </div>
-                            <!-- Our Services Image End -->
-                        </div>
-                        <!-- Our Services Box End -->
-                    </div>
-
-                    <div class="col-lg-4">
-                        <!-- Our Services Box Start -->
-                        <div class="our-services-box">
-                            <!-- Services Item Start -->
-                            <div class="services-item wow fadeInUp" data-wow-delay="0.2s">
-                                <div class="services-item-content">
-                                    <h3>Cooked with Care</h3>
-                                    <p>
-                                        Our chefs prepare each dish with attention to detail, ensuring every bite is
-                                        perfectly seasoned and delicious.
-                                    </p>
-                                </div>
-                                <div class="icon-box">
-                                    <img src="images/icon-service-2.svg" alt="" />
-                                </div>
-                            </div>
-                            <!-- Services Item End -->
-
-                            <!-- Our Services Image Start -->
-                            <div class="services-image">
-                                <figure class="image-anime reveal">
-                                    <img src="images/service-2.jpg" alt="" loading="lazy" />
-                                </figure>
-                            </div>
-                            <!-- Our Services Image End -->
-                        </div>
-                        <!-- Our Services Box End -->
-                    </div>
-
-                    <div class="col-lg-4">
-                        <!-- Our Services Box Start -->
-                        <div class="our-services-box">
-                            <!-- Services Item Start -->
-                            <div class="services-item wow fadeInUp" data-wow-delay="0.4s">
-                                <div class="services-item-content">
-                                    <h3>Generous Portions</h3>
-                                    <p>
-                                        We believe in filling your plate with plenty of great-tasting seafood that
-                                        leaves you satisfied.
-                                    </p>
-                                </div>
-                                <div class="icon-box">
-                                    <img src="images/icon-service-3.svg" alt="" />
-                                </div>
-                            </div>
-                            <!-- Services Item End -->
-
-                            <!-- Our Services Image Start -->
-                            <div class="services-image">
-                                <figure class="image-anime reveal">
-                                    <img src="images/service-3.jpg" alt="" loading="lazy" />
-                                </figure>
-                            </div>
-                            <!-- Our Services Image End -->
-                        </div>
-                        <!-- Our Services Box End -->
-                    </div>
-
-                    <div class="col-lg-12">
-                        <!-- Section Footer Text Start -->
-                        <div class="section-footer-text wow fadeInUp" data-wow-delay="0.6s">
-                            <p>
-                                <span>Free</span>Fresh flavors, tailored for you -
-                                <a href="contact.html">Request a Free Quote Today</a>
-                            </p>
-                        </div>
-                        <!-- Section Footer Text End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Our Services Section End -->
-
-        <!-- Why Choose Us Start -->
-        <div class="why-choose-us">
-            <div class="container">
-                <div class="row section-row">
-                    <!-- Section Title Start -->
-                    <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">Sea Story</h3>
-                        <h2 class="text-anime-style-3" data-cursor="-opaque">
-                            From ocean to plate through quality, freshness, and flavor
-                        </h2>
-                    </div>
-                    <!-- Section Title End -->
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 order-lg-1 order-1">
-                        <!-- Why Choose Box Start -->
-                        <div class="why-choose-box">
-                            <!-- Why Choose Item Start -->
-                            <div class="why-choose-item wow fadeInUp">
-                                <!-- Icon Box Start -->
-                                <div class="icon-box">
-                                    <img src="images/icon-why-choose-1.svg" alt="" />
-                                </div>
-                                <!-- Icon Box End -->
-
-                                <!-- Why Choose Content Start -->
-                                <div class="why-choose-content">
-                                    <h3>Freshly Flavored Fish Feast</h3>
-                                    <p>Delicately seasoned fish dishes crafted coastal flavors experience freshness.</p>
-                                </div>
-                                <!-- Why Choose Content End -->
-                            </div>
-                            <!-- Why Choose Item End -->
-
-                            <!-- Why Choose Item Start -->
-                            <div class="why-choose-item wow fadeInUp" data-wow-delay="0.2s">
-                                <!-- Icon Box Start -->
-                                <div class="icon-box">
-                                    <img src="images/icon-why-choose-2.svg" alt="" />
-                                </div>
-                                <!-- Icon Box End -->
-
-                                <!-- Why Choose Content Start -->
-                                <div class="why-choose-content">
-                                    <h3>Perfectly Plated Prawn Portions</h3>
-                                    <p>Expertly arranged prawn servings that are as stunning as they are tasty.</p>
-                                </div>
-                                <!-- Why Choose Content End -->
-                            </div>
-                            <!-- Why Choose Item End -->
-                        </div>
-                        <!-- Why Choose Box End -->
-                    </div>
-
-                    <div class="col-lg-4 order-lg-2 order-3">
-                        <!-- Why Choose Image Start -->
-                        <div class="why-choose-image">
-                            <img src="images/why-choose-img.png" alt="" loading="lazy" />
-                        </div>
-                        <!-- Why Choose Image End -->
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 order-lg-3 order-2">
-                        <!-- Why Choose Box Start -->
-                        <div class="why-choose-box">
-                            <!-- Why Choose Item Start -->
-                            <div class="why-choose-item wow fadeInUp">
-                                <!-- Icon Box Start -->
-                                <div class="icon-box">
-                                    <img src="images/icon-why-choose-3.svg" alt="" />
-                                </div>
-                                <!-- Icon Box End -->
-
-                                <!-- Why Choose Content Start -->
-                                <div class="why-choose-content">
-                                    <h3>Carefully Cooked Crab Cuisine</h3>
-                                    <p>Crabs prepared with precise cooking methods to retain rich taste.</p>
-                                </div>
-                                <!-- Why Choose Content End -->
-                            </div>
-                            <!-- Why Choose Item End -->
-
-                            <!-- Why Choose Item Start -->
-                            <div class="why-choose-item wow fadeInUp" data-wow-delay="0.2s">
-                                <!-- Icon Box Start -->
-                                <div class="icon-box">
-                                    <img src="images/icon-why-choose-4.svg" alt="" />
-                                </div>
-                                <!-- Icon Box End -->
-
-                                <!-- Why Choose Content Start -->
-                                <div class="why-choose-content">
-                                    <h3>Beautifully Baked Basa Bites</h3>
-                                    <p>
-                                        Mild, flaky basa fillets baked to golden perfection.delicious option full of
-                                        subtle.
-                                    </p>
-                                </div>
-                                <!-- Why Choose Content End -->
-                            </div>
-                            <!-- Why Choose Item End -->
-                        </div>
-                        <!-- Why Choose Box End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Why Choose Us End -->
-
-        <!-- Intro Video Section Start -->
-        <div class="intro-video dark-section parallaxie">
-            <div class="container">
-                <div class="row section-row">
-                    <div class="col-lg-12">
-                        <!-- Section Title Start -->
-                        <div class="section-title section-title-center">
-                            <h3 class="wow fadeInUp">Sea Moments</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">
-                                Step into Our kitchen and discover the complete journey behind every fresh,
-                                flavor-packed seafood dish we serve with passion
-                            </h2>
-                        </div>
-                        <!-- Section Title End -->
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Intro Video Image Start -->
-                        <div class="intro-video-box">
-                            <!-- Video Play Circle Start -->
-                            <div class="video-play-circle">
-                                <a
-                                    href="https://www.youtube.com/watch?v=Y-x0efG1seA"
-                                    class="popup-video"
-                                    data-cursor-text="Play"
-                                >
-                                    <img src="images/video-play-circle.svg" alt="About Azure Bay"
-                                /></a>
-                            </div>
-                            <!-- Video Play Circle End -->
-
-                            <!-- Intro Video Item List Start -->
-                            <div class="intro-video-item-list">
-                                <!-- Intro Video Item Start -->
-                                <div class="intro-video-item wow fadeInUp">
-                                    <div class="icon-box">
-                                        <img src="images/icon-intro-video-1.svg" alt="" />
-                                    </div>
-                                    <div class="intro-video-content">
-                                        <h3>Gently Grilled Golden Grouper</h3>
-                                        <p>
-                                            Delicately seasoned fish dishes crafted using bold coastal
-                                            flavors.experience freshness.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- Intro Video Item End -->
-
-                                <!-- Intro Video Item Start -->
-                                <div class="intro-video-item wow fadeInUp" data-wow-delay="0.25s">
-                                    <div class="icon-box">
-                                        <img src="images/icon-intro-video-2.svg" alt="" />
-                                    </div>
-                                    <div class="intro-video-content">
-                                        <h3>Softly Steamed Spicy Scallops</h3>
-                                        <p>
-                                            Delicately seasoned fish dishes crafted using bold coastal
-                                            flavors.experience freshness.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- Intro Video Item End -->
-
-                                <!-- Intro Video Item Start -->
-                                <div class="intro-video-item wow fadeInUp" data-wow-delay="0.5s">
-                                    <div class="icon-box">
-                                        <img src="images/icon-intro-video-3.svg" alt="" />
-                                    </div>
-                                    <div class="intro-video-content">
-                                        <h3>Delicately Dressed Deep Drum</h3>
-                                        <p>
-                                            Delicately seasoned fish dishes crafted using bold coastal
-                                            flavors.experience freshness.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- Intro Video Item End -->
-                            </div>
-                            <!-- Intro Video Item List End -->
-                        </div>
-                        <!-- Intro Video Btn End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Intro Video Section End -->
-
-        <!-- How It Work Section Start -->
-        <div class="how-it-work">
-            <div class="container">
-                <div class="row section-row">
-                    <div class="col-lg-12">
-                        <!-- Section Title Start -->
-                        <div class="section-title section-title-center">
-                            <h3 class="wow fadeInUp">Flavor Journey</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">
-                                Explore the Authentic Taste of the Sea
-                            </h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">
-                                Whether it's an intimate dinner, corporate function, or milestone celebration, our
-                                stunning venue and expertly crafted seafood menu set the stage.
-                            </p>
-                        </div>
-                        <!-- Section Title End -->
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- How It Work List Start -->
-                        <div class="how-it-work-list">
-                            <!-- How It Work Item Start -->
-                            <div class="how-it-work-item">
-                                <!-- How It Work Image Start -->
-                                <div class="how-it-work-image">
-                                    <figure class="image-anime reveal">
-                                        <img src="images/how-it-work-img-1.jpg" alt="" loading="lazy" />
-                                    </figure>
-                                </div>
-                                <!-- How It Work Image End -->
-
-                                <!-- How It Work Content Start -->
-                                <div class="how-it-work-content wow fadeInUp" data-wow-delay="0.4s">
-                                    <div class="icon-box">
-                                        <img src="images/icon-how-it-work-1.svg" alt="" />
-                                    </div>
-                                    <div class="how-it-work-body">
-                                        <h3>Fresh Shells</h3>
-                                        <p>
-                                            Delicately seasoned fish dishes crafted using bold coastal
-                                            flavors.experience freshness.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- How It Work Content End -->
-                            </div>
-                            <!-- How It Work Item End -->
-
-                            <!-- How It Work Item Start -->
-                            <div class="how-it-work-item">
-                                <!-- How It Work Image Start -->
-                                <div class="how-it-work-image">
-                                    <figure class="image-anime reveal">
-                                        <img src="images/how-it-work-img-2.jpg" alt="" loading="lazy" />
-                                    </figure>
-                                </div>
-                                <!-- How It Work Image End -->
-
-                                <!-- How It Work Content Start -->
-                                <div class="how-it-work-content wow fadeInUp" data-wow-delay="0.4s">
-                                    <div class="icon-box">
-                                        <img src="images/icon-how-it-work-2.svg" alt="" />
-                                    </div>
-                                    <div class="how-it-work-body">
-                                        <h3>Ocean Dishes</h3>
-                                        <p>
-                                            Delicately seasoned fish dishes crafted using bold coastal
-                                            flavors.experience freshness.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- How It Work Content End -->
-                            </div>
-                            <!-- How It Work Item End -->
-
-                            <!-- How It Work Item Start -->
-                            <div class="how-it-work-item">
-                                <!-- How It Work Image Start -->
-                                <div class="how-it-work-image">
-                                    <figure class="image-anime reveal">
-                                        <img src="images/how-it-work-img-3.jpg" alt="" loading="lazy" />
-                                    </figure>
-                                </div>
-                                <!-- How It Work Image End -->
-
-                                <!-- How It Work Content Start -->
-                                <div class="how-it-work-content wow fadeInUp" data-wow-delay="0.6s">
-                                    <div class="icon-box">
-                                        <img src="images/icon-how-it-work-3.svg" alt="" />
-                                    </div>
-                                    <div class="how-it-work-body">
-                                        <h3>Crisp Crabs</h3>
-                                        <p>
-                                            Delicately seasoned fish dishes crafted using bold coastal
-                                            flavors.experience freshness.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- How It Work Content End -->
-                            </div>
-                            <!-- How It Work Item End -->
-
-                            <!-- How It Work Item Start -->
-                            <div class="how-it-work-item">
-                                <!-- How It Work Image Start -->
-                                <div class="how-it-work-image">
-                                    <figure class="image-anime reveal">
-                                        <img src="images/how-it-work-img-4.jpg" alt="" loading="lazy" />
-                                    </figure>
-                                </div>
-                                <!-- How It Work Image End -->
-
-                                <!-- How It Work Content Start -->
-                                <div class="how-it-work-content wow fadeInUp" data-wow-delay="0.6s">
-                                    <div class="icon-box">
-                                        <img src="images/icon-how-it-work-4.svg" alt="" />
-                                    </div>
-                                    <div class="how-it-work-body">
-                                        <h3>Sweet Sauce</h3>
-                                        <p>
-                                            Delicately seasoned fish dishes crafted using bold coastal
-                                            flavors.experience freshness.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- How It Work Content End -->
-                            </div>
-                            <!-- How It Work Item End -->
-                        </div>
-                        <!-- How It Work List End -->
-                    </div>
-
-                    <div class="col-lg-12">
-                        <!-- Service Contact Text Start -->
-                        <div class="section-footer-text how-work-footer-text wow fadeInUp" data-wow-delay="0.8s">
-                            <p>
-                                <span>KSH 32,500</span> Support Coastal Families with Fresh Meals -
-                                <a href="reserve-table.html">Dine In or Get It Delivered!</a>
-                            </p>
-                        </div>
-                        <!-- Service Contact Text End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- How It Work Section End -->
-
-        <!-- Our Testimonials Section Start -->
-        <div class="our-testimonials dark-section">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-7">
-                        <!-- Testimonials Content Start -->
-                        <div class="testimonials-content">
-                            <!-- Section Title Start -->
-                            <div class="section-title">
-                                <h3 class="wow fadeInUp">Our testimonials</h3>
-                                <h2 class="text-anime-style-3" data-cursor="-opaque">
-                                    What our customers say about their seafood experience
-                                </h2>
-                            </div>
-                            <!-- Section Title End -->
-
-                            <!-- Testimonial Slider Start -->
-                            <div class="testimonial-slider">
-                                <div class="swiper">
-                                    <div class="swiper-wrapper" data-cursor-text="Drag">
-                                        <!-- Testimonial Slide Start -->
-                                        <div class="swiper-slide">
-                                            <!-- Testimonial Item Start -->
-                                            <div class="testimonial-item">
-                                                <!-- Testimonial Content Start -->
-                                                <div class="testimonial-item-content">
-                                                    <p>
-                                                        From the moment we walked in, we were warmly welcomed and seated
-                                                        by the window with a lovely view. The aroma of fresh seafood
-                                                        filled the air, and every dish we ordered.
-                                                    </p>
-                                                </div>
-                                                <!-- Testimonial Content End -->
-
-                                                <!-- Testimonial Body Start -->
-                                                <div class="testimonial-author">
-                                                    <div class="author-image">
-                                                        <figure class="image-anime">
-                                                            <img src="images/author-1.jpg" alt="" />
-                                                        </figure>
-                                                    </div>
-                                                    <div class="author-content">
-                                                        <h3>Wade L Warren</h3>
-                                                        <p>Happy Customer</p>
-                                                    </div>
-                                                </div>
-                                                <!-- Testimonial Body End -->
-                                            </div>
-                                            <!-- Testimonial Item End -->
-                                        </div>
-                                        <!-- Testimonial Slide End -->
-
-                                        <!-- Testimonial Slide Start -->
-                                        <div class="swiper-slide">
-                                            <!-- Testimonial Item Start -->
-                                            <div class="testimonial-item">
-                                                <!-- Testimonial Content Start -->
-                                                <div class="testimonial-item-content">
-                                                    <p>
-                                                        From the moment we walked in, we were warmly welcomed and seated
-                                                        by the window with a lovely view. The aroma of fresh seafood
-                                                        filled the air, and every dish we ordered.
-                                                    </p>
-                                                </div>
-                                                <!-- Testimonial Content End -->
-
-                                                <!-- Testimonial Body Start -->
-                                                <div class="testimonial-author">
-                                                    <div class="author-image">
-                                                        <figure class="image-anime">
-                                                            <img src="images/author-2.jpg" alt="" />
-                                                        </figure>
-                                                    </div>
-                                                    <div class="author-content">
-                                                        <h3>Olivia Muthoni</h3>
-                                                        <p>General Manager</p>
-                                                    </div>
-                                                </div>
-                                                <!-- Testimonial Body End -->
-                                            </div>
-                                            <!-- Testimonial Item End -->
-                                        </div>
-                                        <!-- Testimonial Slide End -->
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Testimonial Slider End -->
-
-                            <!-- Testimonial Footer Start -->
-                            <div class="testimonials-counter-list">
-                                <!-- Testimonials Counter Item Start -->
-                                <div class="testimonial-counter-item">
-                                    <!-- Testimonials Counter Header Start -->
-                                    <div class="testimonial-counter-header">
-                                        <div class="icon-box">
-                                            <img src="images/icon-testimonial-counter-1.svg" alt="" />
-                                        </div>
-                                        <div class="testimonial-counter-title">
-                                            <h2><span class="counter">85</span>+</h2>
-                                        </div>
-                                    </div>
-                                    <!-- Testimonials Counter Header End -->
-
-                                    <!-- Testimonials Counter Body Start -->
-                                    <div class="testimonial-counter-body">
-                                        <p>Unique Signature Dishes Curated by Our Team.</p>
-                                    </div>
-                                    <!-- Testimonials Counter Body End -->
-                                </div>
-                                <!-- Testimonials Counter Item End -->
-
-                                <!-- Testimonials Counter Item Start -->
-                                <div class="testimonial-counter-item">
-                                    <!-- Testimonials Counter Header Start -->
-                                    <div class="testimonial-counter-header">
-                                        <div class="icon-box">
-                                            <img src="images/icon-testimonial-counter-2.svg" alt="" />
-                                        </div>
-                                        <div class="testimonial-counter-title">
-                                            <h2><span class="counter">98</span>%</h2>
-                                        </div>
-                                    </div>
-                                    <!-- Testimonials Counter Header End -->
-
-                                    <!-- Testimonials Counter Body Start -->
-                                    <div class="testimonial-counter-body">
-                                        <p>Unique Signature Dishes Curated by Our Team.</p>
-                                    </div>
-                                    <!-- Testimonials Counter Body End -->
-                                </div>
-                                <!-- Testimonials Counter Item End -->
-
-                                <!-- Testimonials Counter Item Start -->
-                                <div class="testimonial-counter-item">
-                                    <!-- Testimonials Counter Header Start -->
-                                    <div class="testimonial-counter-header">
-                                        <div class="icon-box">
-                                            <img src="images/icon-testimonial-counter-3.svg" alt="" />
-                                        </div>
-                                        <div class="testimonial-counter-title">
-                                            <h2><span class="counter">25</span>+</h2>
-                                        </div>
-                                    </div>
-                                    <!-- Testimonials Counter Header End -->
-
-                                    <!-- Testimonials Counter Body Start -->
-                                    <div class="testimonial-counter-body">
-                                        <p>Unique Signature Dishes Curated by Our Team.</p>
-                                    </div>
-                                    <!-- Testimonials Counter Body End -->
-                                </div>
-                                <!-- Testimonials Counter Item End -->
-                            </div>
-                            <!-- Testimonial Footer End -->
-                        </div>
-                        <!-- Testimonials Content End -->
-                    </div>
-
-                    <div class="col-lg-5">
-                        <!-- Testimonials Image Start -->
-                        <div class="testimonials-image wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="testimonial-img">
-                                <figure class="image-anime">
-                                    <img src="images/testimonial-image.jpg" alt="" />
-                                </figure>
-                            </div>
-
-                            <!-- Why Choose CTA Box Start -->
-                            <div class="testimonial-cta-box">
-                                <div class="icon-box">
-                                    <img src="images/icon-headset.svg" alt="" />
-                                </div>
-                                <div class="testimonial-cta-content">
-                                    <p>Need answers? Let's clear things up for you!</p>
-                                    <h3><a href="tel:+254102880577">+254 102 880 577</a></h3>
-                                </div>
-                            </div>
-                            <!-- Why Choose CTA Box End -->
-                        </div>
-                        <!-- Testimonials Image End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Our Testimonials Section End -->
-
-        <!-- What We Do Section Start -->
-        <div class="what-we-do">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <!-- What We Do Content Start -->
-                        <div class="what-we-do-content">
-                            <!-- Section Title Start -->
-                            <div class="section-title">
-                                <h3 class="wow fadeInUp">Ocean Promise</h3>
-                                <h2 class="text-anime-style-3" data-cursor="-opaque">
-                                    Committed to serving fresh, flavorful & responsible
-                                </h2>
-                            </div>
-                            <!-- Section Title End -->
-
-                            <!-- what We List Start -->
-                            <div class="what-we-list">
-                                <!-- What We Item Start -->
-                                <div class="what-we-item wow fadeInUp" data-wow-delay="0.2s">
-                                    <div class="icon-box">
-                                        <img src="images/icon-what-we-1.svg" alt="" />
-                                    </div>
-                                    <div class="what-we-item-content">
-                                        <h3>Sustainably Sourced Every Day</h3>
-                                        <p>
-                                            We work with responsible fisheries to ensure every catch meets the highest
-                                            environmental and ethical standards — protecting oceans.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- What We Item End -->
-
-                                <!-- What We Item Start -->
-                                <div class="what-we-item wow fadeInUp" data-wow-delay="0.4s">
-                                    <div class="icon-box">
-                                        <img src="images/icon-what-we-2.svg" alt="" />
-                                    </div>
-                                    <div class="what-we-item-content">
-                                        <h3>Packed with Natural Goodness</h3>
-                                        <p>
-                                            Our seafood retains its natural nutrients and flavors, giving you delicious
-                                            meals that are both wholesome and satisfying.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- What We Item End -->
-
-                                <!-- What We Item Start -->
-                                <div class="what-we-item wow fadeInUp" data-wow-delay="0.6s">
-                                    <div class="icon-box">
-                                        <img src="images/icon-what-we-3.svg" alt="" />
-                                    </div>
-                                    <div class="what-we-item-content">
-                                        <h3>Trusted by Seafood Lovers</h3>
-                                        <p>
-                                            From home diners to event caterers, customers across the region rely on us
-                                            for consistent quality, flavorful dishes.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- What We Item End -->
-                            </div>
-                            <!-- what We List End -->
-                        </div>
-                        <!-- What We Do Content End -->
-                    </div>
-
-                    <div class="col-lg-6">
-                        <!-- What We Do Images Start -->
-                        <div class="what-we-do-images">
-                            <!-- What We Do Image 1 Start -->
-                            <div class="what-we-do-img-1">
-                                <figure class="image-anime">
-                                    <img src="images/what-we-do-image-1.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- What We Do Image 1 End -->
-
-                            <!-- What We Do Image 2 Start -->
-                            <div class="what-we-do-img-2">
-                                <figure class="image-anime">
-                                    <img src="images/what-we-do-image-2.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- What We Do Image 2 End -->
-
-                            <!-- Donate Now Box Start -->
-                            <div class="donate-now-box">
-                                <a href="reserve-table.html"
-                                    ><img src="images/icon-reserve-table.svg" alt="" />Reserve A Table</a
-                                >
-                            </div>
-                            <!-- Donate Now Box End -->
-                        </div>
-                        <!-- What We Do Images End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- What We Do Section End -->
-
-        <!-- Our Gallery Section Start -->
-        <div class="our-gallery">
-            <div class="container-fluid">
-                <div class="row section-row">
-                    <div class="col-lg-12">
-                        <!-- Section Title Start -->
-                        <div class="section-title section-title-center">
-                            <h3 class="wow fadeInUp">gallery</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">Our image gallery</h2>
-                        </div>
-                        <!-- Section Title End -->
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Our Gallery Nav start -->
-                        <div class="our-gallery-nav wow fadeInUp" data-wow-delay="0.2s">
-                            <ul>
-                                <li><a href="#" class="active-btn" data-filter="*">all</a></li>
-                                <li><a href="#" data-filter=".catch">catch</a></li>
-                                <li><a href="#" data-filter=".prep">prep</a></li>
-                                <li><a href="#" data-filter=".plates">plates</a></li>
-                            </ul>
-                        </div>
-                        <!-- Our Gallery Nav End -->
-                    </div>
-
-                    <div class="col-lg-12">
-                        <!-- Gallery Item Boxes Start -->
-                        <div class="gallery-item-boxes">
-                            <!-- Gallery Item Box Start -->
-                            <div class="gallery-item-box catch plates">
-                                <figure class="image-anime">
-                                    <img src="images/gallery-1.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- Gallery Item Box End -->
-
-                            <!-- Gallery Item Box Start -->
-                            <div class="gallery-item-box plates">
-                                <figure class="image-anime">
-                                    <img src="images/gallery-2.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- Gallery Item Box End -->
-
-                            <!-- Gallery Item Box Start -->
-                            <div class="gallery-item-box plates prep">
-                                <figure class="image-anime">
-                                    <img src="images/gallery-3.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- Gallery Item Box End -->
-
-                            <!-- Gallery Item Box Start -->
-                            <div class="gallery-item-box catch prep">
-                                <figure class="image-anime">
-                                    <img src="images/gallery-4.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- Gallery Item Box End -->
-
-                            <!-- Gallery Item Box Start -->
-                            <div class="gallery-item-box catch">
-                                <figure class="image-anime">
-                                    <img src="images/gallery-5.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- Gallery Item Box End -->
-
-                            <!-- Gallery Item Box Start -->
-                            <div class="gallery-item-box plates prep">
-                                <figure class="image-anime">
-                                    <img src="images/gallery-6.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- Gallery Item Box End -->
-
-                            <!-- Gallery Item Box Start -->
-                            <div class="gallery-item-box catch">
-                                <figure class="image-anime">
-                                    <img src="images/gallery-7.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- Gallery Item Box End -->
-
-                            <!-- Gallery Item Box Start -->
-                            <div class="gallery-item-box plates">
-                                <figure class="image-anime">
-                                    <img src="images/gallery-8.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- Gallery Item Box End -->
-
-                            <!-- Gallery Item Box Start -->
-                            <div class="gallery-item-box prep">
-                                <figure class="image-anime">
-                                    <img src="images/gallery-9.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- Gallery Item Box End -->
-
-                            <!-- Gallery Item Box Start -->
-                            <div class="gallery-item-box catch prep">
-                                <figure class="image-anime">
-                                    <img src="images/gallery-10.jpg" alt="" />
-                                </figure>
-                            </div>
-                            <!-- Gallery Item Box End -->
-                        </div>
-                        <!-- Gallery Item Boxes End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Our Gallery Section End -->
-
-        <!-- Our Special Offers Section Start -->
-        <div class="our-special-offers">
-            <div class="container">
-                <div class="row section-row">
-                    <div class="col-lg-12">
-                        <!-- Section Title Start -->
-                        <div class="section-title section-title-center">
-                            <h3 class="wow fadeInUp">Chef Special</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">
-                                Handpicked signature dishes straight from our culinary experts
-                            </h2>
-                        </div>
-                        <!-- Section Title End -->
-                    </div>
-                </div>
-
-                <div class="row align-items-center">
-                    <div class="col-lg-4 col-md-6 order-1">
-                        <!-- Offers Item List Start -->
-                        <div class="offers-item-list offer-list-1">
-                            <!-- Offers Item Start -->
-                            <div class="offer-item wow fadeInUp">
-                                <div class="offer-image">
-                                    <figure>
-                                        <img src="images/best-product-1.png" alt="" />
-                                    </figure>
-                                </div>
-                                <div class="offer-item-content">
-                                    <h2>Lemon Lobster</h2>
-                                    <p>Tender lobster infused with zesty lemon and herbs.</p>
-                                    <h3>Price: KSH 3,250</h3>
-                                </div>
-                            </div>
-                            <!-- Offers Item End -->
-
-                            <!-- Offers Item Start -->
-                            <div class="offer-item wow fadeInUp" data-wow-delay="0.2s">
-                                <div class="offer-image">
-                                    <figure>
-                                        <img src="images/best-product-2.png" alt="" />
-                                    </figure>
-                                </div>
-                                <div class="offer-item-content">
-                                    <h2>Garlic Prawns</h2>
-                                    <p>Juicy prawns sautéed in rich garlic butter.</p>
-                                    <h3>Price: KSH 7,150</h3>
-                                </div>
-                            </div>
-                            <!-- Offers Item End -->
-
-                            <!-- Offers Item Start -->
-                            <div class="offer-item wow fadeInUp" data-wow-delay="0.4s">
-                                <div class="offer-image">
-                                    <figure>
-                                        <img src="images/best-product-3.png" alt="" />
-                                    </figure>
-                                </div>
-                                <div class="offer-item-content">
-                                    <h2>Spicy Scallops</h2>
-                                    <p>Seared scallops with a bold, fiery chili kick.</p>
-                                    <h3>Price: KSH 5,200</h3>
-                                </div>
-                            </div>
-                            <!-- Offers Item End -->
-                        </div>
-                        <!-- Offers Item List End -->
-                    </div>
-
-                    <div class="col-lg-4 order-lg-2 order-md-3 order-2">
-                        <!-- Best Offer Image Box Start -->
-                        <div class="best-offer-image-box wow fadeInUp" data-wow-delay="0.2s">
-                            <!-- Best Offer Content Start -->
-                            <div class="best-offer-content">
-                                <h2>Best offers</h2>
-                                <p>A Little Thank You, from Us to You!</p>
-                                <a href="reserve-table.html" class="readmore-btn">Reserve A Table</a>
-                            </div>
-                            <!-- Best Offer Content End -->
-
-                            <!-- Best Offer Image Start -->
-                            <div class="best-offer-image">
-                                <figure>
-                                    <img src="images/best-offer-image.png" alt="" />
-                                </figure>
-                            </div>
-                            <!-- Best Offer Image End -->
-                        </div>
-                        <!-- Best Offer Image Box End -->
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 order-lg-3 order-md-2 order-3">
-                        <!-- Offers Item List Start -->
-                        <div class="offers-item-list offer-list-2">
-                            <!-- Offers Item Start -->
-                            <div class="offer-item wow fadeInUp">
-                                <div class="offer-image">
-                                    <figure>
-                                        <img src="images/best-product-4.png" alt="" />
-                                    </figure>
-                                </div>
-                                <div class="offer-item-content">
-                                    <h2>Coconut Crab</h2>
-                                    <p>Crab simmered in creamy coconu gravy seafood.</p>
-                                    <h3>Price: KSH 6,500</h3>
-                                </div>
-                            </div>
-                            <!-- Offers Item End -->
-
-                            <!-- Offers Item Start -->
-                            <div class="offer-item wow fadeInUp" data-wow-delay="0.2s">
-                                <div class="offer-image">
-                                    <figure>
-                                        <img src="images/best-product-5.png" alt="" />
-                                    </figure>
-                                </div>
-                                <div class="offer-item-content">
-                                    <h2>Basil Snapper</h2>
-                                    <p>Pan-fried snapper topped with fresh basil.</p>
-                                    <h3>Price: KSH 9,150</h3>
-                                </div>
-                            </div>
-                            <!-- Offers Item End -->
-
-                            <!-- Offers Item Start -->
-                            <div class="offer-item wow fadeInUp" data-wow-delay="0.4s">
-                                <div class="offer-image">
-                                    <figure>
-                                        <img src="images/best-product-6.png" alt="" />
-                                    </figure>
-                                </div>
-                                <div class="offer-item-content">
-                                    <h2>Chili Salmon</h2>
-                                    <p>Grilled salmon glazed with sweet chili sauce.</p>
-                                    <h3>Price: KSH 7,800</h3>
-                                </div>
-                            </div>
-                            <!-- Offers Item End -->
-                        </div>
-                        <!-- Offers Item List End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Our Special Offers Section End -->
-
-        <!-- Our Faqs Section Start -->
-        <div class="our-faqs dark-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <!-- Faqs Content Start -->
-                        <div class="faqs-content">
-                            <!-- Section Title Start -->
-                            <div class="section-title">
-                                <h3 class="wow fadeInUp">frequently Asked Questions</h3>
-                                <h2 class="text-anime-style-3" data-cursor="-opaque">
-                                    Answers to your common seafood curiosities
-                                </h2>
-                            </div>
-                            <!-- Section Title End -->
-
-                            <!-- Trusted Clients Box Start -->
-                            <div class="trusted-clients-box faq-cta-box wow fadeInUp" data-wow-delay="0.2s">
-                                <!-- Trusted Clients Rating Start -->
-                                <div class="trusted-clients-content">
-                                    <p>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </p>
-                                    <p>More than 1K+ trusted client</p>
-                                </div>
-                                <!-- Trusted Clients Rating End -->
-
-                                <!-- Trusted Clients Images Start -->
-                                <div class="trusted-clients-images">
-                                    <div class="trusted-clients-image">
-                                        <figure class="image-anime">
-                                            <img src="images/author-1.jpg" alt="" />
-                                        </figure>
-                                    </div>
-                                    <div class="trusted-clients-image">
-                                        <figure class="image-anime">
-                                            <img src="images/author-2.jpg" alt="" />
-                                        </figure>
-                                    </div>
-                                    <div class="trusted-clients-image">
-                                        <figure class="image-anime">
-                                            <img src="images/author-3.jpg" alt="" />
-                                        </figure>
-                                    </div>
-                                    <div class="trusted-clients-image">
-                                        <figure class="image-anime">
-                                            <img src="images/author-4.jpg" alt="" />
-                                        </figure>
-                                    </div>
-                                    <div class="trusted-clients-image add-more">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </div>
-                                </div>
-                                <!-- Trusted Clients Images End -->
-                            </div>
-                            <!-- Trusted Clients Box End -->
-                        </div>
-                        <!-- Faqs Content End -->
-                    </div>
-
-                    <div class="col-lg-6">
-                        <!-- FAQ Accordion Start -->
-                        <div class="faq-accordion" id="accordion">
-                            <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp">
-                                <h2 class="accordion-header" id="heading1">
-                                    <button
-                                        class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#collapse1"
-                                        aria-expanded="true"
-                                        aria-controls="collapse1"
-                                    >
-                                        Do you offer home delivery or takeaway options?
-                                    </button>
-                                </h2>
-                                <div
-                                    id="collapse1"
-                                    class="accordion-collapse collapse"
-                                    aria-labelledby="heading1"
-                                    data-bs-parent="#accordion"
-                                >
-                                    <div class="accordion-body">
-                                        <p>
-                                            We're open every day from 12:00 PM to 11:00 PM, including weekends and
-                                            holidays.we offer both home delivery and takeaway.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FAQ Item End -->
-
-                            <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
-                                <h2 class="accordion-header" id="heading2">
-                                    <button
-                                        class="accordion-button"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#collapse2"
-                                        aria-expanded="false"
-                                        aria-controls="collapse2"
-                                    >
-                                        What are your opening hours and days?
-                                    </button>
-                                </h2>
-                                <div
-                                    id="collapse2"
-                                    class="accordion-collapse collapse show"
-                                    aria-labelledby="heading2"
-                                    data-bs-parent="#accordion"
-                                >
-                                    <div class="accordion-body">
-                                        <p>
-                                            We're open every day from 12:00 PM to 11:00 PM, including weekends and
-                                            holidays.we offer both home delivery and takeaway.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FAQ Item End -->
-
-                            <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
-                                <h2 class="accordion-header" id="heading3">
-                                    <button
-                                        class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#collapse3"
-                                        aria-expanded="false"
-                                        aria-controls="collapse3"
-                                    >
-                                        Is reservation required or can we walk in anytime?
-                                    </button>
-                                </h2>
-                                <div
-                                    id="collapse3"
-                                    class="accordion-collapse collapse"
-                                    aria-labelledby="heading3"
-                                    data-bs-parent="#accordion"
-                                >
-                                    <div class="accordion-body">
-                                        <p>
-                                            We're open every day from 12:00 PM to 11:00 PM, including weekends and
-                                            holidays.we offer both home delivery and takeaway.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FAQ Item End -->
-
-                            <!-- FAQ Item Start -->
-                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
-                                <h2 class="accordion-header" id="heading4">
-                                    <button
-                                        class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#collapse4"
-                                        aria-expanded="false"
-                                        aria-controls="collapse4"
-                                    >
-                                        Do you have vegetarian or vegan options?
-                                    </button>
-                                </h2>
-                                <div
-                                    id="collapse4"
-                                    class="accordion-collapse collapse"
-                                    aria-labelledby="heading4"
-                                    data-bs-parent="#accordion"
-                                >
-                                    <div class="accordion-body">
-                                        <p>
-                                            We're open every day from 12:00 PM to 11:00 PM, including weekends and
-                                            holidays.we offer both home delivery and takeaway.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FAQ Item End -->
-                        </div>
-                        <!-- FAQ Accordion End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Our Faqs Section End -->
-
-        <!-- Our Blog Section Start -->
-        <div class="our-blog">
-            <div class="container">
-                <div class="row section-row align-items-center">
-                    <div class="col-lg-12">
-                        <!-- Section Title Start -->
-                        <div class="section-title section-title-center">
-                            <h3 class="wow fadeInUp">Our blogs</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">
-                                Your monthly dose of flavor, freshness & foodie fun
-                            </h2>
-                        </div>
-                        <!-- Section Title End -->
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <!-- Post Item Start -->
-                        <div class="post-item wow fadeInUp">
-                            <!-- Post Featured Image Start-->
-                            <div class="post-featured-image">
-                                <a
-                                    href="blog-single.html"
-                                    data-cursor-text="View"
-                                    aria-label="5 Secrets to Cooking the Perfect Grilled Salmon"
-                                >
-                                    <figure class="image-anime">
-                                        <img src="images/post-1.jpg" alt="Grilled Salmon" loading="lazy" />
-                                    </figure>
-                                </a>
-                            </div>
-                            <!-- Post Featured Image End -->
-
-                            <!-- Post Item Body Start -->
-                            <div class="post-item-body">
-                                <!-- Post Item Content Start -->
-                                <div class="post-item-content">
-                                    <h2>
-                                        <a href="blog-single.html">5 Secrets to Cooking the Perfect Grilled Salmon</a>
-                                    </h2>
-                                </div>
-                                <!-- Post Item Content End -->
-
-                                <!-- Post Item Readmore Button Start-->
-                                <div class="post-item-btn">
-                                    <a href="blog-single.html" class="readmore-btn">Read More</a>
-                                </div>
-                                <!-- Post Item Readmore Button End-->
-                            </div>
-                            <!-- Post Item Body End -->
-                        </div>
-                        <!-- Post Item End -->
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <!-- Post Item Start -->
-                        <div class="post-item wow fadeInUp" data-wow-delay="0.2s">
-                            <!-- Post Featured Image Start-->
-                            <div class="post-featured-image">
-                                <a
-                                    href="blog-single.html"
-                                    data-cursor-text="View"
-                                    aria-label="From Ocean to Plate: How We Source Our Seafood Sustainably"
-                                >
-                                    <figure class="image-anime">
-                                        <img src="images/post-2.jpg" alt="Fresh Seafood" loading="lazy" />
-                                    </figure>
-                                </a>
-                            </div>
-                            <!-- Post Featured Image End -->
-
-                            <!-- Post Item Body Start -->
-                            <div class="post-item-body">
-                                <!-- Post Item Content Start -->
-                                <div class="post-item-content">
-                                    <h2>
-                                        <a href="blog-single.html"
-                                            >From Ocean to Plate: How We Source Our Seafood Sustainably</a
-                                        >
-                                    </h2>
-                                </div>
-                                <!-- Post Item Content End -->
-
-                                <!-- Post Item Readmore Button Start-->
-                                <div class="post-item-btn">
-                                    <a href="blog-single.html" class="readmore-btn">Read More</a>
-                                </div>
-                                <!-- Post Item Readmore Button End-->
-                            </div>
-                            <!-- Post Item Body End -->
-                        </div>
-                        <!-- Post Item End -->
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <!-- Post Item Start -->
-                        <div class="post-item wow fadeInUp" data-wow-delay="0.4s">
-                            <!-- Post Featured Image Start-->
-                            <div class="post-featured-image">
-                                <a
-                                    href="blog-single.html"
-                                    data-cursor-text="View"
-                                    aria-label="Hosting Events at Our Place - A Guide to Private Coastal Dining"
-                                >
-                                    <figure class="image-anime">
-                                        <img src="images/post-3.jpg" alt="Coastal Dining Event" loading="lazy" />
-                                    </figure>
-                                </a>
-                            </div>
-                            <!-- Post Featured Image End -->
-
-                            <!-- Post Item Body Start -->
-                            <div class="post-item-body">
-                                <!-- Post Item Content Start -->
-                                <div class="post-item-content">
-                                    <h2>
-                                        <a href="blog-single.html"
-                                            >Hosting Events at Our Place - A Guide to Private Coastal Dining</a
-                                        >
-                                    </h2>
-                                </div>
-                                <!-- Post Item Content End -->
-
-                                <!-- Post Item Readmore Button Start-->
-                                <div class="post-item-btn">
-                                    <a href="blog-single.html" class="readmore-btn">Read More</a>
-                                </div>
-                                <!-- Post Item Readmore Button End-->
-                            </div>
-                            <!-- Post Item Body End -->
-                        </div>
-                        <!-- Post Item End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Our Blog Section End -->
-
-        <!-- Footer Start -->
-        <footer class="main-footer dark-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Main Footer Start -->
-                        <div class="main-footer-box">
-                            <!-- Footer About Start -->
-                            <div class="footer-about">
-                                <!-- Footer Logo Start -->
-                                <div class="footer-logo">
-                                    <img src="images/footer-logo.svg" alt="" />
-                                </div>
-                                <!-- Footer Logo End -->
-
-                                <!-- About Footer Content Start -->
-                                <div class="about-footer-content">
-                                    <p>
-                                        We're here to flip the script on traditional cooking. Think bold flavor combos
-                                    </p>
-                                </div>
-                                <!-- About Footer Content End -->
-
-                                <!-- Footer Contact List Start -->
-                                <div class="footer-contact-list">
-                                    <!-- Footer Contact Item Start -->
-                                    <div class="footer-contact-item">
-                                        <div class="footer-contact-item-header">
-                                            <img src="images/icon-phone-white.svg" alt="" />
-                                            <p>Phone Number</p>
-                                        </div>
-                                        <h3><a href="tel:+254102880577">+254 102 880 577</a></h3>
-                                    </div>
-                                    <!-- Footer Contact Item End -->
-
-                                    <!-- Footer Contact Item Start -->
-                                    <div class="footer-contact-item">
-                                        <div class="footer-contact-item-header">
-                                            <img src="images/icon-location-white.svg" alt="" />
-                                            <p>Our Location</p>
-                                        </div>
-                                        <p>Next to Capital Center, Mombasa Rd, Nairobi</p>
-                                    </div>
-                                    <!-- Footer Contact Item End -->
-                                </div>
-                                <!-- Footer Contact List End -->
-                            </div>
-                            <!-- Footer About End -->
-
-                            <!-- Footer Links List Start -->
-                            <div class="footer-links-box">
-                                <!-- Footer Links Start -->
-                                <div class="footer-links">
-                                    <h3>Quick Link</h3>
-                                    <ul>
-                                        <li><a href="index.html">home</a></li>
-                                        <li><a href="about.html">about us</a></li>
-                                        <li><a href="menu.html">Menu</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                    </ul>
-                                </div>
-                                <!-- Footer Links End -->
-
-                                <!-- Footer Links Start -->
-                                <div class="footer-links">
-                                    <h3>Our Services</h3>
-                                    <ul>
-                                        <li><a href="contact.html">Private Events</a></li>
-                                        <li><a href="contact.html">Catering Services</a></li>
-                                        <li><a href="menu.html">Dine-In Experience</a></li>
-                                        <li><a href="reserve-table.html"> Online Reservations</a></li>
-                                    </ul>
-                                </div>
-                                <!-- Footer Links End -->
-
-                                <!-- Footer Newsletter Form Start -->
-                                <div class="footer-links footer-newsletter-form">
-                                    <!-- Footer Newsletter Title Start -->
-                                    <div class="footer-newsletter-title">
-                                        <h3>Subscribe Newsletter</h3>
-                                        <p>Subscribe our newsletter to get more updates!</p>
-                                    </div>
-                                    <!-- Footer Newsletter Title End -->
-
-                                    <!-- Newsletter Form Start -->
-                                    <div class="newsletter-form">
-                                        <form
-                                            id="newslettersForm"
-                                            action="https://formspree.io/f/mgooaddz"
-                                            method="POST"
-                                        >
-                                            <div class="form-group">
-                                                <label for="mail" class="visually-hidden">Email Address</label
-                                                ><input
-                                                    type="email"
-                                                    name="mail"
-                                                    class="form-control"
-                                                    id="mail"
-                                                    autocomplete="email"
-                                                    placeholder="Email Address *"
-                                                    required
-                                                />
-                                                <button type="submit" class="newsletter-btn">
-                                                    <img src="images/arrow-white.svg" alt="submit" />
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!-- Newsletter Form End -->
-
-                                    <!-- Footer Contact Item Start -->
-                                    <div class="footer-contact-item">
-                                        <div class="footer-contact-item-header">
-                                            <img src="images/icon-mail-accent.svg" alt="" />
-                                            <p><a href="mailto:support@azurebay.co.ke">support@azurebay.co.ke</a></p>
-                                        </div>
-                                    </div>
-                                    <!-- Footer Contact Item End -->
-                                </div>
-                                <!-- Footer Newsletter Form End -->
-                            </div>
-                            <!-- Footer Links List End -->
-                        </div>
-                        <!-- Main Footer End -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer Copyright Start -->
-            <div class="footer-copyright">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-7">
-                            <!-- Footer Copyright Text Start -->
-                            <div class="footer-copyright-text">
-                                <p>
-                                    Copyright © 2025 All Rights Reserved. | <a href="privacy.html">Privacy Policy</a> |
-                                    <a href="terms.html">Terms of Service</a>
-                                </p>
-                            </div>
-                            <!-- Footer Copyright Text End -->
-                        </div>
-
-                        <div class="col-md-5">
-                            <!-- Footer Social Links Start -->
-                            <div class="footer-social-links">
-                                <ul>
-                                    <li>
-                                        <a href="https://www.instagram.com/azurebay" aria-label="Instagram"
-                                            ><i class="fab fa-instagram"></i
-                                        ></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.facebook.com/azurebay" aria-label="Facebook"
-                                            ><i class="fab fa-facebook-f"></i
-                                        ></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://twitter.com/azurebay" aria-label="Twitter"
-                                            ><i class="fab fa-x-twitter"></i
-                                        ></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.linkedin.com/company/azurebay" aria-label="LinkedIn"
-                                            ><i class="fab fa-linkedin-in"></i
-                                        ></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.youtube.com/azurebay" aria-label="YouTube"
-                                            ><i class="fab fa-youtube"></i
-                                        ></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.tiktok.com/@azurebay" aria-label="TikTok"
-                                            ><i class="fab fa-tiktok"></i
-                                        ></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://wa.me/254102880577" aria-label="WhatsApp"
-                                            ><i class="fab fa-whatsapp"></i
-                                        ></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Footer Social Links End -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer Copyright End -->
-        </footer>
-        <!-- Footer End -->
-
-        <!-- Back To Top Start -->
-        <div class="scroll-to-top">
-            <a href="#top" title="Back to top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
-        </div>
-        <!-- Back To Top End -->
-
-        <!-- Jquery Library File -->
-        <script src="js/jquery-3.7.1.min.js"></script>
-
-        <!-- Service Worker Registration -->
-        <script>
-            if ("serviceWorker" in navigator) {
-                window.addEventListener("load", () => {
-                    navigator.serviceWorker
-                        .register("/js/sw.js")
-                        .then((registration) => {
-                            console.log("Service Worker registered:", registration.scope);
-                        })
-                        .catch((error) => {
-                            console.log("Service Worker registration failed:", error);
-                        });
-                });
-            }
-        </script>
-        <!-- Bootstrap js file -->
-        <script src="js/bootstrap.min.js"></script>
-        <!-- Validator js file -->
-        <script src="js/validator.min.js"></script>
-        <!-- SlickNav js file -->
-        <script src="js/jquery.slicknav.js"></script>
-        <!-- Swiper js file -->
-        <script src="js/swiper-bundle.min.js"></script>
-        <!-- Counter js file -->
-        <script src="js/jquery.waypoints.min.js"></script>
-        <script src="js/jquery.counterup.min.js"></script>
-        <!-- Isotop js file -->
-        <script src="js/isotope.min.js"></script>
-        <!-- Magnific js file -->
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <!-- SmoothScroll -->
-        <script src="js/SmoothScroll.js"></script>
-        <!-- Parallax js -->
-        <script src="js/parallaxie.js"></script>
-        <!-- MagicCursor js file -->
-        <script src="js/gsap.min.js"></script>
-        <!-- Text Effect js file -->
-        <script src="js/SplitText.js"></script>
-        <script src="js/ScrollTrigger.min.js"></script>
-        <!-- YTPlayer js File -->
-        <script src="js/jquery.mb.YTPlayer.min.js"></script>
-        <!-- Wow js file -->
-        <script src="js/wow.min.js"></script>
-        <!-- Main Custom js file -->
-        <script src="js/function.min.js"></script>
-        <script src="js/error-handler.js"></script>
-        <script src="js/whatsapp.js"></script>
-    </body>
+    </footer>
+
+    <!-- Online Ordering Sticky Button -->
+    <a href="https://order.toasttab.com/azurebay" class="btn-premium btn-solid" style="position: fixed; bottom: 30px; right: 30px; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 999;">
+        <img src="images/icon-order.svg" alt="Order" width="24" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1170/1170678.png'">
+    </a>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item active">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>Home</span>
+        </a>
+        <a href="menu.html" class="bottom-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>Menu</span>
+        </a>
+        <a href="reserve-table.html" class="bottom-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>Reserve</span>
+        </a>
+        <a href="https://maps.google.com" target="_blank" class="bottom-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Locate</span>
+        </a>
+    </nav>
+
+    <script src="js/site.js"></script>
+</body>
 </html>
