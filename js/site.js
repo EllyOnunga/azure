@@ -155,4 +155,130 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1200);
         });
     }
+
+    // --- Functional Ordering Engine ---
+    let cart = JSON.parse(localStorage.getItem('azure_cart')) || [];
+    const cartPanel = document.getElementById('cart-panel');
+    const cartFab = document.getElementById('cart-fab');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartCountBadge = document.getElementById('cart-count');
+    const cartSubtotal = document.getElementById('cart-subtotal');
+    const handoffOverlay = document.getElementById('handoff-overlay');
+
+    const updateCartUI = () => {
+        if (!cartItemsContainer) return;
+
+        // Save state
+        localStorage.setItem('azure_cart', JSON.stringify(cart));
+
+        // Update badge and visibility
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountBadge.textContent = totalItems;
+        if (totalItems > 0) {
+            cartFab.classList.add('visible');
+        } else {
+            cartFab.classList.remove('visible');
+            cartPanel.classList.remove('active');
+        }
+
+        // Render items
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your selection is empty.</p>';
+            cartSubtotal.textContent = 'KSH 0';
+        } else {
+            let html = '';
+            let total = 0;
+            cart.forEach(item => {
+                const sub = item.price * item.quantity;
+                total += sub;
+                html += `
+                    <div class="cart-item">
+                        <div class="item-info-row">
+                            <h4>${item.name}</h4>
+                            <span>KSH ${item.price.toLocaleString()} x ${item.quantity}</span>
+                        </div>
+                        <div class="item-controls">
+                            <button class="control-btn minus" data-id="${item.id}">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="control-btn plus" data-id="${item.id}">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+            cartItemsContainer.innerHTML = html;
+            cartSubtotal.textContent = `KSH ${total.toLocaleString()}`;
+
+            // Add listeners to new buttons
+            cartItemsContainer.querySelectorAll('.control-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.getAttribute('data-id');
+                    const change = btn.classList.contains('plus') ? 1 : -1;
+                    updateQuantity(id, change);
+                });
+            });
+        }
+    };
+
+    const updateQuantity = (id, change) => {
+        const index = cart.findIndex(item => item.id === id);
+        if (index !== -1) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+    };
+
+    // Add to Order Logic
+    document.querySelectorAll('.add-to-order-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const card = btn.closest('.menu-item-card');
+            const item = {
+                id: card.dataset.id,
+                name: card.dataset.name,
+                price: parseInt(card.dataset.price),
+                quantity: 1
+            };
+
+            const existing = cart.find(i => i.id === item.id);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push(item);
+            }
+
+            // Quick Animation on card
+            card.style.transform = 'scale(1.02)';
+            card.style.borderColor = 'var(--accent-gold)';
+            setTimeout(() => { 
+                card.style.transform = ''; 
+                card.style.borderColor = ''; 
+            }, 300);
+
+            updateCartUI();
+        });
+    });
+
+    // Toggle Cart
+    if (cartFab) cartFab.addEventListener('click', () => cartPanel.classList.add('active'));
+    if (document.getElementById('close-cart')) {
+        document.getElementById('close-cart').addEventListener('click', () => cartPanel.classList.remove('active'));
+    }
+
+    // Checkout Handoff Logic
+    const checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            handoffOverlay.classList.add('active');
+            
+            // Premium simulation delay
+            setTimeout(() => {
+                window.location.href = 'https://order.toasttab.com/azurebay';
+            }, 2500);
+        });
+    }
+
+    // Initial load
+    updateCartUI();
 });
