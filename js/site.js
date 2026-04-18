@@ -332,30 +332,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const waUrl = `https://wa.me/254102880577?text=${encodeURIComponent(waMessage)}`;
 
-            // Email Message
-            const emailSubject = `New Order from ${name} — Azure Bay`;
-            const emailBody =
-                `New Order — Azure Bay\n\n` +
-                `Name: ${name}\nPhone: ${phone}\nOrder Type: ${type === 'delivery' ? 'Delivery' : 'Pick-up'}` +
-                (type === 'delivery' ? `\nDelivery Address: ${address}` : '') +
-                `\n\nItems:\n${cart.map(i => `${i.name} x${i.quantity} — KSH ${(i.price * i.quantity).toLocaleString()}`).join('\n')}` +
-                `\n\nTotal: KSH ${total.toLocaleString()}\n\nSent via Azure Bay online ordering.`;
-
-            const mailtoUrl = `mailto:hello@azurebay.co.ke?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-
             // Update Overlay Text
             document.getElementById('handoff-title').textContent = `Thank you, ${name.split(' ')[0]}!`;
-            document.getElementById('handoff-summary').textContent = type === 'delivery'
-                ? `Sending your order via WhatsApp & email — we'll confirm shortly.`
-                : 'Your pick-up order is being sent to our team now.';
+            document.getElementById('handoff-summary').textContent = `Sending your order via WhatsApp — we'll confirm shortly.`;
 
             handoffOverlay.classList.add('active');
 
             setTimeout(() => {
                 // Open WhatsApp in a new tab
                 window.open(waUrl, '_blank');
-                // Open email client
-                window.open(mailtoUrl, '_blank');
                 // Clear cart after dispatch
                 cart = [];
                 localStorage.removeItem('azure_cart');
