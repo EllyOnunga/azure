@@ -493,12 +493,27 @@ input:invalid:not(:placeholder-shown) + .error-hint {
 
 .menu-item-card {
     position: relative;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.menu-item-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.item-content {
     padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 15px;
-    height: 100%;
+    flex-grow: 1;
 }
 
 .item-meta h3 {
