@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
             handoffOverlay.classList.add('active');
             
             setTimeout(() => {
-                window.location.href = 'https://order.toasttab.com/azure-bay';
+                window.location.href = 'https://order.toasttab.com/azurebay';
             }, 3000);
         });
     }
