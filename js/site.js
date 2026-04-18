@@ -298,31 +298,70 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('cart-backdrop').addEventListener('click', closeCartFunc);
     }
 
-    // Comprehensive Checkout Handoff
+    // Comprehensive Checkout Handoff via WhatsApp + Email
     const checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
-            const name = document.getElementById('guest-name').value;
-            const phone = document.getElementById('guest-phone').value;
+            const name = document.getElementById('guest-name').value.trim();
+            const phone = document.getElementById('guest-phone').value.trim();
             const type = orderTypeSelect.value;
-            const address = document.getElementById('guest-address').value;
+            const address = document.getElementById('guest-address') ? document.getElementById('guest-address').value.trim() : '';
 
             if (!name || !phone || (type === 'delivery' && !address)) {
                 alert('Please provide your name, phone, and delivery address to continue.');
                 return;
             }
 
+            // Build line-by-line order
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const orderLines = cart.map(item =>
+                `• ${item.name} x${item.quantity} — KSH ${(item.price * item.quantity).toLocaleString()}`
+            ).join('\n');
+            const deliveryNote = type === 'delivery' ? `\n*Delivery Address:* ${address}` : '';
+
+            // WhatsApp Message
+            const waMessage =
+                `*🍽️ New Order — Azure Bay*\n\n` +
+                `*Name:* ${name}\n` +
+                `*Phone:* ${phone}\n` +
+                `*Order Type:* ${type === 'delivery' ? 'Delivery' : 'Pick-up'}` +
+                deliveryNote +
+                `\n\n*Items:*\n${orderLines}\n\n` +
+                `*Total: KSH ${total.toLocaleString()}*\n\n` +
+                `_Sent via Azure Bay online ordering_`;
+
+            const waUrl = `https://wa.me/254102880577?text=${encodeURIComponent(waMessage)}`;
+
+            // Email Message
+            const emailSubject = `New Order from ${name} — Azure Bay`;
+            const emailBody =
+                `New Order — Azure Bay\n\n` +
+                `Name: ${name}\nPhone: ${phone}\nOrder Type: ${type === 'delivery' ? 'Delivery' : 'Pick-up'}` +
+                (type === 'delivery' ? `\nDelivery Address: ${address}` : '') +
+                `\n\nItems:\n${cart.map(i => `${i.name} x${i.quantity} — KSH ${(i.price * i.quantity).toLocaleString()}`).join('\n')}` +
+                `\n\nTotal: KSH ${total.toLocaleString()}\n\nSent via Azure Bay online ordering.`;
+
+            const mailtoUrl = `mailto:hello@azurebay.co.ke?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
             // Update Overlay Text
-            document.getElementById('handoff-title').textContent = `Excellent Choice, ${name.split(' ')[0]}!`;
-            document.getElementById('handoff-summary').textContent = type === 'delivery' 
-                ? `Preparing your delivery to ${address.substring(0, 20)}...`
-                : 'Preparing your fresh order for pick-up...';
+            document.getElementById('handoff-title').textContent = `Thank you, ${name.split(' ')[0]}!`;
+            document.getElementById('handoff-summary').textContent = type === 'delivery'
+                ? `Sending your order via WhatsApp & email — we'll confirm shortly.`
+                : 'Your pick-up order is being sent to our team now.';
 
             handoffOverlay.classList.add('active');
-            
+
             setTimeout(() => {
-                window.location.href = 'https://order.toasttab.com/azurebay';
-            }, 3000);
+                // Open WhatsApp in a new tab
+                window.open(waUrl, '_blank');
+                // Open email client
+                window.open(mailtoUrl, '_blank');
+                // Clear cart after dispatch
+                cart = [];
+                localStorage.removeItem('azure_cart');
+                updateCartUI();
+                handoffOverlay.classList.remove('active');
+            }, 2500);
         });
     }
 
