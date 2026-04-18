@@ -681,6 +681,7 @@ input:invalid:not(:placeholder-shown) + .error-hint {
 
 .cart-items-list {
     flex-grow: 1;
+    min-height: 0;
     overflow-y: auto;
     margin-bottom: 30px;
 }
@@ -799,6 +800,7 @@ input:invalid:not(:placeholder-shown) + .error-hint {
     flex-direction: column;
     gap: 20px;
     flex-grow: 1;
+    min-height: 0;
     overflow-y: auto;
 }
 
