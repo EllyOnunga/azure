@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Functional Ordering Engine ---
+    // --- Integrated Transition Ordering Engine ---
     let cart = JSON.parse(localStorage.getItem('azure_cart')) || [];
     const cartPanel = document.getElementById('cart-panel');
     const cartFab = document.getElementById('cart-fab');
@@ -164,14 +164,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartCountBadge = document.getElementById('cart-count');
     const cartSubtotal = document.getElementById('cart-subtotal');
     const handoffOverlay = document.getElementById('handoff-overlay');
+    
+    // View Switchers
+    const viewItems = document.getElementById('cart-view-items');
+    const viewInfo = document.getElementById('cart-view-info');
+    const goToInfoBtn = document.getElementById('go-to-info');
+    const backToItemsBtn = document.getElementById('back-to-items');
+    const orderTypeSelect = document.getElementById('order-type');
+    const addressGroup = document.getElementById('delivery-address-group');
 
     const updateCartUI = () => {
         if (!cartItemsContainer) return;
 
-        // Save state
         localStorage.setItem('azure_cart', JSON.stringify(cart));
 
-        // Update badge and visibility
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         cartCountBadge.textContent = totalItems;
         if (totalItems > 0) {
@@ -179,18 +185,18 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             cartFab.classList.remove('visible');
             cartPanel.classList.remove('active');
+            resetCartView();
         }
 
-        // Render items
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your selection is empty.</p>';
             cartSubtotal.textContent = 'KSH 0';
+            if (goToInfoBtn) goToInfoBtn.disabled = true;
         } else {
             let html = '';
             let total = 0;
             cart.forEach(item => {
-                const sub = item.price * item.quantity;
-                total += sub;
+                total += (item.price * item.quantity);
                 html += `
                     <div class="cart-item">
                         <div class="item-info-row">
@@ -207,30 +213,51 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             cartItemsContainer.innerHTML = html;
             cartSubtotal.textContent = `KSH ${total.toLocaleString()}`;
+            if (goToInfoBtn) goToInfoBtn.disabled = false;
 
-            // Add listeners to new buttons
             cartItemsContainer.querySelectorAll('.control-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const id = btn.getAttribute('data-id');
                     const change = btn.classList.contains('plus') ? 1 : -1;
-                    updateQuantity(id, change);
+                    const index = cart.findIndex(i => i.id === id);
+                    if (index !== -1) {
+                        cart[index].quantity += change;
+                        if (cart[index].quantity <= 0) cart.splice(index, 1);
+                        updateCartUI();
+                    }
                 });
             });
         }
     };
 
-    const updateQuantity = (id, change) => {
-        const index = cart.findIndex(item => item.id === id);
-        if (index !== -1) {
-            cart[index].quantity += change;
-            if (cart[index].quantity <= 0) {
-                cart.splice(index, 1);
-            }
-            updateCartUI();
+    const resetCartView = () => {
+        if (viewItems && viewInfo) {
+            viewItems.classList.add('active');
+            viewInfo.classList.remove('active');
         }
     };
 
-    // Add to Order Logic
+    // Transition Logic
+    if (goToInfoBtn) {
+        goToInfoBtn.addEventListener('click', () => {
+            viewItems.classList.remove('active');
+            viewInfo.classList.add('active');
+        });
+    }
+
+    if (backToItemsBtn) {
+        backToItemsBtn.addEventListener('click', () => {
+            viewInfo.classList.remove('active');
+            viewItems.classList.add('active');
+        });
+    }
+
+    if (orderTypeSelect) {
+        orderTypeSelect.addEventListener('change', () => {
+            addressGroup.style.display = orderTypeSelect.value === 'delivery' ? 'flex' : 'none';
+        });
+    }
+
     document.querySelectorAll('.add-to-order-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const card = btn.closest('.menu-item-card');
@@ -240,45 +267,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 price: parseInt(card.dataset.price),
                 quantity: 1
             };
-
             const existing = cart.find(i => i.id === item.id);
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push(item);
-            }
+            if (existing) existing.quantity += 1;
+            else cart.push(item);
 
-            // Quick Animation on card
             card.style.transform = 'scale(1.02)';
-            card.style.borderColor = 'var(--accent-gold)';
-            setTimeout(() => { 
-                card.style.transform = ''; 
-                card.style.borderColor = ''; 
-            }, 300);
-
+            setTimeout(() => card.style.transform = '', 300);
             updateCartUI();
         });
     });
 
-    // Toggle Cart
     if (cartFab) cartFab.addEventListener('click', () => cartPanel.classList.add('active'));
     if (document.getElementById('close-cart')) {
         document.getElementById('close-cart').addEventListener('click', () => cartPanel.classList.remove('active'));
     }
 
-    // Checkout Handoff Logic
+    // Comprehensive Checkout Handoff
     const checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
+            const name = document.getElementById('guest-name').value;
+            const phone = document.getElementById('guest-phone').value;
+            const type = orderTypeSelect.value;
+            const address = document.getElementById('guest-address').value;
+
+            if (!name || !phone || (type === 'delivery' && !address)) {
+                alert('Please provide your name, phone, and delivery address to continue.');
+                return;
+            }
+
+            // Update Overlay Text
+            document.getElementById('handoff-title').textContent = `Excellent Choice, ${name.split(' ')[0]}!`;
+            document.getElementById('handoff-summary').textContent = type === 'delivery' 
+                ? `Preparing your delivery to ${address.substring(0, 20)}...`
+                : 'Preparing your fresh order for pick-up...';
+
             handoffOverlay.classList.add('active');
             
-            // Premium simulation delay
             setTimeout(() => {
                 window.location.href = 'https://order.toasttab.com/azurebay';
-            }, 2500);
+            }, 3000);
         });
     }
 
-    // Initial load
     updateCartUI();
 });
