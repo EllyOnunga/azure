@@ -1,7 +1,7 @@
 /* Azure Bay Mobile-First Interactivity */
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('main-header');
-    
+
     // Navigation Drawer Logic
     const drawerTrigger = document.getElementById('hamburger-trigger');
     const drawer = document.getElementById('mobile-drawer');
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
-        
+
         // Close drawer on link click
         drawer.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tab.classList.add('active');
 
             const filter = tab.getAttribute('data-filter');
-            
+
             menuItems.forEach(item => {
                 const category = item.getAttribute('data-category');
                 if (filter === 'all' || category === filter) {
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Form Overhaul & Validation Logic ---
-    
+
     // 1. Date Restriction (Disable past dates)
     const dateInput = document.getElementById('res_date');
     if (dateInput) {
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const showSuccess = (formId, message) => {
         const form = document.getElementById(formId);
         const parent = form.parentElement;
-        
+
         // Premium Success Template
         const successHTML = `
             <div class="form-success-message">
@@ -119,42 +119,91 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button onclick="location.reload()" class="btn-premium btn-outline" style="margin-top: 25px; padding: 10px 20px; font-size: 0.8rem; border-color: var(--accent-gold); color: var(--accent-gold);">Send Another</button>
             </div>
         `;
-        
+
         form.style.opacity = '0';
         setTimeout(() => {
             parent.innerHTML = successHTML;
         }, 300);
     };
 
+    // --- Universal Form Handling (Formspree + EmailJS) ---
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/mrerqnay";
+
+    const submitToFormspree = async (formElement, successTitle, successMsg) => {
+        const formData = new FormData(formElement);
+        // Use a hidden loader or button state
+        const submitBtn = formElement.querySelector('button[type="submit"]');
+        const originalText = submitBtn ? submitBtn.textContent : "Submit";
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Processing...";
+        }
+
+        try {
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                if (formElement.id === 'orderForm') {
+                    // Order specific success handled in checkoutBtn listener
+                } else {
+                    showSuccess(formElement.id, successMsg);
+                }
+                return true;
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch (error) {
+            alert("Oops! There was a problem submitting your request. Please try again or contact us directly.");
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+            return false;
+        }
+    };
+
     // 3. Reservation Form Handler
     const reserveForm = document.getElementById('reserveForm');
     if (reserveForm) {
-        reserveForm.addEventListener('submit', (e) => {
+        reserveForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const submitBtn = reserveForm.querySelector('button[type="submit"]');
-            submitBtn.innerHTML = 'Securing Table...';
-            submitBtn.disabled = true;
-
-            setTimeout(() => {
-                showSuccess('reserveForm', 'Your reservation request for Azure Bay has been sent! We will confirm your table via email shortly. Karibu Sana.');
-            }, 1500);
+            await submitToFormspree(reserveForm, "Booking Sent", "Your reservation request has been received. We will confirm your table via email shortly.");
         });
     }
 
     // 4. Contact Form Handler
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            submitBtn.innerHTML = 'Sending...';
-            submitBtn.disabled = true;
-
-            setTimeout(() => {
-                showSuccess('contactForm', 'Thank you for reaching out to Azure Bay. Our team has received your message and will get back to you within 24 hours.');
-            }, 1200);
+            await submitToFormspree(contactForm, "Message Received", "Thank you for reaching out. Our team will get back to you within 24 hours.");
         });
     }
+
+    // 5. Newsletter Forms
+    document.querySelectorAll('.newsletter-form').forEach(form => {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const emailInput = form.querySelector('input[type="email"]');
+            if (!emailInput) return;
+
+            // Artificial success for newsletter to keep it quick
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.textContent = "Subscribed!";
+            submitBtn.disabled = true;
+
+            // Background submit
+            fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+        });
+    });
 
     // --- Integrated Transition Ordering Engine ---
     let cart = JSON.parse(localStorage.getItem('azure_cart')) || [];
@@ -164,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartCountBadge = document.getElementById('cart-count');
     const cartSubtotal = document.getElementById('cart-subtotal');
     const handoffOverlay = document.getElementById('handoff-overlay');
-    
+
     // Page Elements (Floating or Standalone Page)
     const viewItems = document.getElementById('cart-view-items');
     const viewInfo = document.getElementById('cart-view-info');
@@ -176,9 +225,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const orderMenuGrid = document.getElementById('order-menu-grid');
     const orderItemsSummary = document.getElementById('order-items-summary');
 
-    // EmailJS Init - Replace with your key
+    // EmailJS Init
     if (typeof emailjs !== 'undefined') {
-        emailjs.init("user_placeholder_key"); 
+        emailjs.init("HZJp6uWwuezAcfzFw");
     }
 
     const updateCartUI = () => {
@@ -188,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update Badges
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         if (cartCountBadge) cartCountBadge.textContent = totalItems;
-        
+
         if (totalItems > 0) {
             if (cartFab) cartFab.classList.add('visible');
         } else {
@@ -201,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         const orderType = orderTypeSelect ? orderTypeSelect.value : 'pickup';
         let deliveryFee = 0;
-        
+
         if (orderType === 'delivery') {
             deliveryFee = subtotal >= 1500 ? 0 : 100;
         }
@@ -259,12 +308,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.getElementById('order-subtotal')) document.getElementById('order-subtotal').textContent = formattedSubtotal;
         if (document.getElementById('order-total-grand')) document.getElementById('order-total-grand').textContent = formattedGrandTotal;
         if (document.getElementById('mpesa-amount')) document.getElementById('mpesa-amount').textContent = formattedGrandTotal;
-        
+
         // Fee Rows Logic
         const feeRow = document.getElementById('delivery-fee-row');
         const freeNote = document.getElementById('free-delivery-note');
         const feeSpan = document.getElementById('order-delivery-fee');
-        
+
         if (feeRow) feeRow.style.display = (orderType === 'delivery' && deliveryFee > 0) ? 'flex' : 'none';
         if (feeSpan) feeSpan.textContent = formattedFee;
         if (freeNote) freeNote.style.display = (orderType === 'delivery' && deliveryFee === 0 && subtotal > 0) ? 'flex' : 'none';
@@ -310,22 +359,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Populate order.html Menu Grid if present
     if (orderMenuGrid) {
-        // We can either fetch menu.html or just hardcode the keys since it's a fixed menu
         const menuData = [
-            { id: 'p1', name: 'Swahili Garlic Prawns', price: 1850, category: 'appetizers' },
-            { id: 'p5', name: 'Lamu Crab Cakes', price: 2100, category: 'appetizers' },
-            { id: 'p6', name: 'Beef Samosas (3)', price: 950, category: 'appetizers' },
-            { id: 'p7', name: 'Malindi Calamari', price: 1600, category: 'appetizers' },
-            { id: 'p2', name: 'Grilled Whole Tilapia', price: 2450, category: 'mains' },
-            { id: 'p8', name: 'Red Snapper', price: 2800, category: 'mains' },
-            { id: 'p9', name: 'Beef Biryani', price: 2100, category: 'mains' },
-            { id: 'p10', name: 'Chicken Pilau', price: 1950, category: 'mains' },
-            { id: 'p3', name: 'Diani Lobster tail', price: 4250, category: 'mains' },
-            { id: 'p12', name: 'Samaki wa Kupaka', price: 2300, category: 'mains' },
-            { id: 'p11', name: 'Zanzibar Platter (2)', price: 7500, category: 'mains' },
-            { id: 'p13', name: 'Mango Mousse', price: 850, category: 'desserts' },
-            { id: 'p4', name: 'Nairobi Spritz', price: 1100, category: 'cocktails' },
-            { id: 'p14', name: 'Classic Dawa', price: 950, category: 'cocktails' }
+            { id: 'p1', name: 'Swahili Garlic Prawns', price: 1850 },
+            { id: 'p5', name: 'Lamu Crab Cakes', price: 2100 },
+            { id: 'p6', name: 'Beef Samosas (3)', price: 950 },
+            { id: 'p7', name: 'Malindi Calamari', price: 1600 },
+            { id: 'p2', name: 'Grilled Whole Tilapia', price: 2450 },
+            { id: 'p8', name: 'Red Snapper', price: 2800 },
+            { id: 'p9', name: 'Beef Biryani', price: 2100 },
+            { id: 'p10', name: 'Chicken Pilau', price: 1950 },
+            { id: 'p3', name: 'Diani Lobster tail', price: 4250 },
+            { id: 'p12', name: 'Samaki wa Kupaka', price: 2300 },
+            { id: 'p11', name: 'Zanzibar Platter (2)', price: 7500 },
+            { id: 'p13', name: 'Mango Mousse', price: 850 },
+            { id: 'p4', name: 'Nairobi Spritz', price: 1100 },
+            { id: 'p14', name: 'Classic Dawa', price: 950 }
         ];
 
         orderMenuGrid.innerHTML = menuData.map(item => `
@@ -339,10 +387,8 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // Transition Logic
     if (goToInfoBtn) {
         goToInfoBtn.addEventListener('click', () => {
-            // If we are on menu.html, we redirect to order.html instead of just switching views
             if (!window.location.pathname.includes('order.html')) {
                 window.location.href = 'order.html';
             } else {
@@ -409,43 +455,47 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('cart-backdrop').addEventListener('click', closeCartFunc);
     }
 
-    // --- Enhanced Checkout Handoff ---
-    const checkoutBtn = document.getElementById('checkout-btn');
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', () => {
+    // --- Enhanced Checkout Handoff (Final Build) ---
+    const orderForm = document.getElementById('orderForm');
+    if (orderForm) {
+        orderForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
             const name = document.getElementById('guest-name').value.trim();
-            const email = document.getElementById('guest-email') ? document.getElementById('guest-email').value.trim() : '';
+            const email = document.getElementById('guest-email').value.trim();
             const phone = document.getElementById('guest-phone').value.trim();
             const type = orderTypeSelect ? orderTypeSelect.value : 'pickup';
             const address = document.getElementById('guest-address') ? document.getElementById('guest-address').value.trim() : '';
             const table = document.getElementById('guest-table') ? document.getElementById('guest-table').value.trim() : '';
 
-            // Validation
-            if (!name || !phone || !email) {
-                alert('Please provide your name, phone, and email to continue.');
-                return;
-            }
-            if (type === 'delivery' && !address) {
-                alert('Please provide your delivery address.');
-                return;
-            }
-            if (type === 'eatin' && !table) {
-                alert('Please provide your table number.');
-                return;
-            }
+            // Validation (Standard HTML5 handled by 'required', but extra check for type specifics)
+            if (type === 'delivery' && !address) { alert('Please provide your delivery address.'); return; }
+            if (type === 'eatin' && !table) { alert('Please provide your table number.'); return; }
 
             // Calculation Constants
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const deliveryFee = (type === 'delivery' && subtotal < 1500) ? 100 : 0;
             const grandTotal = subtotal + deliveryFee;
 
-            // Build Message
-            const orderLines = cart.map(item =>
+            // Build Itemized Lists
+            const orderLinesText = cart.map(item =>
                 `• ${item.name} x${item.quantity} — KSH ${(item.price * item.quantity).toLocaleString()}`
             ).join('\n');
+
+            const orderLinesHTML = cart.map(item =>
+                `<li><strong>${item.name}</strong> x ${item.quantity} — KSH ${(item.price * item.quantity).toLocaleString()}</li>`
+            ).join('');
+
             const typeLabel = type === 'delivery' ? 'Delivery' : (type === 'eatin' ? `Eat-in (Table ${table})` : 'Pick-up');
             const deliveryNote = type === 'delivery' ? `\n*Address:* ${address}\n*Delivery Fee:* KSH ${deliveryFee.toLocaleString()}` : '';
 
+            // 1. Prepare Hidden Field for Formspree (Merchant Record)
+            const hiddenDetails = document.getElementById('hidden_order_details');
+            if (hiddenDetails) {
+                hiddenDetails.value = `Items:\n${orderLinesText}\n\nTotal: KSH ${grandTotal.toLocaleString()}\nType: ${typeLabel}\nAddress/Table: ${address || table}`;
+            }
+
+            // 2. Open WhatsApp (Real-time Merchant Interaction)
             const waMessage =
                 `*🍽️ New Order — Azure Bay*\n\n` +
                 `*Name:* ${name}\n` +
@@ -453,33 +503,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 `*Email:* ${email}\n` +
                 `*Order Type:* ${typeLabel}` +
                 deliveryNote +
-                `\n\n*Items:*\n${orderLines}\n\n` +
+                `\n\n*Items:*\n${orderLinesText}\n\n` +
                 `*Subtotal: KSH ${subtotal.toLocaleString()}*\n` +
                 `*Total: KSH ${grandTotal.toLocaleString()}*\n\n` +
                 `_Sent via Azure Bay online ordering_`;
-
             const waUrl = `https://wa.me/254102880577?text=${encodeURIComponent(waMessage)}`;
+            window.open(waUrl, '_blank');
 
-            // 1. Instant WhatsApp Dispatch (Avoids Pop-up Blocker)
-            const waWindow = window.open(waUrl, '_blank');
+            // 3. Trigger Formspree (Database/Log Backup)
+            submitToFormspree(orderForm, "Order Sent", "Processing...");
 
-            // 2. EmailJS Confirmation Send (Simulation/Async)
+            // 4. Trigger EmailJS (Guest Automatic Confirmation)
             if (typeof emailjs !== 'undefined') {
                 emailjs.send("service_placeholder", "template_placeholder", {
                     to_name: name,
                     to_email: email,
-                    order_details: orderLines,
+                    order_summary_html: `<ul>${orderLinesHTML}</ul>`,
                     order_total: grandTotal.toLocaleString(),
-                    order_type: typeLabel
-                }).then(() => console.log('Confirmation email sent.')).catch(err => console.error('Email failed:', err));
+                    order_type: typeLabel,
+                    delivery_info: address || table || "N/A",
+                    payment_info: "Lipa Na M-Pesa Till: 557766 (Azure Bay)"
+                }).then(() => console.log('Guest receipt sent.')).catch(err => console.error('Email failed:', err));
             }
 
-            // 3. Update Success Overlay
+            // 5. Success Overlay UI
             if (handoffOverlay) {
                 document.getElementById('handoff-title').textContent = `Order Placed, ${name.split(' ')[0]}!`;
                 if (document.getElementById('order-success-details')) document.getElementById('order-success-details').style.display = 'block';
-                if (document.getElementById('handoff-summary')) document.getElementById('handoff-summary').style.display = 'block';
-                
+                if (document.getElementById('mpesa-amount')) document.getElementById('mpesa-amount').textContent = `KSH ${grandTotal.toLocaleString()}`;
                 handoffOverlay.classList.add('active');
             }
 

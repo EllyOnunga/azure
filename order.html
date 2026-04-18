@@ -97,11 +97,15 @@
 
                     <hr style="border: none; border-top: 1px solid var(--glass-border); margin: 30px 0;">
 
-                    <div class="cart-form-container" style="padding: 0;">
+                    <form id="orderForm" class="cart-form-container" style="padding: 0;">
                         <h4 style="color: var(--soft-white); margin-bottom: 15px; font-size: 0.9rem; text-transform: uppercase;">Your Details</h4>
+                        
+                        <!-- Hidden field for Formspree order summary -->
+                        <input type="hidden" name="order_details" id="hidden_order_details">
+
                         <div class="form-group-custom">
                             <label>Order Type</label>
-                            <select id="order-type" class="cart-input">
+                            <select id="order-type" name="order_type" class="cart-input">
                                 <option value="delivery">Delivery</option>
                                 <option value="pickup">Pick-up</option>
                                 <option value="eatin">Eat-in (At Table)</option>
@@ -109,27 +113,27 @@
                         </div>
                         <div class="form-group-custom" style="margin-top: 15px;">
                             <label>Full Name</label>
-                            <input type="text" id="guest-name" class="cart-input" placeholder="Hassan Juma" required>
+                            <input type="text" id="guest-name" name="name" class="cart-input" placeholder="Hassan Juma" required>
                         </div>
                         <div class="form-group-custom" style="margin-top: 15px;">
                             <label>Email Address</label>
-                            <input type="email" id="guest-email" class="cart-input" placeholder="hassan@example.com" required>
+                            <input type="email" id="guest-email" name="email" class="cart-input" placeholder="hassan@example.com" required>
                         </div>
                         <div class="form-group-custom" style="margin-top: 15px;">
                             <label>Phone Number</label>
-                            <input type="tel" id="guest-phone" class="cart-input" placeholder="+254 7..." required>
+                            <input type="tel" id="guest-phone" name="phone" class="cart-input" placeholder="+254 7..." required>
                         </div>
                         <div id="delivery-address-group" class="form-group-custom" style="margin-top: 15px;">
                             <label>Delivery Address</label>
-                            <textarea id="guest-address" class="cart-input" rows="2" placeholder="Nairobi Waterfront, Apt 4B..."></textarea>
+                            <textarea id="guest-address" name="address" class="cart-input" rows="2" placeholder="Nairobi Waterfront, Apt 4B..."></textarea>
                         </div>
                         <div id="table-number-group" class="form-group-custom" style="margin-top: 15px; display: none;">
                             <label>Table Number</label>
-                            <input type="number" id="guest-table" class="cart-input" placeholder="e.g. 5">
+                            <input type="number" id="guest-table" name="table_number" class="cart-input" placeholder="e.g. 5">
                         </div>
 
-                        <button id="checkout-btn" class="btn-premium btn-solid" style="width: 100%; margin-top: 30px; height: 55px; font-size: 1rem;">Pay & Finalize Order</button>
-                    </div>
+                        <button type="submit" id="checkout-btn" class="btn-premium btn-solid" style="width: 100%; margin-top: 30px; height: 55px; font-size: 1rem;">Pay & Finalize Order</button>
+                    </form>
                 </div>
             </div>
         </div>
