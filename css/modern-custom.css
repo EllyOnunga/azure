@@ -777,7 +777,8 @@ input:invalid:not(:placeholder-shown) + .error-hint {
 .cart-view {
     display: none;
     flex-direction: column;
-    height: 100%;
+    flex-grow: 1;
+    min-height: 0; /* Constraints the container so the footer is always visible */
     animation: fadeInSlide 0.4s ease forwards;
 }
 
