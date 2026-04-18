@@ -8,51 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/modern-custom.css">
-    <style>
-        .filter-scroll {
-            display: flex;
-            overflow-x: auto;
-            gap: 12px;
-            padding: 20px 0;
-            margin-bottom: 40px;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .filter-scroll::-webkit-scrollbar { display: none; }
-        
-        .filter-tab {
-            white-space: nowrap;
-            padding: 12px 24px;
-            border-radius: 50px;
-            background: var(--glass-background);
-            border: 1px solid var(--glass-border);
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-        }
-        .filter-tab.active {
-            background: var(--accent-gold);
-            color: var(--deep-navy);
-            border-color: var(--accent-gold);
-        }
-        
-        .menu-item-card {
-            position: relative;
-            padding: 24px;
-            padding-right: 60px; /* Space for the absolute Add button */
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-        }
-        .item-meta h3 { margin-bottom: 5px; font-size: 1.1rem; }
-        .item-meta p { font-size: 0.85rem; color: var(--text-light); }
-        .item-price { font-family: var(--font-heading); font-weight: 800; color: var(--accent-gold); }
-    </style>
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
 </head>
 <body class="page-menu">
@@ -110,12 +65,14 @@
             <p style="color: var(--accent-gold); font-weight: 700; letter-spacing: 1px;">Sourced Locally, Prepared Authentically</p>
         </div>
 
-        <div class="filter-scroll">
-            <div class="filter-tab active" data-filter="all">All Dishes</div>
-            <div class="filter-tab" data-filter="appetizers">Appetizers</div>
-            <div class="filter-tab" data-filter="mains">Mains</div>
-            <div class="filter-tab" data-filter="desserts">Desserts</div>
-            <div class="filter-tab" data-filter="cocktails">Cocktails</div>
+        <div class="filter-container">
+            <div class="filter-scroll">
+                <div class="filter-tab active" data-filter="all">All Dishes</div>
+                <div class="filter-tab" data-filter="appetizers">Appetizers</div>
+                <div class="filter-tab" data-filter="mains">Mains</div>
+                <div class="filter-tab" data-filter="desserts">Desserts</div>
+                <div class="filter-tab" data-filter="cocktails">Cocktails</div>
+            </div>
         </div>
 
         <div class="menu-list glass-panel">
@@ -249,8 +206,12 @@
             </div>
         </div>
 
+        <!-- Mobile Cart Backdrop -->
+        <div id="cart-backdrop" class="cart-backdrop"></div>
+
         <!-- Functional Multi-Step Cart -->
         <div id="cart-panel" class="cart-panel">
+            <div class="sheet-handle"></div> <!-- Mobile Visual Indicator -->
             <div class="cart-header">
                 <h2>Your Order</h2>
                 <button id="close-cart" class="close-btn">&times;</button>

@@ -277,9 +277,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    if (cartFab) cartFab.addEventListener('click', () => cartPanel.classList.add('active'));
+    if (cartFab) {
+        cartFab.addEventListener('click', () => {
+            cartPanel.classList.add('active');
+            document.getElementById('cart-backdrop').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scroll under
+        });
+    }
+
+    const closeCartFunc = () => {
+        cartPanel.classList.remove('active');
+        document.getElementById('cart-backdrop').classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
     if (document.getElementById('close-cart')) {
-        document.getElementById('close-cart').addEventListener('click', () => cartPanel.classList.remove('active'));
+        document.getElementById('close-cart').addEventListener('click', closeCartFunc);
+    }
+    if (document.getElementById('cart-backdrop')) {
+        document.getElementById('cart-backdrop').addEventListener('click', closeCartFunc);
     }
 
     // Comprehensive Checkout Handoff
