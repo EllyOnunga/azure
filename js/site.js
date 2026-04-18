@@ -165,39 +165,55 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartSubtotal = document.getElementById('cart-subtotal');
     const handoffOverlay = document.getElementById('handoff-overlay');
     
-    // View Switchers
+    // Page Elements (Floating or Standalone Page)
     const viewItems = document.getElementById('cart-view-items');
     const viewInfo = document.getElementById('cart-view-info');
     const goToInfoBtn = document.getElementById('go-to-info');
     const backToItemsBtn = document.getElementById('back-to-items');
     const orderTypeSelect = document.getElementById('order-type');
     const addressGroup = document.getElementById('delivery-address-group');
+    const tableGroup = document.getElementById('table-number-group');
+    const orderMenuGrid = document.getElementById('order-menu-grid');
+    const orderItemsSummary = document.getElementById('order-items-summary');
+
+    // EmailJS Init - Replace with your key
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init("user_placeholder_key"); 
+    }
 
     const updateCartUI = () => {
-        if (!cartItemsContainer) return;
-
+        const isOrderPage = !!orderMenuGrid;
         localStorage.setItem('azure_cart', JSON.stringify(cart));
 
+        // Update Badges
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartCountBadge.textContent = totalItems;
+        if (cartCountBadge) cartCountBadge.textContent = totalItems;
+        
         if (totalItems > 0) {
-            cartFab.classList.add('visible');
+            if (cartFab) cartFab.classList.add('visible');
         } else {
-            cartFab.classList.remove('visible');
-            cartPanel.classList.remove('active');
+            if (cartFab) cartFab.classList.remove('visible');
+            if (cartPanel) cartPanel.classList.remove('active');
             resetCartView();
         }
 
-        if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your selection is empty.</p>';
-            cartSubtotal.textContent = 'KSH 0';
-            if (goToInfoBtn) goToInfoBtn.disabled = true;
-        } else {
-            let html = '';
-            let total = 0;
-            cart.forEach(item => {
-                total += (item.price * item.quantity);
-                html += `
+        // Calculate Pricing
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const orderType = orderTypeSelect ? orderTypeSelect.value : 'pickup';
+        let deliveryFee = 0;
+        
+        if (orderType === 'delivery') {
+            deliveryFee = subtotal >= 1500 ? 0 : 100;
+        }
+
+        const grandTotal = subtotal + deliveryFee;
+
+        // Populate Floating Cart (menu.html)
+        if (cartItemsContainer) {
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your selection is empty.</p>';
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => `
                     <div class="cart-item">
                         <div class="item-info-row">
                             <h4>${item.name}</h4>
@@ -209,25 +225,80 @@ document.addEventListener('DOMContentLoaded', () => {
                             <button class="control-btn plus" data-id="${item.id}">+</button>
                         </div>
                     </div>
-                `;
-            });
-            cartItemsContainer.innerHTML = html;
-            cartSubtotal.textContent = `KSH ${total.toLocaleString()}`;
-            if (goToInfoBtn) goToInfoBtn.disabled = false;
-
-            cartItemsContainer.querySelectorAll('.control-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const id = btn.getAttribute('data-id');
-                    const change = btn.classList.contains('plus') ? 1 : -1;
-                    const index = cart.findIndex(i => i.id === id);
-                    if (index !== -1) {
-                        cart[index].quantity += change;
-                        if (cart[index].quantity <= 0) cart.splice(index, 1);
-                        updateCartUI();
-                    }
-                });
-            });
+                `).join('');
+            }
         }
+
+        // Populate Standalone Order Page Summary (order.html)
+        if (orderItemsSummary) {
+            if (cart.length === 0) {
+                orderItemsSummary.innerHTML = '<p style="color: var(--text-light); text-align: center; margin-top: 20px;">Your cart is empty.</p>';
+            } else {
+                orderItemsSummary.innerHTML = cart.map(item => `
+                    <div class="order-item-row">
+                        <div style="flex-grow: 1;">
+                            <h5>${item.name}</h5>
+                            <span style="font-size: 0.8rem; color: var(--accent-gold);">KSH ${item.price.toLocaleString()} each</span>
+                        </div>
+                        <div class="item-controls" style="margin-left: 15px;">
+                            <button class="control-btn minus" data-id="${item.id}">-</button>
+                            <span style="color: var(--soft-white); min-width: 20px; text-align: center;">${item.quantity}</span>
+                            <button class="control-btn plus" data-id="${item.id}">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Refresh Totals Everywhere
+        const formattedSubtotal = `KSH ${subtotal.toLocaleString()}`;
+        const formattedGrandTotal = `KSH ${grandTotal.toLocaleString()}`;
+        const formattedFee = `KSH ${deliveryFee.toLocaleString()}`;
+
+        if (cartSubtotal) cartSubtotal.textContent = formattedSubtotal;
+        if (document.getElementById('order-subtotal')) document.getElementById('order-subtotal').textContent = formattedSubtotal;
+        if (document.getElementById('order-total-grand')) document.getElementById('order-total-grand').textContent = formattedGrandTotal;
+        if (document.getElementById('mpesa-amount')) document.getElementById('mpesa-amount').textContent = formattedGrandTotal;
+        
+        // Fee Rows Logic
+        const feeRow = document.getElementById('delivery-fee-row');
+        const freeNote = document.getElementById('free-delivery-note');
+        const feeSpan = document.getElementById('order-delivery-fee');
+        
+        if (feeRow) feeRow.style.display = (orderType === 'delivery' && deliveryFee > 0) ? 'flex' : 'none';
+        if (feeSpan) feeSpan.textContent = formattedFee;
+        if (freeNote) freeNote.style.display = (orderType === 'delivery' && deliveryFee === 0 && subtotal > 0) ? 'flex' : 'none';
+
+        // Est Time Logic
+        const estTime = document.getElementById('order-est-time');
+        if (estTime) {
+            if (orderType === 'delivery') estTime.textContent = '35-45 mins';
+            else if (orderType === 'pickup') estTime.textContent = '20 mins';
+            else estTime.textContent = '15 mins';
+        }
+
+        // Min Order Logic
+        const minWarning = document.getElementById('min-order-warning');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const canCheckout = subtotal >= 500;
+
+        if (minWarning) minWarning.style.display = (subtotal > 0 && !canCheckout) ? 'block' : 'none';
+        if (checkoutBtn) checkoutBtn.disabled = !canCheckout;
+        if (goToInfoBtn) goToInfoBtn.disabled = !canCheckout;
+
+        // Re-bind controls
+        document.querySelectorAll('.control-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = btn.getAttribute('data-id');
+                const change = btn.classList.contains('plus') ? 1 : -1;
+                const index = cart.findIndex(i => i.id === id);
+                if (index !== -1) {
+                    cart[index].quantity += change;
+                    if (cart[index].quantity <= 0) cart.splice(index, 1);
+                    updateCartUI();
+                }
+            });
+        });
     };
 
     const resetCartView = () => {
@@ -237,11 +308,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Populate order.html Menu Grid if present
+    if (orderMenuGrid) {
+        // We can either fetch menu.html or just hardcode the keys since it's a fixed menu
+        const menuData = [
+            { id: 'p1', name: 'Swahili Garlic Prawns', price: 1850, category: 'appetizers' },
+            { id: 'p5', name: 'Lamu Crab Cakes', price: 2100, category: 'appetizers' },
+            { id: 'p6', name: 'Beef Samosas (3)', price: 950, category: 'appetizers' },
+            { id: 'p7', name: 'Malindi Calamari', price: 1600, category: 'appetizers' },
+            { id: 'p2', name: 'Grilled Whole Tilapia', price: 2450, category: 'mains' },
+            { id: 'p8', name: 'Red Snapper', price: 2800, category: 'mains' },
+            { id: 'p9', name: 'Beef Biryani', price: 2100, category: 'mains' },
+            { id: 'p10', name: 'Chicken Pilau', price: 1950, category: 'mains' },
+            { id: 'p3', name: 'Diani Lobster tail', price: 4250, category: 'mains' },
+            { id: 'p12', name: 'Samaki wa Kupaka', price: 2300, category: 'mains' },
+            { id: 'p11', name: 'Zanzibar Platter (2)', price: 7500, category: 'mains' },
+            { id: 'p13', name: 'Mango Mousse', price: 850, category: 'desserts' },
+            { id: 'p4', name: 'Nairobi Spritz', price: 1100, category: 'cocktails' },
+            { id: 'p14', name: 'Classic Dawa', price: 950, category: 'cocktails' }
+        ];
+
+        orderMenuGrid.innerHTML = menuData.map(item => `
+            <div class="menu-item-card glass-panel" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}" style="padding: 15px; display: flex; flex-direction: row; align-items: center; gap: 15px;">
+                <div style="flex-grow: 1;">
+                    <h4 style="margin: 0; font-size: 0.9rem; color: var(--soft-white);">${item.name}</h4>
+                    <span style="color: var(--accent-gold); font-weight: 700; font-size: 0.8rem;">KSH ${item.price.toLocaleString()}</span>
+                </div>
+                <button class="add-to-order-btn" style="position: static; width: 32px; height: 32px; font-size: 1rem;">+</button>
+            </div>
+        `).join('');
+    }
+
     // Transition Logic
     if (goToInfoBtn) {
         goToInfoBtn.addEventListener('click', () => {
-            viewItems.classList.remove('active');
-            viewInfo.classList.add('active');
+            // If we are on menu.html, we redirect to order.html instead of just switching views
+            if (!window.location.pathname.includes('order.html')) {
+                window.location.href = 'order.html';
+            } else {
+                viewItems.classList.remove('active');
+                viewInfo.classList.add('active');
+            }
         });
     }
 
@@ -254,12 +361,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (orderTypeSelect) {
         orderTypeSelect.addEventListener('change', () => {
-            addressGroup.style.display = orderTypeSelect.value === 'delivery' ? 'flex' : 'none';
+            const val = orderTypeSelect.value;
+            if (addressGroup) addressGroup.style.display = val === 'delivery' ? 'flex' : 'none';
+            if (tableGroup) tableGroup.style.display = val === 'eatin' ? 'flex' : 'none';
+            updateCartUI();
         });
     }
 
-    document.querySelectorAll('.add-to-order-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.add-to-order-btn')) {
+            const btn = e.target.closest('.add-to-order-btn');
             const card = btn.closest('.menu-item-card');
             const item = {
                 id: card.dataset.id,
@@ -271,23 +382,23 @@ document.addEventListener('DOMContentLoaded', () => {
             if (existing) existing.quantity += 1;
             else cart.push(item);
 
-            card.style.transform = 'scale(1.02)';
-            setTimeout(() => card.style.transform = '', 300);
+            btn.style.transform = 'scale(1.2)';
+            setTimeout(() => btn.style.transform = '', 200);
             updateCartUI();
-        });
+        }
     });
 
     if (cartFab) {
         cartFab.addEventListener('click', () => {
             cartPanel.classList.add('active');
             document.getElementById('cart-backdrop').classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scroll under
+            document.body.style.overflow = 'hidden';
         });
     }
 
     const closeCartFunc = () => {
-        cartPanel.classList.remove('active');
-        document.getElementById('cart-backdrop').classList.remove('active');
+        if (cartPanel) cartPanel.classList.remove('active');
+        if (document.getElementById('cart-backdrop')) document.getElementById('cart-backdrop').classList.remove('active');
         document.body.style.overflow = '';
     };
 
@@ -298,55 +409,84 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('cart-backdrop').addEventListener('click', closeCartFunc);
     }
 
-    // Comprehensive Checkout Handoff via WhatsApp + Email
+    // --- Enhanced Checkout Handoff ---
     const checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
             const name = document.getElementById('guest-name').value.trim();
+            const email = document.getElementById('guest-email') ? document.getElementById('guest-email').value.trim() : '';
             const phone = document.getElementById('guest-phone').value.trim();
-            const type = orderTypeSelect.value;
+            const type = orderTypeSelect ? orderTypeSelect.value : 'pickup';
             const address = document.getElementById('guest-address') ? document.getElementById('guest-address').value.trim() : '';
+            const table = document.getElementById('guest-table') ? document.getElementById('guest-table').value.trim() : '';
 
-            if (!name || !phone || (type === 'delivery' && !address)) {
-                alert('Please provide your name, phone, and delivery address to continue.');
+            // Validation
+            if (!name || !phone || !email) {
+                alert('Please provide your name, phone, and email to continue.');
+                return;
+            }
+            if (type === 'delivery' && !address) {
+                alert('Please provide your delivery address.');
+                return;
+            }
+            if (type === 'eatin' && !table) {
+                alert('Please provide your table number.');
                 return;
             }
 
-            // Build line-by-line order
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            // Calculation Constants
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryFee = (type === 'delivery' && subtotal < 1500) ? 100 : 0;
+            const grandTotal = subtotal + deliveryFee;
+
+            // Build Message
             const orderLines = cart.map(item =>
                 `• ${item.name} x${item.quantity} — KSH ${(item.price * item.quantity).toLocaleString()}`
             ).join('\n');
-            const deliveryNote = type === 'delivery' ? `\n*Delivery Address:* ${address}` : '';
+            const typeLabel = type === 'delivery' ? 'Delivery' : (type === 'eatin' ? `Eat-in (Table ${table})` : 'Pick-up');
+            const deliveryNote = type === 'delivery' ? `\n*Address:* ${address}\n*Delivery Fee:* KSH ${deliveryFee.toLocaleString()}` : '';
 
-            // WhatsApp Message
             const waMessage =
                 `*🍽️ New Order — Azure Bay*\n\n` +
                 `*Name:* ${name}\n` +
                 `*Phone:* ${phone}\n` +
-                `*Order Type:* ${type === 'delivery' ? 'Delivery' : 'Pick-up'}` +
+                `*Email:* ${email}\n` +
+                `*Order Type:* ${typeLabel}` +
                 deliveryNote +
                 `\n\n*Items:*\n${orderLines}\n\n` +
-                `*Total: KSH ${total.toLocaleString()}*\n\n` +
+                `*Subtotal: KSH ${subtotal.toLocaleString()}*\n` +
+                `*Total: KSH ${grandTotal.toLocaleString()}*\n\n` +
                 `_Sent via Azure Bay online ordering_`;
 
             const waUrl = `https://wa.me/254102880577?text=${encodeURIComponent(waMessage)}`;
 
-            // Update Overlay Text
-            document.getElementById('handoff-title').textContent = `Thank you, ${name.split(' ')[0]}!`;
-            document.getElementById('handoff-summary').textContent = `Sending your order via WhatsApp — we'll confirm shortly.`;
+            // 1. Instant WhatsApp Dispatch (Avoids Pop-up Blocker)
+            const waWindow = window.open(waUrl, '_blank');
 
-            handoffOverlay.classList.add('active');
+            // 2. EmailJS Confirmation Send (Simulation/Async)
+            if (typeof emailjs !== 'undefined') {
+                emailjs.send("service_placeholder", "template_placeholder", {
+                    to_name: name,
+                    to_email: email,
+                    order_details: orderLines,
+                    order_total: grandTotal.toLocaleString(),
+                    order_type: typeLabel
+                }).then(() => console.log('Confirmation email sent.')).catch(err => console.error('Email failed:', err));
+            }
 
-            setTimeout(() => {
-                // Open WhatsApp in a new tab
-                window.open(waUrl, '_blank');
-                // Clear cart after dispatch
-                cart = [];
-                localStorage.removeItem('azure_cart');
-                updateCartUI();
-                handoffOverlay.classList.remove('active');
-            }, 2500);
+            // 3. Update Success Overlay
+            if (handoffOverlay) {
+                document.getElementById('handoff-title').textContent = `Order Placed, ${name.split(' ')[0]}!`;
+                if (document.getElementById('order-success-details')) document.getElementById('order-success-details').style.display = 'block';
+                if (document.getElementById('handoff-summary')) document.getElementById('handoff-summary').style.display = 'block';
+                
+                handoffOverlay.classList.add('active');
+            }
+
+            // Clear cart
+            cart = [];
+            localStorage.removeItem('azure_cart');
+            updateCartUI();
         });
     }
 

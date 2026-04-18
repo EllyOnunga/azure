@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/modern-custom.css">
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body class="page-menu">
 
@@ -271,34 +273,6 @@
                     </div>
                     <button id="go-to-info" class="btn-premium btn-solid" style="width: 100%; margin-top: 15px;">Confirm Details</button>
                 </div>
-            </div>
-
-            <!-- Step 2: Guest Information -->
-            <div id="cart-view-info" class="cart-view">
-                <div class="cart-form-container">
-                    <div class="form-group-custom">
-                        <label>Order Type</label>
-                        <select id="order-type" class="cart-input">
-                            <option value="delivery">Delivery</option>
-                            <option value="pickup">Pick-up</option>
-                        </select>
-                    </div>
-                    <div class="form-group-custom">
-                        <label>Full Name</label>
-                        <input type="text" id="guest-name" class="cart-input" placeholder="e.g. Hassan Juma">
-                    </div>
-                    <div class="form-group-custom">
-                        <label>Phone Number</label>
-                        <input type="tel" id="guest-phone" class="cart-input" placeholder="+254 7XX XXX XXX">
-                    </div>
-                    <div id="delivery-address-group" class="form-group-custom">
-                        <label>Delivery Address</label>
-                        <textarea id="guest-address" class="cart-input" rows="3" placeholder="Apartment, Street, Area..."></textarea>
-                    </div>
-                </div>
-                <div class="cart-footer">
-                    <button id="back-to-items" class="btn-premium btn-outline" style="width: 100%; margin-bottom: 10px;">Review Items</button>
-                    <button id="checkout-btn" class="btn-premium btn-solid" style="width: 100%;">Pay & Finalize</button>
                 </div>
             </div>
         </div>
@@ -312,6 +286,12 @@
             <div class="handoff-content">
                 <div class="loader-nautilus"></div>
                 <h2 id="handoff-title">Connecting to Kitchen...</h2>
+                <div id="payment-instructions" class="payment-instructions-card">
+                    <h4>M-PESA PAYMENT</h4>
+                    <p>Till Number: <strong>557766</strong></p>
+                    <p>Amount: <strong id="mpesa-amount">KSH 0</strong></p>
+                    <small>Please complete payment and keep the transaction message for confirmation.</small>
+                </div>
                 <p id="handoff-summary">Securing your delivery to Nairobi</p>
                 <div style="margin-top: 20px; font-size: 0.7rem; color: var(--text-light);">Final checkout via ToastTab® Private Portal</div>
             </div>

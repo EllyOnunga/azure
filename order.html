@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Manage Your Order | Azure Bay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/modern-custom.css">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body class="page-order">
+
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <div id="mobile-drawer">
+        <div class="logo" style="margin-bottom: 40px;">
+            <img src="images/logo.svg" alt="Azure Bay" height="40">
+        </div>
+        <ul class="drawer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="reserve-table.html">Reservations</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="image-gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <header id="main-header">
+        <div class="container header-container">
+            <div class="hamburger" id="hamburger-trigger">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.svg" alt="Azure Bay Logo" height="40"></a>
+            </div>
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-cta">
+                <a href="menu.html" class="btn-premium btn-outline" style="padding: 10px 20px; font-size: 0.7rem;">Back to Menu</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="order-page-grid">
+            <!-- Left: Menu Selection -->
+            <div class="order-selection">
+                <h2 class="order-section-title">Add More to Your Order</h2>
+                <div class="menu-list" id="order-menu-grid">
+                    <!-- Items will be populated by JS or rendered here -->
+                    <p style="color: var(--text-light);">Loading the Azure Bay menu...</p>
+                </div>
+            </div>
+
+            <!-- Right: Checkout Sidebar -->
+            <div class="order-checkout-sidebar">
+                <div class="glass-panel" style="padding: 30px; position: sticky; top: 120px;">
+                    <h3 class="order-section-title" style="font-size: 1.2rem; margin-bottom: 20px;">Order Summary</h3>
+                    
+                    <div id="order-items-summary" style="margin-bottom: 25px; max-height: 300px; overflow-y: auto; padding-right: 5px;">
+                        <!-- Selected items show up here -->
+                    </div>
+
+                    <div class="cart-footer" style="border-top: 1px solid var(--glass-border); padding-top: 20px;">
+                        <div class="cart-total-row">
+                            <span>Subtotal</span>
+                            <span id="order-subtotal">KSH 0</span>
+                        </div>
+                        <div class="cart-summary-row" id="delivery-fee-row" style="display: none;">
+                            <span>Delivery Fee</span>
+                            <span id="order-delivery-fee">KSH 100</span>
+                        </div>
+                        <div class="cart-summary-row accent" id="free-delivery-note" style="display: none;">
+                            <span>Free Delivery applied!</span>
+                        </div>
+                        <div class="cart-total-row" style="margin-top: 15px; font-size: 1.5rem;">
+                            <span>Total</span>
+                            <span id="order-total-grand">KSH 0</span>
+                        </div>
+                        <div class="cart-summary-row" id="est-time-row" style="margin-top: 5px; opacity: 0.8;">
+                            <span>Est. Prep Time</span>
+                            <span id="order-est-time">25 mins</span>
+                        </div>
+
+                        <div id="min-order-warning" class="min-order-warning">
+                             Minimum order is KSH 500 to proceed.
+                        </div>
+                    </div>
+
+                    <hr style="border: none; border-top: 1px solid var(--glass-border); margin: 30px 0;">
+
+                    <div class="cart-form-container" style="padding: 0;">
+                        <h4 style="color: var(--soft-white); margin-bottom: 15px; font-size: 0.9rem; text-transform: uppercase;">Your Details</h4>
+                        <div class="form-group-custom">
+                            <label>Order Type</label>
+                            <select id="order-type" class="cart-input">
+                                <option value="delivery">Delivery</option>
+                                <option value="pickup">Pick-up</option>
+                                <option value="eatin">Eat-in (At Table)</option>
+                            </select>
+                        </div>
+                        <div class="form-group-custom" style="margin-top: 15px;">
+                            <label>Full Name</label>
+                            <input type="text" id="guest-name" class="cart-input" placeholder="Hassan Juma" required>
+                        </div>
+                        <div class="form-group-custom" style="margin-top: 15px;">
+                            <label>Email Address</label>
+                            <input type="email" id="guest-email" class="cart-input" placeholder="hassan@example.com" required>
+                        </div>
+                        <div class="form-group-custom" style="margin-top: 15px;">
+                            <label>Phone Number</label>
+                            <input type="tel" id="guest-phone" class="cart-input" placeholder="+254 7..." required>
+                        </div>
+                        <div id="delivery-address-group" class="form-group-custom" style="margin-top: 15px;">
+                            <label>Delivery Address</label>
+                            <textarea id="guest-address" class="cart-input" rows="2" placeholder="Nairobi Waterfront, Apt 4B..."></textarea>
+                        </div>
+                        <div id="table-number-group" class="form-group-custom" style="margin-top: 15px; display: none;">
+                            <label>Table Number</label>
+                            <input type="number" id="guest-table" class="cart-input" placeholder="e.g. 5">
+                        </div>
+
+                        <button id="checkout-btn" class="btn-premium btn-solid" style="width: 100%; margin-top: 30px; height: 55px; font-size: 1rem;">Pay & Finalize Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="handoff-overlay" class="handoff-overlay">
+        <div class="handoff-content">
+            <div class="loader-nautilus"></div>
+            <h2 id="handoff-title">Connecting to Kitchen...</h2>
+            
+            <div id="order-success-details" style="display: none;">
+                <div class="payment-instructions-card">
+                    <h4>M-PESA PAYMENT</h4>
+                    <p>Till Number: <strong>557766</strong></p>
+                    <p>Amount: <strong id="mpesa-amount">KSH 0</strong></p>
+                    <small>Please complete payment and keep the transaction message for confirmation.</small>
+                </div>
+                <p id="handoff-summary">Sending your order via WhatsApp — we'll confirm shortly.</p>
+                <div style="margin-top: 30px;">
+                    <a href="menu.html" class="btn-premium btn-outline">Back to Menu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="main-footer" style="margin-top: 80px; padding: 60px 0;">
+        <div class="container" style="text-align: center; border-top: 1px solid var(--glass-border); padding-top: 40px;">
+            <p style="color: var(--text-light); font-size: 0.8rem;">&copy; 2026 Azure Bay Kenya. Part of the Nautilus Hospitality Group.</p>
+        </div>
+    </footer>
+
+    <script src="js/site.js"></script>
+</body>
+</html>
