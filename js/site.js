@@ -515,7 +515,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 4. Trigger EmailJS (Guest Automatic Confirmation)
             if (typeof emailjs !== 'undefined') {
-                emailjs.send("service_placeholder", "template_placeholder", {
+                // TODO: Replace the two strings below with your real EmailJS Service ID and Template ID
+                // Find them at: https://dashboard.emailjs.com/admin
+                emailjs.send("YOUR_EMAILJS_SERVICE_ID", "YOUR_EMAILJS_TEMPLATE_ID", {
                     to_name: name,
                     to_email: email,
                     order_summary_html: `<ul>${orderLinesHTML}</ul>`,

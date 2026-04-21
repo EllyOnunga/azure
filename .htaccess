@@ -1,51 +1,36 @@
-# Azure Bay Production Configuration
+# Azure Bay - Apache Pretty URL Configuration
+RewriteEngine On
+RewriteBase /
 
-# 1. ENFORCE HTTPS (if on Apache)
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-</IfModule>
+# 1. 301 Redirects from old .html URLs to protect SEO
+Redirect 301 /about.html /about/
+Redirect 301 /menu.html /menu/
+Redirect 301 /order.html /order/
+Redirect 301 /contact.html /contact/
+Redirect 301 /reserve-table.html /reserve/
+Redirect 301 /image-gallery.html /gallery/
+Redirect 301 /video-gallery.html /gallery/video/
+Redirect 301 /team.html /team/
+Redirect 301 /testimonials.html /testimonials/
+Redirect 301 /donation.html /donate/
+Redirect 301 /faqs.html /faqs/
+Redirect 301 /privacy.html /privacy/
+Redirect 301 /terms.html /terms/
+Redirect 301 /blog.html /blog/
+Redirect 301 /blog-ocean-sustainable.html /blog/ocean-sustainable/
+Redirect 301 /blog-chef-story.html /blog/chef-story/
+Redirect 301 /blog-fish-plate.html /blog/fish-plate/
+Redirect 301 /blog-grilling-techniques.html /blog/grilling-techniques/
+Redirect 301 /blog-beach-getaway.html /blog/beach-getaway/
+Redirect 301 /blog-swahili-spices.html /blog/swahili-spices/
+Redirect 301 /team-single.html /team/
 
-# 2. COMPRESSION
-<IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json application/xml image/svg+xml
-</IfModule>
+# 2. Canonical Trailing Slash Enforcement
+# Redirect /about to /about/ (avoids duplicate content and relative path issues)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ^(.*)$ $1/ [L,R=301]
 
-# 3. CACHING
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresDefault "access plus 1 month"
-    
-    # CSS/JS
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType text/javascript "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
-    
-    # Images/Icons
-    ExpiresByType image/x-icon "access plus 1 year"
-    ExpiresByType image/png "access plus 1 month"
-    ExpiresByType image/jpg "access plus 1 month"
-    ExpiresByType image/jpeg "access plus 1 month"
-    ExpiresByType image/webp "access plus 1 month"
-    ExpiresByType image/svg+xml "access plus 1 month"
-    
-    # Fonts
-    ExpiresByType font/woff2 "access plus 1 year"
-    ExpiresByType application/font-woff "access plus 1 year"
-</IfModule>
-
-# 4. SECURITY HEADERS
-<IfModule mod_headers.c>
-    Header set X-XSS-Protection "1; mode=block"
-    Header set X-Frame-Options "SAMEORIGIN"
-    Header set X-Content-Type-Options "nosniff"
-    Header set Referrer-Policy "strict-origin-when-cross-origin"
-    Header set Permissions-Policy "geolocation=(), megaphone=(), camera=(), microphone=()"
-</IfModule>
-
-# 5. REMOVE .html EXTENSION (Optional but recommended for clean URLs)
-# RewriteEngine On
-# RewriteCond %{REQUEST_FILENAME} !-d
-# RewriteCond %{REQUEST_FILENAME}\.html -f
-# RewriteRule ^(.*)$ $1.html [NC,L]
+# 3. Handle subfolder index files
+# Most servers do this by default, but this ensures /about/ loads /about/index.html
+DirectoryIndex index.html
