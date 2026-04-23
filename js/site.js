@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Universal Form Handling (Formspree + EmailJS) ---
     const FORMSPREE_ENDPOINT = "https://formspree.io/f/mrerqnay";
 
-    const submitToFormspree = async (formElement, successTitle, successMsg) => {
+    const submitToFormspree = async (formElement, successTitle, successMsg, templateId = null) => {
         const formData = new FormData(formElement);
         // Use a hidden loader or button state
         const submitBtn = formElement.querySelector('button[type="submit"]');
@@ -164,6 +164,23 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.ok) {
+                // Send automated email response via EmailJS to the user
+                if (templateId && typeof emailjs !== 'undefined') {
+                    const params = Object.fromEntries(formData.entries());
+                    const emailParams = {
+                        to_name: params.name || 'Guest',
+                        to_email: params.email,
+                        message: params.message || '',
+                        phone: params.phone || '',
+                        date: params.date || '',
+                        time: params.time || '',
+                        guests: params.guests || ''
+                    };
+                    emailjs.send("default_service", templateId, emailParams)
+                        .then(() => console.log(`Auto-reply sent for ${templateId}.`))
+                        .catch(err => console.error('EmailJS Auto-reply failed:', err));
+                }
+
                 if (formElement.id === 'orderForm') {
                     // Order specific success handled in checkoutBtn listener
                 } else {
@@ -188,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (reserveForm) {
         reserveForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            await submitToFormspree(reserveForm, "Booking Sent", "Your reservation request has been received. We will confirm your table via email shortly.");
+            await submitToFormspree(reserveForm, "Booking Sent", "Your reservation request has been received. We will confirm your table via email shortly.", "template_reserve");
         });
     }
 
@@ -197,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            await submitToFormspree(contactForm, "Message Received", "Thank you for reaching out. Our team will get back to you within 24 hours.");
+            await submitToFormspree(contactForm, "Message Received", "Thank you for reaching out. Our team will get back to you within 24 hours.", "template_contact");
         });
     }
 
@@ -547,9 +564,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 4. Trigger EmailJS (Guest Automatic Confirmation)
             if (typeof emailjs !== 'undefined') {
-                // TODO: Replace the two strings below with your real EmailJS Service ID and Template ID
-                // Find them at: https://dashboard.emailjs.com/admin
-                emailjs.send("YOUR_EMAILJS_SERVICE_ID", "YOUR_EMAILJS_TEMPLATE_ID", {
+                // Sending to the user using the standard EmailJS setup
+                emailjs.send("default_service", "template_order", {
                     to_name: name,
                     to_email: email,
                     order_summary_html: `<ul>${orderLinesHTML}</ul>`,
