@@ -13,6 +13,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body class="page-order">
+        <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <div id="drawer-overlay" class="drawer-overlay"></div>
     <div id="mobile-drawer">
@@ -49,7 +50,7 @@
         </div>
     </header>
 
-    <main class="container">
+    <main id="main-content">
         <div class="order-page-grid">
             <!-- Left: Menu Selection -->
             <div class="order-selection">
@@ -62,7 +63,7 @@
 
             <!-- Right: Checkout Sidebar -->
             <div class="order-checkout-sidebar">
-                <div class="glass-panel" style="padding: 30px; position: sticky; top: 120px;">
+                <div class="hover-lift glass-panel" style="padding: 30px; position: sticky; top: 120px;">
                     <h3 class="order-section-title" style="font-size: 1.2rem; margin-bottom: 20px;">Order Summary</h3>
                     
                     <div id="order-items-summary" style="margin-bottom: 25px; max-height: 300px; overflow-y: auto; padding-right: 5px;">
@@ -147,7 +148,7 @@
             <div id="order-success-details" style="display: none;">
                 <div class="payment-instructions-card">
                     <h4>M-PESA PAYMENT</h4>
-                    <p>Till Number: <strong>557766</strong></p>
+                    <p>Till Number: <strong class="copy-till" style="cursor: pointer;" title="Click to Copy">557766</strong></p>
                     <p>Amount: <strong id="mpesa-amount">KSH 0</strong></p>
                     <small>Please complete payment and keep the transaction message for confirmation.</small>
                 </div>
@@ -166,6 +167,8 @@
     </footer>
 
     <script src="../js/site.js"></script>
+
+    <div id="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></div>
 </body>
 </html>
 

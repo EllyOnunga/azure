@@ -11,6 +11,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.png">
 </head>
 <body>
+        <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <div id="announcement-bar">
         Closed for a Private Event on Dec 5th. Looking for a venue? <a href="../reserve/#events" style="color: inherit; text-decoration: underline;">Inquire Here</a>
@@ -59,14 +60,14 @@
         </div>
     </header>
 
-    <main class="container" style="padding-top: 40px; padding-bottom: 150px;">
+    <main id="main-content">
         <div style="text-align: center; margin-bottom: 40px;">
             <div class="kenya-badge" style="justify-content: center;">Karibu Sana</div>
             <h1>Reservations</h1>
             <p style="color: var(--accent-gold); font-weight: 700; letter-spacing: 1px;">Join us at Waterfront Mall, Karen</p>
         </div>
 
-        <div class="glass-panel" style="padding: 40px;">
+        <div class="hover-lift glass-panel" style="padding: 40px;">
             <form id="reserveForm" style="display: flex; flex-direction: column; gap: 20px;">
                 <div class="responsive-grid cols-2" style="gap: 20px;">
                     <div>
@@ -127,15 +128,15 @@
 
         <!-- Policy Cards (Stacked on Mobile) -->
         <div class="responsive-grid cols-3" style="margin-top: 40px;">
-            <div class="glass-panel" style="padding: 24px;">
+            <div class="hover-lift glass-panel" style="padding: 24px;">
                 <h4 style="color: var(--accent-gold); margin-bottom: 10px;">Cancellation</h4>
                 <p style="font-size: 0.85rem; color: var(--text-light);">We require 24 hours notice for all cancellations.</p>
             </div>
-            <div class="glass-panel" style="padding: 24px;">
+            <div class="hover-lift glass-panel" style="padding: 24px;">
                 <h4 style="color: var(--accent-gold); margin-bottom: 10px;">Large Parties</h4>
                 <p style="font-size: 0.85rem; color: var(--text-light);">6+ guests require a direct phone inquiry.</p>
             </div>
-            <div class="glass-panel" style="padding: 24px;">
+            <div class="hover-lift glass-panel" style="padding: 24px;">
                 <h4 style="color: var(--accent-gold); margin-bottom: 10px;">Dress Code</h4>
                 <p style="font-size: 0.85rem; color: var(--text-light);">Smart casual is preferred in the dining room.</p>
             </div>
@@ -187,7 +188,7 @@
             <div class="footer-bottom" style="text-align: center; border-top: 1px solid var(--glass-border); padding-top: 30px; font-size: 0.8rem; color: var(--text-light); display: flex; flex-direction: column; gap: 20px;">
                 <div style="padding: 15px 20px; border: 1px dashed var(--accent-gold); max-width: 250px; margin: 0 auto; border-radius: 8px; background: rgba(192,160,109,0.05);">
                     <p style="color: #4CAF50; font-weight: 800; font-size: 0.85rem; margin-bottom: 5px; text-transform: uppercase;">Lipa Na M-Pesa</p>
-                    <p style="color: var(--soft-white); font-weight: 600; font-size: 0.9rem;">Buy Goods Till: <span style="font-size: 1.1rem; color: var(--accent-gold);">78910</span></p>
+                    <p style="color: var(--soft-white); font-weight: 600; font-size: 0.9rem;">Buy Goods Till: <span style="font-size: 1.1rem; color: var(--accent-gold);" class="copy-till" style="cursor: pointer;" title="Click to Copy">78910</span></p>
                 </div>
                 
                 <div class="footer-legal-links" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
@@ -203,7 +204,7 @@
 
     <!-- Online Ordering Sticky Button -->
     <a href="https://wa.me/254102880577?text=Hi%2C%20I%27d%20like%20to%20place%20an%20order%20at%20Azure%20Bay%21" class="floating-cta btn-solid" aria-label="Order on WhatsApp" target="_blank" rel="noopener noreferrer">
-        <img src="../images/icon-order.svg" alt="Order" width="24" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1170/1170678.png'">
+        <i class="fa-brands fa-whatsapp" style="font-size: 24px;"></i>
     </a>
 
     <nav class="bottom-nav">
@@ -226,6 +227,8 @@
     </nav>
 
     <script src="../js/site.js"></script>
+
+    <div id="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></div>
 </body>
 </html>
 

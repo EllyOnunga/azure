@@ -13,6 +13,7 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="css/modern-custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- JSON-LD Schema -->
     <script type="application/ld+json">
@@ -34,9 +35,11 @@
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
 </head>
 <body>
+        <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <div id="announcement-bar">
-        Closed for a Private Event on Dec 5th. Looking for a venue? <a href="reserve/#events" style="color: inherit; text-decoration: underline;">Inquire Here</a>
+        <span>Closed for a Private Event on Dec 5th. Looking for a venue? <a href="./reserve/#events" style="color: inherit; text-decoration: underline;">Inquire Here</a></span>
+        <button id="close-announcement" aria-label="Close Announcement" style="background: none; border: none; color: inherit; font-size: 1.2rem; cursor: pointer; padding: 0 10px;">&times;</button>
     </div>
 
     <!-- Navigation Drawer -->
@@ -106,7 +109,7 @@
 
         <!-- Section: Speed Bump Info Bar -->
         <div id="speed-bump" class="container" style="margin-top: -40px; position: relative; z-index: 10;">
-            <div class="glass-panel responsive-grid cols-3" style="padding: 20px; border-radius: 30px; text-align: center;">
+            <div class="hover-lift glass-panel responsive-grid cols-3" style="padding: 20px; border-radius: 30px; text-align: center;">
                 <div class="info-item" style="padding: 10px;">
                     <span style="display: block; font-size: 0.7rem; text-transform: uppercase; color: var(--accent-gold); letter-spacing: 1px;">Daily Hours</span>
                     <span style="font-weight: 700; font-size: 0.9rem;">5PM - 10PM</span>
@@ -128,7 +131,7 @@
             }
         </style>
         <!-- Section: About / Story Block -->
-        <section id="about">
+        <section class="reveal" id="about">
             <div class="container responsive-grid cols-2" style="align-items: center;">
                 <div class="about-text">
                     <h2 style="margin-bottom: 20px;">Mastering the Art of Coastal Dining</h2>
@@ -148,7 +151,7 @@
         </style>
 
         <!-- Section: Menu Highlights -->
-        <section id="menu-highlights" class="dark-section" style="background: rgba(4, 18, 35, 0.5);">
+        <section id="menu-highlights" class="reveal dark-section" style="background: rgba(4, 18, 35, 0.5);">
             <div class="container">
                 <div class="section-header" style="text-align: center; margin-bottom: 60px;">
                     <h2>Featured Dishes</h2>
@@ -156,19 +159,19 @@
                 </div>
                 <div class="menu-grid responsive-grid cols-3">
                     <!-- Dish Card 1 -->
-                    <div class="dish-card glass-panel" style="padding: 30px; text-align: center;">
+                    <div class="hover-lift dish-card glass-panel" style="padding: 30px; text-align: center;">
                         <img src="images/best-product-1.png" alt="Lemon Lobster" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 4px solid var(--accent-gold);">
                         <h3>Lemon Lobster</h3>
                         <p style="color: var(--accent-gold); font-weight: 800; font-size: 1.2rem;">KSH 3,250</p>
                     </div>
                     <!-- Dish Card 2 -->
-                    <div class="dish-card glass-panel" style="padding: 30px; text-align: center;">
+                    <div class="hover-lift dish-card glass-panel" style="padding: 30px; text-align: center;">
                         <img src="images/best-product-2.png" alt="Garlic Prawns" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 4px solid var(--accent-gold);">
                         <h3>Garlic Prawns</h3>
                         <p style="color: var(--accent-gold); font-weight: 800; font-size: 1.2rem;">KSH 7,150</p>
                     </div>
                     <!-- Dish Card 3 -->
-                    <div class="dish-card glass-panel" style="padding: 30px; text-align: center;">
+                    <div class="hover-lift dish-card glass-panel" style="padding: 30px; text-align: center;">
                         <img src="images/best-product-3.png" alt="Spicy Scallops" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 4px solid var(--accent-gold);">
                         <h3>Spicy Scallops</h3>
                         <p style="color: var(--accent-gold); font-weight: 800; font-size: 1.2rem;">KSH 5,200</p>
@@ -184,7 +187,7 @@
         <section id="reservations" style="position: relative; padding: 80px 0; background: url('/hero-image-new.webp') center/cover fixed;">
             <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 18, 35, 0.75);"></div>
             <div class="container" style="position: relative; z-index: 2;">
-                <div class="glass-panel" style="padding: 40px; text-align: center; max-width: 600px; margin: 0 auto;">
+                <div class="hover-lift glass-panel" style="padding: 40px; text-align: center; max-width: 600px; margin: 0 auto;">
                     <h2>Book Your Table</h2>
                     <p style="margin-bottom: 30px; color: var(--accent-gold);">Nairobi's Best Waterfront Experience</p>
                     <form class="reservation-inline responsive-grid" style="gap: 15px;">
@@ -212,11 +215,11 @@
         </section>
 
         <!-- Section: Private Events -->
-        <section id="events" style="padding: 60px 0;">
+        <section class="reveal" id="events" style="padding: 60px 0;">
             <div class="container responsive-grid cols-2" style="align-items: center;">
                 <div class="events-image">
                     <img src="images/service-2.jpg" alt="Private Dining" style="width: 100%; border-radius: var(--card-radius);">
-                    <div class="glass-panel" style="padding: 20px; margin-top: -30px; position: relative; max-width: 250px; margin-left: auto;">
+                    <div class="hover-lift glass-panel" style="padding: 20px; margin-top: -30px; position: relative; max-width: 250px; margin-left: auto;">
                         <h3 style="color: var(--accent-gold); font-size: 1.2rem;">50+ Guests</h3>
                         <p style="font-size: 0.8rem;">We handle everything from decor to custom coastal menus.</p>
                     </div>
@@ -230,18 +233,18 @@
         </section>
 
         <!-- Section: Testimonials -->
-        <section id="testimonials" class="dark-section" style="padding: 100px 0; background: var(--deep-navy);">
+        <section id="testimonials" class="reveal dark-section" style="padding: 100px 0; background: var(--deep-navy);">
             <div class="container" style="text-align: center;">
                 <h2 style="font-size: 3rem; margin-bottom: 60px;">What Our Guests Say</h2>
                 <div class="testimonial-slider" style="display: flex; gap: 30px; overflow-x: auto; padding-bottom: 40px; scroll-snap-type: x mandatory;">
                     <!-- Testimonial 1 -->
-                    <div class="glass-panel" style="min-width: 400px; padding: 40px; scroll-snap-align: center;">
+                    <div class="hover-lift glass-panel" style="min-width: 400px; padding: 40px; scroll-snap-align: center;">
                         <p style="font-size: 1.2rem; font-style: italic; margin-bottom: 30px;">"The best seafood I've had in Nairobi. The waterfront view at sunset is absolutely breathtaking. Highly recommend the Lemon Lobster!"</p>
                         <h4 style="color: var(--accent-gold);">Wade Warren</h4>
                         <span style="font-size: 0.8rem; color: var(--text-light);">Google Reviews</span>
                     </div>
                     <!-- Testimonial 2 -->
-                    <div class="glass-panel" style="min-width: 400px; padding: 40px; scroll-snap-align: center;">
+                    <div class="hover-lift glass-panel" style="min-width: 400px; padding: 40px; scroll-snap-align: center;">
                         <p style="font-size: 1.2rem; font-style: italic; margin-bottom: 30px;">"Exceptional service and an incredible wine list. The private events space is perfect for corporate dinners."</p>
                         <h4 style="color: var(--accent-gold);">Olivia Clarke</h4>
                         <span style="font-size: 0.8rem; color: var(--text-light);">Michelin Guide Mention</span>
@@ -251,7 +254,7 @@
         </section>
 
         <!-- Section: Instagram Feed -->
-        <section id="instagram" style="padding: 60px 0;">
+        <section class="reveal" id="instagram" style="padding: 60px 0;">
             <div class="container">
                 <div style="text-align: center; margin-bottom: 40px;">
                     <h2>Follow the Flavor</h2>
@@ -315,7 +318,7 @@
             <div class="footer-bottom" style="text-align: center; border-top: 1px solid var(--glass-border); padding-top: 30px; font-size: 0.8rem; color: var(--text-light); display: flex; flex-direction: column; gap: 20px;">
                 <div style="padding: 15px 20px; border: 1px dashed var(--accent-gold); max-width: 250px; margin: 0 auto; border-radius: 8px; background: rgba(192,160,109,0.05);">
                     <p style="color: #4CAF50; font-weight: 800; font-size: 0.85rem; margin-bottom: 5px; text-transform: uppercase;">Lipa Na M-Pesa</p>
-                    <p style="color: var(--soft-white); font-weight: 600; font-size: 0.9rem;">Buy Goods Till: <span style="font-size: 1.1rem; color: var(--accent-gold);">78910</span></p>
+                    <p style="color: var(--soft-white); font-weight: 600; font-size: 0.9rem;">Buy Goods Till: <span style="font-size: 1.1rem; color: var(--accent-gold);" class="copy-till" style="cursor: pointer;" title="Click to Copy">78910</span></p>
                 </div>
                 
                 <div class="footer-legal-links" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
@@ -329,9 +332,14 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <div id="back-to-top" aria-label="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </div>
+
     <!-- Online Ordering Sticky Button -->
     <a href="https://wa.me/254102880577?text=Hi%2C%20I%27d%20like%20to%20place%20an%20order%20at%20Azure%20Bay%21" class="floating-cta btn-solid" aria-label="Order on WhatsApp" target="_blank" rel="noopener noreferrer">
-        <img src="images/icon-order.svg" alt="Order" width="24" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1170/1170678.png'">
+        <i class="fa-brands fa-whatsapp" style="font-size: 24px;"></i>
     </a>
 
     <nav class="bottom-nav">

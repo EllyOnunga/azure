@@ -36,6 +36,7 @@
 </head>
     <body>
         <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="reading-progress-container"><div class="reading-progress-bar"></div></div>
         <div class="scroll-progress"></div>
         <div class="preloader"><div class="loading-container"><div class="loading"></div><div id="loading-icon"><img src="../../images/loader.svg" alt="Loading" /></div></div></div>
         <header class="header">
@@ -79,7 +80,7 @@
                 </div>
             </div>
         </section>
-        <section class="blog-single-section" id="main-content">
+        <section class="reveal blog-single-section" id="main-content">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
@@ -204,7 +205,7 @@
             <div class="footer-bottom" style="text-align: center; border-top: 1px solid var(--glass-border); padding-top: 30px; font-size: 0.8rem; color: var(--text-light); display: flex; flex-direction: column; gap: 20px;">
                 <div style="padding: 15px 20px; border: 1px dashed var(--accent-gold); max-width: 250px; margin: 0 auto; border-radius: 8px; background: rgba(192,160,109,0.05);">
                     <p style="color: #4CAF50; font-weight: 800; font-size: 0.85rem; margin-bottom: 5px; text-transform: uppercase;">Lipa Na M-Pesa</p>
-                    <p style="color: var(--soft-white); font-weight: 600; font-size: 0.9rem;">Buy Goods Till: <span style="font-size: 1.1rem; color: var(--accent-gold);">78910</span></p>
+                    <p style="color: var(--soft-white); font-weight: 600; font-size: 0.9rem;">Buy Goods Till: <span style="font-size: 1.1rem; color: var(--accent-gold);" class="copy-till" style="cursor: pointer;" title="Click to Copy">78910</span></p>
                 </div>
 
                 <div class="footer-legal-links" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
@@ -220,7 +221,7 @@
 
     <!-- Online Ordering Sticky Button -->
     <a href="https://wa.me/254102880577?text=Hi%2C%20I%27d%20like%20to%20place%20an%20order%20at%20Azure%20Bay%21" class="floating-cta btn-solid" aria-label="Order on WhatsApp" target="_blank" rel="noopener noreferrer">
-        <img src="../../images/icon-order.svg" alt="Order" width="24" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1170/1170678.png'">
+        <i class="fa-brands fa-whatsapp" style="font-size: 24px;"></i>
     </a>
 
     <nav class="bottom-nav">
@@ -243,6 +244,8 @@
     </nav>
 
     <script src="../../js/site.js"></script>
+
+    <div id="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></div>
 </body>
 </html>
 

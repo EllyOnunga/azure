@@ -30,6 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Dismiss Announcement Bar
+    const closeAnnounce = document.getElementById('close-announcement');
+    const announceBar = document.getElementById('announcement-bar');
+    if (closeAnnounce && announceBar) {
+        closeAnnounce.addEventListener('click', () => {
+            announceBar.style.display = 'none';
+            // Adjust header top if necessary
+            document.body.style.paddingTop = '0';
+        });
+    }
+
     // Sticky Header Effect
     if (header) {
         window.addEventListener('scroll', () => {
@@ -44,13 +55,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Active State for Bottom Nav
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const currentPath = window.location.pathname;
     document.querySelectorAll('.bottom-nav-item').forEach(item => {
-        const href = item.getAttribute('href');
-        if (href === currentPath) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
+        let href = item.getAttribute('href');
+        if (href) {
+            // Normalize href for comparison (remove relative indicators)
+            const normalizedHref = href.replace(/\.\.\//g, '/').replace(/\/$/, '');
+            const normalizedPath = currentPath.replace(/\/$/, '');
+            
+            if (normalizedPath === normalizedHref || (normalizedHref === '' && normalizedPath === '')) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
         }
     });
 
@@ -278,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Populate Standalone Order Page Summary (order.html)
+        // Populate Standalone Order Page Summary (order/)
         if (orderItemsSummary) {
             if (cart.length === 0) {
                 orderItemsSummary.innerHTML = '<p style="color: var(--text-light); text-align: center; margin-top: 20px;">Your cart is empty.</p>';
@@ -357,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Populate order.html Menu Grid if present
+    // Populate order/ Menu Grid if present
     if (orderMenuGrid) {
         const menuData = [
             { id: 'p1', name: 'Swahili Garlic Prawns', price: 1850 },
@@ -389,19 +406,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (goToInfoBtn) {
         goToInfoBtn.addEventListener('click', () => {
-            if (!window.location.pathname.includes('order.html')) {
-                window.location.href = 'order.html';
+            // Determine if we are on the full order page or just the menu page cart
+            const isOrderPage = window.location.pathname.includes('/order/');
+            
+            if (!isOrderPage) {
+                // If on menu page or similar, redirect to full order page
+                // We determine the correct relative path based on our script location
+                const scriptTag = document.querySelector('script[src*="site.js"]');
+                const isSubfolder = scriptTag && scriptTag.getAttribute('src').startsWith('../');
+                const target = isSubfolder ? '../order/' : 'order/';
+                window.location.href = target;
             } else {
-                viewItems.classList.remove('active');
-                viewInfo.classList.add('active');
+                // We are already on the order page, try to switch to details view or scroll to form
+                if (viewItems) viewItems.classList.remove('active');
+                if (viewInfo) {
+                    viewInfo.classList.add('active');
+                } else {
+                    // Fallback: if viewInfo doesn't exist, scroll to the order form
+                    const orderForm = document.getElementById('orderForm');
+                    if (orderForm) orderForm.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         });
     }
 
     if (backToItemsBtn) {
         backToItemsBtn.addEventListener('click', () => {
-            viewInfo.classList.remove('active');
-            viewItems.classList.add('active');
+            if (viewInfo) viewInfo.classList.remove('active');
+            if (viewItems) viewItems.classList.add('active');
         });
     }
 
@@ -542,6 +574,119 @@ document.addEventListener('DOMContentLoaded', () => {
             updateCartUI();
         });
     }
+
+    // --- UI/UX & Accessibility Enhancements ---
+
+    // 1. Back to Top Button
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // 2. Scroll Reveal Animations
+    const revealElements = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    } else {
+        // Fallback for older browsers
+        revealElements.forEach(el => el.classList.add('active'));
+    }
+
+    // 3. Reading Progress Bar (for Blog Posts)
+    const progressBar = document.querySelector('.reading-progress-bar');
+    if (progressBar) {
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + "%";
+        });
+    }
+
+    // 4. Mobile Drawer Accessibility (Focus Trap)
+    if (drawer && drawerTrigger && overlay) {
+        const focusableElements = drawer.querySelectorAll('a, button, input, textarea, select');
+        const firstFocusable = focusableElements[0];
+        const lastFocusable = focusableElements[focusableElements.length - 1];
+
+        drawerTrigger.setAttribute('aria-expanded', 'false');
+        drawerTrigger.setAttribute('aria-controls', 'mobile-drawer');
+
+        drawerTrigger.addEventListener('click', () => {
+            drawerTrigger.setAttribute('aria-expanded', 'true');
+            setTimeout(() => { if (firstFocusable) firstFocusable.focus(); }, 300);
+        });
+
+        overlay.addEventListener('click', () => {
+            drawerTrigger.setAttribute('aria-expanded', 'false');
+            drawerTrigger.focus();
+        });
+
+        drawer.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                if (e.shiftKey) {
+                    if (document.activeElement === firstFocusable) {
+                        e.preventDefault();
+                        if (lastFocusable) lastFocusable.focus();
+                    }
+                } else {
+                    if (document.activeElement === lastFocusable) {
+                        e.preventDefault();
+                        if (firstFocusable) firstFocusable.focus();
+                    }
+                }
+            }
+            if (e.key === 'Escape') {
+                drawer.classList.remove('active');
+                overlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                drawerTrigger.setAttribute('aria-expanded', 'false');
+                drawerTrigger.focus();
+            }
+        });
+    }
+
+    // 5. Toast Notification Helper
+    const showToast = (message) => {
+        let toast = document.querySelector('.toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.className = 'toast';
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    };
+
+    // 6. Copy Till Number Logic
+    document.addEventListener('click', (e) => {
+        const tillSpan = e.target.closest('.copy-till');
+        if (tillSpan) {
+            const till = tillSpan.getAttribute('data-till') || tillSpan.textContent;
+            navigator.clipboard.writeText(till.replace(/\D/g, '')).then(() => {
+                showToast(`Till Number ${till} Copied!`);
+            });
+        }
+    });
 
     updateCartUI();
 });
